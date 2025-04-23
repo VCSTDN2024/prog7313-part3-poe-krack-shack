@@ -6,4 +6,6 @@
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="Confirm_Password">Confirm Password</string>
+    <string name="LogExpense">Log Expense</string>
+    <string name="LogIncome">Log Income</string>
 </resources>
