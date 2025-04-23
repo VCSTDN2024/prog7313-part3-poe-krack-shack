@@ -8,6 +8,11 @@
     <string name="Confirm_Password">Confirm Password</string>
     <string name="LogExpense">Log Expense</string>
     <string name="LogIncome">Log Income</string>
+    <string name="Username_Input_Hint">Enter Username</string>
+    <string name="Password_Input_Hint">Enter Password</string>
+    <string name="Confirm_Password_Input_Hint">Confirm Password</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnEnter">Enter</string>
     <string name="EnterUsername">Enter Username</string>
     <string name="EnterPassword">Enter Password</string>
     <string name="SearchExpenses">Search Expense</string>
