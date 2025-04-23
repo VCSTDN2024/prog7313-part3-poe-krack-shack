@@ -1,4 +1,4 @@
-package vcmsa.projects.krackshackbanking
+package vcmsa.projects.krackshackbanking.User
 //
 // main login handler will control login and all mini views related to login
 // kotlin has no proper handling for mvc esc architecture
@@ -13,7 +13,9 @@ package vcmsa.projects.krackshackbanking
     import android.widget.Toast
     import com.google.android.gms.tasks.OnCompleteListener
     import com.google.firebase.auth.FirebaseAuth
-    class LoginActivity : AppCompatActivity() {
+    import vcmsa.projects.krackshackbanking.MainActivity
+
+class LoginActivity : AppCompatActivity() {
         private lateinit var auth: FirebaseAuth
         private lateinit var emailEt: EditText
         private lateinit var passwordEt: EditText
