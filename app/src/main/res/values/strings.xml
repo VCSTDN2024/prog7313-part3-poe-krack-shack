@@ -3,4 +3,7 @@
     <string name="LogoHeader">KracK ShacK Banking</string>
     <string name="Login">Login</string>
     <string name="Register">Register</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Confirm_Password">Confirm Password</string>
 </resources>
