@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">KracKShacKBanking</string>
+    <string name="LogoHeader">KracK ShacK Banking</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
 </resources>
