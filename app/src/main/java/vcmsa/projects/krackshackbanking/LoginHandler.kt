@@ -1,8 +1,7 @@
 package vcmsa.projects.krackshackbanking
-
-
-
-
+//
+// main login handler will control login and all mini views related to login
+// kotlin has no proper handling for mvc esc architecture
 
     import android.content.Intent
     import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +21,7 @@ package vcmsa.projects.krackshackbanking
         private lateinit var loginBtn: Button
         private lateinit var resetPasswordTv: TextView
         override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
+            super.onCreate(savedInstanceState) //these can be changed to match our views
             //setContentView(R.layout.activity_login)
             //emailEt = findViewById(R.id.email_edt_text)
             //passwordEt = findViewById(R.id.pass_edt_text)
@@ -59,7 +58,7 @@ package vcmsa.projects.krackshackbanking
             //
             //signupBtn.setOnClickListener{
             //   val intent = Intent(this,
-            //        SignupActivity::class.java) /// need impleymented views
+            //        SignupActivity::class.java) /// need implemented views
             //    startActivity(intent)
             //    finish()
             //}
