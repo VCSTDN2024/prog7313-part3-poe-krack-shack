@@ -11,8 +11,8 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
@@ -22,29 +22,25 @@
         android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="131dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="25dp"
         android:layout_marginBottom="60dp"
+        android:background="@drawable/formatbuttondashboardincome"
         android:text="@string/LogIncome"
         app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="131dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="60dp"
+        android:background="@drawable/formatbuttondashboardexpense"
         android:text="@string/LogExpense"
         app:layout_constraintBottom_toTopOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -53,24 +49,64 @@
         android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="664dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="409dp"
         android:layout_height="70dp"
         android:background="@color/white"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:queryHint="@string/SearchExpenses"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imageButton7"
         android:layout_width="77dp"
+        android:layout_height="61dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/homeicon2"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="670dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/grapgicon"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="675dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="66dp"
         android:layout_height="58dp"
         android:background="@color/white"
-        app:srcCompat="@drawable/homeicon1"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="667dp" />
+        app:srcCompat="@drawable/moneyicon"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="669dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/profileicon"
+        tools:layout_editor_absoluteX="262dp"
+        tools:layout_editor_absoluteY="675dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="58dp"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/menuicon"
+        tools:layout_editor_absoluteX="352dp"
+        tools:layout_editor_absoluteY="672dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

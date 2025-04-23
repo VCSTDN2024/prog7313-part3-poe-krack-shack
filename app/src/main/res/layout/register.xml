@@ -44,7 +44,7 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="text"
-        android:text="Name"
+        android:text="@string/EnterUsername"
         app:layout_constraintEnd_toEndOf="@+id/txtUsername"
         app:layout_constraintStart_toStartOf="@+id/txtUsername"
         app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
