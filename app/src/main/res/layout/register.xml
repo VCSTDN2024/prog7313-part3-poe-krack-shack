@@ -7,7 +7,7 @@
     android:background="@color/background">
 
     <TextView
-        android:id="@+id/txtUsername"
+        android:id="@+id/txtCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -35,7 +35,7 @@
 
     <EditText
         android:id="@+id/txtUsernameInput"
-        android:layout_width="@+id/txtUsername"
+        android:layout_width="@+id/txtCategory"
         android:layout_height="75dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/format_button"
@@ -50,9 +50,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtUsername"
-        app:layout_constraintStart_toStartOf="@+id/txtUsername"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+        app:layout_constraintEnd_toEndOf="@+id/txtCategory"
+        app:layout_constraintStart_toStartOf="@+id/txtCategory"
+        app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
 
     <TextView
         android:id="@+id/txtPassword"
@@ -76,9 +76,9 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txtUsername"
-        app:layout_constraintStart_toStartOf="@+id/txtUsername"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+        app:layout_constraintEnd_toEndOf="@+id/txtCategory"
+        app:layout_constraintStart_toStartOf="@+id/txtCategory"
+        app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
 
     <EditText
         android:id="@+id/txtPasswordInput"
