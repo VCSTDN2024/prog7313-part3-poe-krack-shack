@@ -131,10 +131,10 @@
                 android:id="@+id/txtUploadPhoto"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="-90dp"
-                android:padding="10dp"
+                android:layout_marginTop="-100dp"
                 android:autoSizeTextType="uniform"
-               android:elevation="5dp"
+                android:elevation="5dp"
+                android:padding="20dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
@@ -143,7 +143,65 @@
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="-75dp"
+                android:width="125dp"
+                android:height="75dp"
+                android:backgroundTint="@color/red" />
 
+            <Button
+                android:id="@+id/btnEnter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-75dp"
+                android:layout_marginEnd="-75dp"
+                android:width="125dp"
+                android:height="75dp"
+                android:backgroundTint="@color/green"
+                app:layout_constraintEnd_toEndOf="@+id/txtConfirmPasswordInput"
+                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPasswordInput" />
+
+            <TextView
+                android:id="@+id/btnCancelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-75dp"
+                android:layout_marginStart="-75dp"
+                android:autoSizeTextType="uniform"
+                android:width="125dp"
+                android:height="75dp"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="10.0"
+                android:text="@string/btnCancel"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/btnEnterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-75dp"
+                android:layout_marginEnd="-75dp"
+                android:autoSizeTextType="uniform"
+                android:width="125dp"
+                android:height="75dp"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="10.0"
+                android:text="@string/btnEnter"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
