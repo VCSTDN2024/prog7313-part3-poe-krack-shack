@@ -1,0 +1,27 @@
+{
+  "Category": {
+    "CategoryID": "cat_testCate",
+    "Name": "testCat",
+    "UID": 44444,
+    "totalCost": 10000
+  },
+  "Expense": {
+    "Amount": 12,
+    "CategoryID": "cat_testCat",
+    "Date": "12/04/2045",
+    "Discription": "pnp",
+    "Image": "filepath",
+    "UID": 44444,
+    "expenseID": "12/04/2025_pnp"
+  },
+  "User": {
+    "UID": "0101010adva",
+    "email": "\"testEmail\"",
+    "fNmae": "\"testFname\"",
+    "password": "\"testPassword\"",
+    "surname": "\"testSname",
+    "userName": "\"test Uname\""
+  }
+}
+
+//note this data is test data to give examples 
