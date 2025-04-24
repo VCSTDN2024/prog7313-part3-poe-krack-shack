@@ -5,65 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    >
+    android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="389dp"
-        android:layout_height="620dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="65dp"
-        android:background="@color/blue"
+    <Button
+        android:id="@+id/btnStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:backgroundTint="@color/darkgrey"
+        android:paddingTop="6dp"
+        android:rotationX="0"
+        android:text="@string/StartDate"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtExpenses" />
+
+    <Button
+        android:id="@+id/btnEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/darkgrey"
+        android:text="@string/EndDate"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartDate" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtCategory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btnStartDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="@color/darkgrey"
-                android:paddingTop="6dp"
-                android:rotationX="0"
-                android:text="@string/StartDate"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                app:cornerRadius="0dp" />
-
-            <Button
-                android:id="@+id/btnEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/darkgrey"
-                android:text="@string/EndDate"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                app:cornerRadius="0dp" />
-
-            <TextView
-                android:id="@+id/txtCategory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
-                android:background="@color/darkerblue"
-                android:textColor="@color/white"
-                android:textSize="34sp" />
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:background="@color/darkerblue"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtExpenses"
         android:layout_width="386dp"
         android:layout_height="42dp"
         android:layout_marginStart="65dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="65dp"
         android:layout_marginBottom="4dp"
         android:shadowColor="@color/black"
@@ -75,7 +72,6 @@
         android:textColor="#FF0000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
