@@ -16,6 +16,9 @@
     <string name="EnterUsername">Enter Username</string>
     <string name="EnterPassword">Enter Password</string>
     <string name="SearchExpenses">Search Expense</string>
+    <string name="Expenses">Expenses</string>
+    <string name="StartDate">Start Date</string>
+    <string name="EndDate">End Date</string>
     <string name="Category">Category</string>
     <string name="Amount">Amount</string>
     <string name="Amount_Hint">Enter Amount</string>
