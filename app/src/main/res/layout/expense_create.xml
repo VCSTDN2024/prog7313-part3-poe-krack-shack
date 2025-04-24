@@ -123,17 +123,17 @@
                 android:id="@+id/btnUploadPhoto"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/format_button" />
 
             <TextView
                 android:id="@+id/txtUploadPhoto"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="-100dp"
+                android:layout_marginTop="-90dp"
+                android:padding="10dp"
                 android:autoSizeTextType="uniform"
-                android:background="@drawable/format_button_text"
-                android:elevation="5dp"
+               android:elevation="5dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
