@@ -1,22 +1,14 @@
 package vcmsa.projects.krackshackbanking.Budget
 
-import android.os.Bundle
-import com.google.firebase.Firebase
-import com.google.firebase.database.FirebaseDatabase
-
-class AddCategory {
-
-
-
+data class BudgetModel (
     // "category" {
     //     "CategoryID": "cat_testCate",
     //     "Name": "testCat",
     //     "UID": 44444,
     //     "totalCost": 10000
     //   },
-
-
-  fun createCategory(){
-
-  }
+        val name: String? = null,
+        val UID: String? = null,
+        val categoryID: String? = null,
+        val totalCost: String? = null){
 }
