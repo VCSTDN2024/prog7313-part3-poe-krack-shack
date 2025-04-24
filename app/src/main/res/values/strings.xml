@@ -1,133 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Name -->
-    <string name="app_name">KracK ShacK Banking</string>
-    <string name="StartDate">Start Date</string>
-    <string name="EndDate">End Date</string>
-    <string name="Expenses">Expenses</string>
+    <string name="app_name">KracKShacKBanking</string>
+    <string name="LogoHeader">KracK ShacK Banking</string>
     <string name="Login">Login</string>
     <string name="Register">Register</string>
-    <string name="Or">Or</string>
     <string name="Username">Username</string>
-    <string name="EnterUsername">Enter Username</string>
     <string name="Password">Password</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="LogExpense">Log Expense</string>
+    <string name="LogIncome">Log Income</string>
+    <string name="Username_Input_Hint">Enter Username</string>
+    <string name="Password_Input_Hint">Enter Password</string>
+    <string name="Confirm_Password_Input_Hint">Confirm Password</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnEnter">Enter</string>
+    <string name="EnterUsername">Enter Username</string>
     <string name="EnterPassword">Enter Password</string>
-
-    <!-- Common -->
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="loading">Loading…</string>
-    <string name="error">Error</string>
-    <string name="success">Success</string>
-    <string name="warning">Warning</string>
-    <string name="create">Create</string>
-
-    <!-- Authentication -->
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="logout">Logout</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="password_input_hint">Enter Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="confirm_password_input_hint">Confirm Password</string>
-    <string name="username">Name</string>
-    <string name="username_input_hint">Username Input Hint</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="dont_have_account">Don\'t have an account?</string>
-    <string name="already_have_account">Already have an account?</string>
-
-    <!-- Dashboard -->
-    <string name="dashboard">Dashboard</string>
-    <string name="total_balance">Total Balance</string>
-    <string name="income">Income</string>
-    <string name="expenses">Expenses</string>
-    <string name="budgets">Budgets</string>
-    <string name="recent_transactions">Recent Transactions</string>
-    <string name="search_expenses">Search expenses…</string>
-    <string name="log_income">Log Income</string>
-    <string name="log_expense">Log Expense</string>
-
-    <!-- Budgets -->
-    <string name="create_budget">Create Budget</string>
-    <string name="edit_budget">Edit Budget</string>
-    <string name="delete_budget">Delete Budget</string>
-    <string name="budget_name">Budget Name</string>
-    <string name="budget_amount">Budget Amount</string>
-    <string name="budget_category">Category</string>
-    <string name="budget_period">Period</string>
-    <string name="budget_start_date">Start Date</string>
-    <string name="budget_end_date">End Date</string>
-    <string name="budget_remaining">Remaining</string>
-    <string name="budget_spent">Spent</string>
-    <string name="budget_limit">Limit</string>
-    <string name="category_create">Enter Category name below</string>
-
-    <!-- Transactions -->
-    <string name="transactions">Transactions</string>
-    <string name="add_transaction">Add Transaction</string>
-    <string name="edit_transaction">Edit Transaction</string>
-    <string name="delete_transaction">Delete Transaction</string>
-    <string name="transaction_amount">Amount</string>
-    <string name="transaction_amount_hint">Enter Amount Here</string>
-    <string name="transaction_date">Date</string>
-    <string name="upload_photo">Upload Photo</string>
-    <string name="transaction_description">Description</string>
-    <string name="transaction_description_hint">Enter Description</string>
-    <string name="transaction_category">Category</string>
-    <string name="transaction_type">Type</string>
-    <string name="transaction_payment_method">Payment Method</string>
-    <string name="transaction_location">Location</string>
-    <string name="transaction_notes">Notes</string>
-    <string name="transaction_receipt">Receipt</string>
-
-    <!-- Analytics -->
-    <string name="analytics">Analytics</string>
-    <string name="spending_by_category">Spending by Category</string>
-    <string name="monthly_summary">Monthly Summary</string>
-    <string name="yearly_summary">Yearly Summary</string>
-    <string name="trends">Trends</string>
-    <string name="reports">Reports</string>
-
-    <!-- Bar graph -->
-    <string name="budgetsummary">Budget Summary</string>
-    
-    <!-- Settings -->
-    <string name="settings">Settings</string>
-    <string name="profile">Profile</string>
-    <string name="notifications">Notifications</string>
-    <string name="currency">Currency</string>
-    <string name="language">Language</string>
-    <string name="theme">Theme</string>
-    <string name="about">About</string>
-    <string name="help">Help</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="terms_of_service">Terms of Service</string>
-
-    <!-- Errors -->
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_invalid_password">Password must be at least 6 characters</string>
-    <string name="error_passwords_dont_match">Passwords don\'t match</string>
-    <string name="error_invalid_amount">Invalid amount</string>
-    <string name="error_invalid_date">Invalid date</string>
-    <string name="error_required_field">This field is required</string>
-    <string name="error_network">Network error. Please try again.</string>
-    <string name="error_unknown">An unknown error occurred</string>
-
-    <!-- Dashboard-->
-    <string name="Home">Home</string>
-    <string name="Graph">Graph</string>
-    <string name="Profile">Profile</string>
-    <string name="Menu">Menu</string>
-    <string name="Money">Money</string>
-
-    <string name="Settings">Settings</string>
-    <string name="Reports">Reports</string>
-    <string name="Logout">Logout</string>
-
-    <string name="Category_Input_Hint">Enter Category</string>
+    <string name="SearchExpenses">Search Expense</string>
+    <string name="Confilct">Conflict</string>
 </resources>
