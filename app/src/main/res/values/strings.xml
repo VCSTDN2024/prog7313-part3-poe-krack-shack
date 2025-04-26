@@ -19,4 +19,19 @@
     <string name="Expenses">Expenses</string>
     <string name="StartDate">Start Date</string>
     <string name="EndDate">End Date</string>
+    <string name="Category">Category</string>
+    <string name="Amount">Amount</string>
+    <string name="Amount_Hint">Enter Amount</string>
+    <string name="Date">Date</string>
+    <string name="Description">Description</string>
+    <string name="Description_Hint">Enter Description</string>
+    <string name="UploadPhoto">Upload Photo</string>
+    <!-- for bottom navigation bar i am working on NB ryan is working on it -->
+    <string name="HomeNav">Home</string>
+    <string name="GraphNav">Graph</string>
+    <string name="PlanningNav">Planning</string>
+    <string name="MoneyNav">Money</string>
+    <string name="ProfileNav">Profile</string>
+
+
 </resources>

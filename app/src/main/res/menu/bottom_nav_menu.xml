@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_home"
         android:icon="@drawable/home_icon"
-        android:title="@string/Home"/>
+        android:title="Home" />
+
     <item
-        android:id="@+id/navigation_graph"
+        android:id="@+id/nav_graph"
         android:icon="@drawable/graph_icon"
-        android:title="@string/Graph"/>
+        android:title="Graph" />
 
     <item
-        android:id="@+id/navigation_money"
+        android:id="@+id/nav_money"
         android:icon="@drawable/money_icon"
-        android:title="@string/Money"/>
+        android:title="Money" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/nav_profile"
         android:icon="@drawable/profile_icon"
-        android:title="@string/profile"/>
+        android:title="Profile" />
 
     <item
-        android:id="@+id/navigation_menu"
+        android:id="@+id/nav_menu"
         android:icon="@drawable/menu_icon"
-        android:title="@string/Menu"/>
-
+        android:title="Menu" />
 </menu>
