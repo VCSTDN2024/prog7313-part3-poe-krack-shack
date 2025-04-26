@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
+    android:background="@color/background">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/searchview_background"
+        android:queryHint="@string/SearchExpenses"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <Button
@@ -26,10 +38,9 @@
         android:layout_marginBottom="60dp"
         android:background="@drawable/formatbuttondashboardincome"
         android:text="@string/LogIncome"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button3" />
 
     <Button
         android:id="@+id/button3"
@@ -39,74 +50,17 @@
         android:layout_marginBottom="60dp"
         android:background="@drawable/formatbuttondashboardexpense"
         android:text="@string/LogExpense"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="409dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="409dp"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        android:queryHint="@string/SearchExpenses"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="77dp"
-        android:layout_height="61dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/home_icon"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="670dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="66dp"
-        android:layout_height="53dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/graph_icon"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="675dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton9"
-        android:layout_width="66dp"
-        android:layout_height="58dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/money_icon"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="669dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton10"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/profile_icon"
-        tools:layout_editor_absoluteX="262dp"
-        tools:layout_editor_absoluteY="675dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton11"
-        android:layout_width="58dp"
-        android:layout_height="56dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/menu_icon"
-        tools:layout_editor_absoluteX="352dp"
-        tools:layout_editor_absoluteY="672dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
