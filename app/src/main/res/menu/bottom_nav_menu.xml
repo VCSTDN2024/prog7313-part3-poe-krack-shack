@@ -3,25 +3,25 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/home_icon"
-        android:title="Home" />
+        android:title="@string/HomeNav" />
 
     <item
         android:id="@+id/nav_graph"
         android:icon="@drawable/graph_icon"
-        android:title="Graph" />
+        android:title="@string/GraphNav" />
 
     <item
         android:id="@+id/nav_money"
         android:icon="@drawable/money_icon"
-        android:title="Money" />
+        android:title="@string/MoneyNav" />
 
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/profile_icon"
-        android:title="Profile" />
+        android:title="@string/ProfileNav" />
 
     <item
         android:id="@+id/nav_menu"
         android:icon="@drawable/menu_icon"
-        android:title="Menu" />
+        android:title="@string/MenuNav" />
 </menu>

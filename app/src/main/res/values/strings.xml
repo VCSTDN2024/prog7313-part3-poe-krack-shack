@@ -29,7 +29,7 @@
     <!-- for bottom navigation bar i am working on NB ryan is working on it -->
     <string name="HomeNav">Home</string>
     <string name="GraphNav">Graph</string>
-    <string name="PlanningNav">Planning</string>
+    <string name="MenuNav">Menu</string>
     <string name="MoneyNav">Money</string>
     <string name="ProfileNav">Profile</string>
 
