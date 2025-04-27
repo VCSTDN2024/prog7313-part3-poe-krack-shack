@@ -10,4 +10,5 @@
     <color name="grey">#E9E9E9</color>
     <color name="darkgrey">#D9D9D9</color>
     <color name="transparent">#00000000</color>
+    <color name="SearchExpenses">FF000000</color>
 </resources>
