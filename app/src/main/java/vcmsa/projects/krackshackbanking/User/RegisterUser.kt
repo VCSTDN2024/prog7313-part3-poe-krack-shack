@@ -9,12 +9,11 @@ import vcmsa.projects.krackshackbanking.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import vcmsa.projects.krackshackbanking.MainActivity
 
-public class RegesterUser : AppCompatActivity() {
+public class RegisterUser : AppCompatActivity() {
 
     lateinit var _database: DatabaseReference
     lateinit var _auth: FirebaseAuth

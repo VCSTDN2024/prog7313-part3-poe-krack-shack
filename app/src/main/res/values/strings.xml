@@ -26,6 +26,7 @@
     <string name="Description">Description</string>
     <string name="Description_Hint">Enter Description</string>
     <string name="UploadPhoto">Upload Photo</string>
+    <string name="Or">Or</string>
     <!-- for bottom navigation bar i am working on NB ryan is working on it -->
     <string name="HomeNav">Home</string>
     <string name="GraphNav">Graph</string>
