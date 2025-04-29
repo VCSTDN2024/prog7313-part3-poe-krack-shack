@@ -6,7 +6,7 @@ data class ExpenseModel
     //     "Amount": 12,
     //     "CategoryID": "cat_testCat",
     //     "Date": "12/04/2045",
-    //     "Discription": "pnp",
+    //     "Description": "pnp",
     //     "Image": "filepath",
     //     "UID": 44444,
     //     "expenseID": "12/04/2025_pnp"
@@ -17,7 +17,7 @@ data class ExpenseModel
         val categoryID: String = "",
         val cost: String = "",
         val date: String = "",
-        val imnagePath: String = ""
+        val imagePath: String = ""
             ){
 
 
