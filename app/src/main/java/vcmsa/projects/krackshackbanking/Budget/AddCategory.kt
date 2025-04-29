@@ -8,12 +8,12 @@ class AddCategory {
 
 
 
-    // "category" {
-    //     "CategoryID": "cat_testCate",
-    //     "Name": "testCat",
-    //     "UID": 44444,
-    //     "totalCost": 10000
-    //   },
+     "category" {
+         "CategoryID": "cat_testCate",
+         "Name": "testCat",
+         "UID": 44444,
+         "totalCost": 10000
+       }
 
 
   fun createCategory(){
