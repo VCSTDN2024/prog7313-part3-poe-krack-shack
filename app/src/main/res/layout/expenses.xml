@@ -7,6 +7,19 @@
     android:background="@color/background"
     android:orientation="vertical">
 
+    <SearchView
+        android:id="@+id/searchView_dashboard"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/search_view_background"
+        android:queryHint="@string/SearchExpenses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btnStartDate"
         android:layout_width="match_parent"
