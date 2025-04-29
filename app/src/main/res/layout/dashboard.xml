@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView_dashboard"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo"/>
 
         <Button
             android:id="@+id/btn_log_income_dashboard"
