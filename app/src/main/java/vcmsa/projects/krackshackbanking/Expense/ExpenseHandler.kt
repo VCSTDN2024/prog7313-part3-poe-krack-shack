@@ -1,23 +1,19 @@
 package vcmsa.projects.krackshackbanking.Expense
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import java.util.Date
 
-/**
- * Handler class for managing expense-related operations.
- * This class provides methods for CRUD operations on expenses.
- */
 class ExpenseHandler {
     private val db = FirebaseFirestore.getInstance()
     private val expensesCollection = db.collection("expenses")
     private val budgetHandler = BudgetHandler()
+    private val auth: FirebaseAuth = Firebase.auth
 
-    /**
-     * Creates a new expense in Firestore
-     * @param expense The expense model to create
-     * @param onComplete Callback to handle the result of the operation
-     */
     fun createExpense(expense: ExpenseModel, onComplete: (String?, String?) -> Unit) {
         if (!expense.isExpenseValid()) {
             onComplete(null, "Invalid expense data")
@@ -29,7 +25,6 @@ class ExpenseHandler {
 
         expenseRef.set(expenseWithId.toMap())
             .addOnSuccessListener {
-                // Update the budget's current spent amount
                 if (expense.budgetId.isNotBlank()) {
                     budgetHandler.updateBudgetSpent(expense.budgetId, expense.amount) { error ->
                         if (error != null) {
@@ -47,37 +42,30 @@ class ExpenseHandler {
             }
     }
 
-    /**
-     * Retrieves all expenses for the current user
-     * @return List of ExpenseModel objects
-     */
     suspend fun getExpenses(): List<ExpenseModel> {
         val currentUser = auth.currentUser
-        if (currentUser == null) throw IllegalStateException("User not authenticated")
+            ?: throw IllegalStateException("User not authenticated")
 
-        val snapshot = db.collection("expenses")
+        val snapshot = expensesCollection
             .whereEqualTo("UID", currentUser.uid)
             .get()
             .await()
 
         return snapshot.documents.map { doc ->
             ExpenseModel(
+                id = doc.id,
                 amount = doc.getDouble("Amount") ?: 0.0,
                 categoryID = doc.getString("CategoryID") ?: "",
                 date = doc.getString("Date") ?: "",
                 description = doc.getString("Description") ?: "",
                 imageUrl = doc.getString("Image") ?: "",
                 UID = doc.getString("UID") ?: "",
-                expenseID = doc.getString("expenseID") ?: ""
+                expenseID = doc.getString("expenseID") ?: "",
+                budgetId = doc.getString("budgetId") ?: ""
             )
         }
     }
 
-    /**
-     * Updates an existing expense
-     * @param expense The updated expense data
-     * @param onComplete Callback to handle the result of the operation
-     */
     fun updateExpense(expense: ExpenseModel, onComplete: (String?) -> Unit) {
         if (!expense.isExpenseValid()) {
             onComplete("Invalid expense data")
@@ -94,11 +82,6 @@ class ExpenseHandler {
             }
     }
 
-    /**
-     * Deletes an expense
-     * @param expenseId The ID of the expense to delete
-     * @param onComplete Callback to handle the result of the operation
-     */
     fun deleteExpense(expenseId: String, onComplete: (String?) -> Unit) {
         expensesCollection.document(expenseId)
             .delete()
@@ -112,11 +95,23 @@ class ExpenseHandler {
 
     fun getExpensesByUser(userId: String, onComplete: (List<ExpenseModel>?, String?) -> Unit) {
         expensesCollection
-            .whereEqualTo("userId", userId)
+            .whereEqualTo("UID", userId)
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val expenses = documents.mapNotNull { it.toObject(ExpenseModel::class.java) }
+                val expenses = documents.map { doc ->
+                    ExpenseModel(
+                        id = doc.id,
+                        amount = doc.getDouble("Amount") ?: 0.0,
+                        categoryID = doc.getString("CategoryID") ?: "",
+                        date = doc.getString("Date") ?: "",
+                        description = doc.getString("Description") ?: "",
+                        imageUrl = doc.getString("Image") ?: "",
+                        UID = doc.getString("UID") ?: "",
+                        expenseID = doc.getString("expenseID") ?: "",
+                        budgetId = doc.getString("budgetId") ?: ""
+                    )
+                }
                 onComplete(expenses, null)
             }
             .addOnFailureListener { e ->
@@ -130,7 +125,19 @@ class ExpenseHandler {
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val expenses = documents.mapNotNull { it.toObject(ExpenseModel::class.java) }
+                val expenses = documents.map { doc ->
+                    ExpenseModel(
+                        id = doc.id,
+                        amount = doc.getDouble("Amount") ?: 0.0,
+                        categoryID = doc.getString("CategoryID") ?: "",
+                        date = doc.getString("Date") ?: "",
+                        description = doc.getString("Description") ?: "",
+                        imageUrl = doc.getString("Image") ?: "",
+                        UID = doc.getString("UID") ?: "",
+                        expenseID = doc.getString("expenseID") ?: "",
+                        budgetId = doc.getString("budgetId") ?: ""
+                    )
+                }
                 onComplete(expenses, null)
             }
             .addOnFailureListener { e ->
@@ -145,13 +152,25 @@ class ExpenseHandler {
         onComplete: (List<ExpenseModel>?, String?) -> Unit
     ) {
         expensesCollection
-            .whereEqualTo("userId", userId)
-            .whereGreaterThanOrEqualTo("date", startDate)
-            .whereLessThanOrEqualTo("date", endDate)
+            .whereEqualTo("UID", userId)
+            .whereGreaterThanOrEqualTo("date", startDate.toString())
+            .whereLessThanOrEqualTo("date", endDate.toString())
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val expenses = documents.mapNotNull { it.toObject(ExpenseModel::class.java) }
+                val expenses = documents.map { doc ->
+                    ExpenseModel(
+                        id = doc.id,
+                        amount = doc.getDouble("Amount") ?: 0.0,
+                        categoryID = doc.getString("CategoryID") ?: "",
+                        date = doc.getString("Date") ?: "",
+                        description = doc.getString("Description") ?: "",
+                        imageUrl = doc.getString("Image") ?: "",
+                        UID = doc.getString("UID") ?: "",
+                        expenseID = doc.getString("expenseID") ?: "",
+                        budgetId = doc.getString("budgetId") ?: ""
+                    )
+                }
                 onComplete(expenses, null)
             }
             .addOnFailureListener { e ->
@@ -165,12 +184,24 @@ class ExpenseHandler {
         onComplete: (List<ExpenseModel>?, String?) -> Unit
     ) {
         expensesCollection
-            .whereEqualTo("userId", userId)
-            .whereEqualTo("category", category)
+            .whereEqualTo("UID", userId)
+            .whereEqualTo("CategoryID", category)
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val expenses = documents.mapNotNull { it.toObject(ExpenseModel::class.java) }
+                val expenses = documents.map { doc ->
+                    ExpenseModel(
+                        id = doc.id,
+                        amount = doc.getDouble("Amount") ?: 0.0,
+                        categoryID = doc.getString("CategoryID") ?: "",
+                        date = doc.getString("Date") ?: "",
+                        description = doc.getString("Description") ?: "",
+                        imageUrl = doc.getString("Image") ?: "",
+                        UID = doc.getString("UID") ?: "",
+                        expenseID = doc.getString("expenseID") ?: "",
+                        budgetId = doc.getString("budgetId") ?: ""
+                    )
+                }
                 onComplete(expenses, null)
             }
             .addOnFailureListener { e ->
@@ -180,11 +211,12 @@ class ExpenseHandler {
 
     fun getTotalExpensesByUser(userId: String, onComplete: (Double?, String?) -> Unit) {
         expensesCollection
-            .whereEqualTo("userId", userId)
+            .whereEqualTo("UID", userId)
             .get()
             .addOnSuccessListener { documents ->
-                val total = documents.mapNotNull { it.toObject(ExpenseModel::class.java) }
-                    .sumOf { it.amount }
+                val total = documents.sumOf { doc ->
+                    doc.getDouble("Amount") ?: 0.0
+                }
                 onComplete(total, null)
             }
             .addOnFailureListener { e ->
