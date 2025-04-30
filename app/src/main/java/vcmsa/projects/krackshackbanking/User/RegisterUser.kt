@@ -12,6 +12,8 @@ import com.google.firebase.database.FirebaseDatabase
 import android.widget.EditText
 import android.widget.Toast
 import vcmsa.projects.krackshackbanking.MainActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.UUID
 
 public class RegisterUser : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ public class RegisterUser : AppCompatActivity() {
     lateinit var _userPasswordIn: EditText
     lateinit var _userConfirmPasswordIn: EditText
     lateinit var _register: Button
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,33 +48,70 @@ public class RegisterUser : AppCompatActivity() {
                     "Please fill all the fields", Toast.LENGTH_LONG
                 ).show()
             } else if (password != confirmPassword) {
-                _auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(
-                                this,
-                                "Successfully Registered", Toast.LENGTH_LONG
-                            ).show()
-                            val intent = Intent(
-                                this,
-                                MainActivity::class.java
-                            )
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "Registration Failed", Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
+                registerUser(email, password, "", "", "", onComplete)
             }
-
         }
     }
 
+    fun registerUser(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String,
+        phoneNumber: String,
+        onComplete: (Boolean, String?, String?) -> Unit
+    ) {
+        _auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val userId = _auth.currentUser?.uid
+                    if (userId != null) {
+                        val user = UserModel(
+                            userId = userId,
+                            email = email,
+                            firstName = firstName,
+                            lastName = lastName,
+                            phoneNumber = phoneNumber,
+                            accountNumber = generateAccountNumber()
+                        )
 
+                        db.collection("users").document(userId)
+                            .set(user)
+                            .addOnSuccessListener {
+                                onComplete(true, userId, null)
+                                Toast.makeText(
+                                    this,
+                                    "Successfully Registered", Toast.LENGTH_LONG
+                                ).show()
+                                val intent = Intent(
+                                    this,
+                                    MainActivity::class.java
+                                )
+                                startActivity(intent)
+                                finish()
+                            }
+                            .addOnFailureListener { e ->
+                                onComplete(false, null, e.message)
+                                Toast.makeText(
+                                    this,
+                                    "Registration Failed", Toast.LENGTH_LONG
+                                ).show()
+                            }
+                    } else {
+                        onComplete(false, null, "Failed to get user ID")
+                    }
+                } else {
+                    onComplete(false, null, task.exception?.message)
+                    Toast.makeText(
+                        this,
+                        "Registration Failed", Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+    }
 
-
+    private fun generateAccountNumber(): String {
+        return "KR" + UUID.randomUUID().toString().substring(0, 8).toUpperCase()
+    }
 }
 

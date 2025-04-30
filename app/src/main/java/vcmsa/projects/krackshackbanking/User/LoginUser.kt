@@ -61,5 +61,29 @@ class LoginUser: AppCompatActivity()
 
         }
     }
+
+    fun loginUser(email: String, password: String, onComplete: (Boolean, String?, String?) -> Unit) {
+        _auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val userId = _auth.currentUser?.uid
+                    onComplete(true, userId, null)
+                } else {
+                    onComplete(false, null, task.exception?.message)
+                }
+            }
+    }
+
+    fun isUserLoggedIn(): Boolean {
+        return _auth.currentUser != null
+    }
+
+    fun getCurrentUserId(): String? {
+        return _auth.currentUser?.uid
+    }
+
+    fun logout() {
+        _auth.signOut()
+    }
 }
 
