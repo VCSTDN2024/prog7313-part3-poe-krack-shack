@@ -30,7 +30,7 @@ data class ExpenseModel(
     val description: String = "",
     val category: String = "",
     val budgetId: String = "",
-    val date: String = Date(),
+    val date: String = "",
     val location: String = "",
     @get:Exclude
     val attachments: List<String> = listOf() // URLs to attached files

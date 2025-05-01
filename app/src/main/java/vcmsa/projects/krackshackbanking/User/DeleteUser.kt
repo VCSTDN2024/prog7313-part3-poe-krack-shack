@@ -6,22 +6,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class DeleteUser {
     private val auth = FirebaseAuth.getInstance()
 
-    fun deleteUser(userId: String, onComplete: (Boolean, String?) -> Unit) {
-        db.collection("users").document(userId)
-            .delete()
-            .addOnSuccessListener {
-                // Delete user from Firebase Auth
-                auth.currentUser?.delete()
-                    ?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            onComplete(true, null)
-                        } else {
-                            onComplete(false, task.exception?.message)
-                        }
-                    }
-            }
-            .addOnFailureListener { e ->
-                onComplete(false, e.message)
-            }
-    }
+
+
 }

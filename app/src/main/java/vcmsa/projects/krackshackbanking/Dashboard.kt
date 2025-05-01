@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import vcmsa.projects.krackshackbanking.Expense.AddExpense
 import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
 
+
 class Dashboard : AppCompatActivity() {
 
     // database auth
@@ -38,7 +39,7 @@ class Dashboard : AppCompatActivity() {
         // button logic
         _income.setOnClickListener {
             // here we send the user to the add expense page
-            val intent = Intent(this, AddExpense::class.java)
+            val intent = Intent(this, ExpenseHandler::class.java)
             startActivity(intent)
         }
 
@@ -46,7 +47,7 @@ class Dashboard : AppCompatActivity() {
         // button logic
         _expense.setOnClickListener {
             // method to opne the set monthly bidget area
-            val intent = Intent(this, ExpenseHandler::class.java)
+            val intent = Intent(this, AddExpense::class.java)
             startActivity(intent)
         }
     }

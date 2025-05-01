@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/maincolour"
+    android:theme="@style/Theme.AppCompat"
     tools:context=".MainActivity">
 
     <ImageView
@@ -61,7 +62,7 @@
         android:shadowDy="0.0"
         android:shadowRadius="10.0"
         android:background="@drawable/format_button_text"
-        android:text="@string/Login"
+        android:text="@string/login"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/btnLogin"
@@ -84,7 +85,7 @@
         android:shadowDx="0.0"
         android:shadowDy="0.0"
         android:shadowRadius="10.0"
-        android:text="@string/Register"
+        android:text="@string/register"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/btnRegister"
