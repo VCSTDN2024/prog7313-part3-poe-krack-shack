@@ -63,7 +63,7 @@
             android:id="@+id/txtCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/darkerblue"
+            android:background="@color/primary_dark"
             android:scrollbars="vertical"
             android:textColor="@color/white"
             android:textSize="34sp" />
