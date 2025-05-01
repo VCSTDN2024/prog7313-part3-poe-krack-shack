@@ -1,6 +1,7 @@
 package vcmsa.projects.krackshackbanking.Budget
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -50,22 +51,13 @@ class AddCategory {
 
   }
 
-  fun DialougeBox
-    (
-
-  )
-   {
-      val builder = AlertDialog.Builder(this)
-      builder.setTitle("New Category")
-      val input = EditText(this)
-      val lp = LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.MATCH_PARENT
-      )
-      input.layoutParams = lp
-      builder.setView(input)
-
-    }
 
 
+
+
+
+}
+class Dialoug (context: Context) : AlertDialog.Builder(context)
+{
+    fun show 
 }
