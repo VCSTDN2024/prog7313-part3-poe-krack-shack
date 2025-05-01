@@ -29,7 +29,7 @@ class AddCategory {
 
 
     //
-    fun getCategory(ctaegory: String): Boolean { // looks for current selected category
+    fun getCategory(category: String): Boolean { // looks for current selected category
 
         return false
     }
@@ -37,14 +37,14 @@ class AddCategory {
     fun CreateCategory() // if user selects create new category , we go here
     {
 
-        // here we will have a dialouge box to create new category
+        // here we will have a dialogue box to create new category
 
         var categoryName = ""
         var categoryID = ""
         var categoryTotalCost = 0
         var UID = _auth.currentUser?.uid
 
-        var _catergoy = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
+        var _catergory = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
 
 
     }
