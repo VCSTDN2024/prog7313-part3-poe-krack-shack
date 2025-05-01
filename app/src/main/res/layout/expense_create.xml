@@ -120,13 +120,6 @@
 
             </DatePicker>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadPhoto"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/format_button" />
-
             <TextView
                 android:id="@+id/txtDescriptionLabel"
                 android:layout_width="wrap_content"
@@ -163,6 +156,14 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUploadPhoto"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/format_button" />
+
             <TextView
                 android:id="@+id/txtUploadPhoto"
                 android:layout_width="300dp"

@@ -73,7 +73,7 @@ class AddExpense : AppCompatActivity() {
         btnEnter = findViewById(R.id.btnEnter)
     }
 
-    // when the user selects new they should recive a pop up to create a new category
+    // when the user selects new they should receive a pop up to create a new category
     // code here https://developer.android.com/develop/ui/compose/quick-guides/content/display-user-input
     private fun setupCategorySpinner() {
         val categories = categoriesMap.keys.toList()
