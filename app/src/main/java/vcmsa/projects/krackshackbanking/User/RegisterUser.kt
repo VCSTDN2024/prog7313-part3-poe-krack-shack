@@ -3,18 +3,15 @@ package vcmsa.projects.krackshackbanking.User
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Button
 import vcmsa.projects.krackshackbanking.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
 import vcmsa.projects.krackshackbanking.MainActivity
-import vcmsa.projects.krackshackbanking.User.UserModel
 
 
 import java.util.UUID
@@ -38,7 +35,7 @@ public class RegisterUser : AppCompatActivity() {
         _database = Firebase.database.reference
 
         _btnRegister = findViewById(R.id.btnEnter)
-        _txtEmail = findViewById(R.id.txtUsernameInput)
+        _txtEmail = findViewById(R.id.txtEmailInput)
         _txtPassword = findViewById(R.id.txtPasswordInput)
         _txtConfirm = findViewById(R.id.txtConfirmPasswordInput)
 
