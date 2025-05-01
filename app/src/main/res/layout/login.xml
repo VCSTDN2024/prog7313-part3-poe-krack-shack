@@ -50,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/Password"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
