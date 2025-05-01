@@ -74,7 +74,7 @@
     <string name="edit_transaction">Edit Transaction</string>
     <string name="delete_transaction">Delete Transaction</string>
     <string name="transaction_amount">Amount</string>
-    <string name="transaction_amount_hint">Amount Hint</string>
+    <string name="transaction_amount_hint">Enter Amount</string>
     <string name="transaction_date">Date</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="transaction_description">Description</string>
