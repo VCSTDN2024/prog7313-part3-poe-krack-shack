@@ -84,8 +84,8 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColor="@color/text_hint"
+                android:textColorHint="@color/text_hint"
                 android:textSize="30sp" />
 
             <TextView
@@ -153,8 +153,8 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColor="@color/text_hint"
+                android:textColorHint="@color/text_hint"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
