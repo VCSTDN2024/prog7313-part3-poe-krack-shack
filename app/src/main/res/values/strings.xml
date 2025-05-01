@@ -29,8 +29,11 @@
     <string name="logout">Logout</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="password_input_hint">Password Input Hint</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="name">Name</string>
+    <string name="confirm_password_input_hint">Confirm Password Input Hint</string>
+    <string name="username">Name</string>
+    <string name="username_input_hint">Username Input Hint</string>
     <string name="phone_number">Phone Number</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_account">Don\'t have an account?</string>

@@ -1,6 +1,5 @@
 package vcmsa.projects.krackshackbanking.Expense
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,12 +12,10 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import vcmsa.projects.krackshackbanking.R
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.UUID
@@ -181,7 +178,7 @@ class AddExpense : AppCompatActivity() {
 
         val expense = ExpenseModel(
             amount = amount,
-            categoryID = categoryID,
+            category = categoryID,
             date = formattedDate,
             description = description,
             expenseID = expenseID
