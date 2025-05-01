@@ -118,6 +118,8 @@
     <string name="Menu">Menu</string>
     <string name="Money">Money</string>
 
-    <!--Register-->
+    <string name="Settings">Settings</string>
+    <string name="Reports">Reports</string>
+    <string name="Logout">Logout</string>
 
 </resources>
