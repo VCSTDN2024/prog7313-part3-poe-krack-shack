@@ -12,11 +12,15 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.R
 
@@ -35,7 +39,7 @@ class AddExpense : AppCompatActivity() {
     private lateinit var _cancelButton: Button
     private lateinit var _imageUri: Uri
 
-    private lateinit var _catArray: Array<DatabaseReference>
+    private lateinit var _catArray: Array<String>
 
     // database reference
     private lateinit var _data: DatabaseReference
@@ -53,22 +57,14 @@ class AddExpense : AppCompatActivity() {
         _cancelButton = findViewById(R.id.btnCancel)
 
 
+
         _data = FirebaseDatabase.getInstance().reference
-
-
         //here we make the array for the spinner
 
-        _catArray = arrayOf(
-            _data.child(""),
-        )
-        //convert to spinner object
-        val categoryAdapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            _catArray
-        )
 
-        val convert : ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, _catArray)
+        _catArray = RetriveData()
+        val convert: ArrayAdapter<*> =
+            ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, _catArray)
 
         convert.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         _categorySpinner.adapter = convert
@@ -80,23 +76,48 @@ class AddExpense : AppCompatActivity() {
 
 
 
-            _submitButton.setOnClickListener {
-                val category = _categorySpinner.selectedItem.toString()
-                val date =
-                    _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
-                val amount = _amountEditText.text.toString().toFloat()
-                val description = _descriptionEditText.text.toString()
+        _submitButton.setOnClickListener {
+            val category = _categorySpinner.selectedItem.toString()
+            val date =
+                _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
+            val amount = _amountEditText.text.toString().toFloat()
+            val description = _descriptionEditText.text.toString()
 
-                val Intent = Intent(this, Dashboard::class.java)
-                startActivity(Intent)
-            }
-
-            _cancelButton.setOnClickListener {
-                val intent = Intent(this, Dashboard::class.java)
-                startActivity(intent)
-            }
-
+            val Intent = Intent(this, Dashboard::class.java)
+            startActivity(Intent)
         }
 
+        _cancelButton.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
+        }
 
+    }
+
+    private fun RetriveData(): Array<String> {
+        var _getData: Array<String> = emptyArray()
+        _data.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val category = snapshot.getValue(String::class.java)
+                    _getData + (category.toString())
+                }
+
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+                // failed exception handling here
+            }
+            // This method is called once with the initial value and again
+            // whenever data at this location is updated.
+        })
+        return _getData
+
+    }
 }
+
+
+
+
+
