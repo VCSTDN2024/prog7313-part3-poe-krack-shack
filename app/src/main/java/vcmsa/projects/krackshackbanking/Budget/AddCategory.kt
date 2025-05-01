@@ -21,14 +21,12 @@ class AddCategory(private val context: Context) {
     private lateinit var _database: FirebaseDatabase
     private lateinit var _auth: FirebaseAuth
 
-    fun getCategory(category: String): Boolean { // looks for current selected category
-
+    fun getCategory(category: String): Boolean {
         return false
     }
 
     fun CreateCategory() // if user selects create new category , we go here
     {
-        // here we will have a dialogue box to create new category
         var categoryName = ""
         var categoryID = ""
         var categoryTotalCost = 0
