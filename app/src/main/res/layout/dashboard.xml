@@ -20,7 +20,9 @@
             android:background="@android:color/transparent"
             app:title="@string/app_name"
             app:titleTextColor="@color/white"
-            app:menu="@menu/dashboard_menu"/>
+            app:menu="@menu/dashboard_menu"/> <!-- where is our @menu-->
+
+        <!-- to:do make a search bar -->
 
         <com.google.android.material.search.SearchBar
             android:id="@+id/searchBar"
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
-            android:hint="@string/SearchExpenses"
+            android:hint="@string/search_expenses"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SearchBar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -61,7 +63,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/TotalBalance"
+                        android:text="@string/total_balance"
                         android:textAppearance="?attr/textAppearanceBodyMedium"/>
 
                     <TextView
@@ -96,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:text="@string/LogIncome"
+                        android:text="@string/log_income"
                         style="@style/Widget.Material3.Button.TonalButton"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -105,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
-                        android:text="@string/LogExpense"
+                        android:text="@string/log_expense"
                         style="@style/Widget.Material3.Button.TonalButton"/>
 
                 </LinearLayout>
@@ -130,7 +132,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Budgets"
+                        android:text="@string/budgets"
                         android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -161,7 +163,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/RecentTransactions"
+                        android:text="@string/recent_transactions"
                         android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                     <androidx.recyclerview.widget.RecyclerView
