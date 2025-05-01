@@ -74,6 +74,7 @@
     <string name="transaction_date">Date</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="transaction_description">Description</string>
+    <string name="transaction_description_hint">Description Hint</string>
     <string name="transaction_category">Category</string>
     <string name="transaction_type">Type</string>
     <string name="transaction_payment_method">Payment Method</string>

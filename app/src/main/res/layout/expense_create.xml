@@ -128,6 +128,42 @@
                 android:background="@drawable/format_button" />
 
             <TextView
+                android:id="@+id/txtDescriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="300dp"
+                android:height="100dp"
+                android:autoSizeTextType="uniform"
+                android:elevation="4dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="10.0"
+                android:text="@string/transaction_description"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtDescription"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
+                android:background="@drawable/format_button"
+                android:gravity="center"
+                android:hint="@string/transaction_description_hint"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+            <TextView
                 android:id="@+id/txtUploadPhoto"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
