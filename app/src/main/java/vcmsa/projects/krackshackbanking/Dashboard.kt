@@ -12,8 +12,11 @@ import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
 
 class Dashboard : AppCompatActivity() {
 
+    // database auth
     private lateinit var _data: DatabaseReference
     private lateinit var _auth: FirebaseAuth
+
+    // xml components
     private lateinit var _income: Button
     private lateinit var _expense: Button
 
@@ -21,18 +24,23 @@ class Dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard) // replace with your correct layout resource name
 
+        // initalising components
         _auth = FirebaseAuth.getInstance()
         _data = FirebaseDatabase.getInstance().reference
-        _income = findViewById(R.id.btn_log_income_dashboard)
-        _expense = findViewById(R.id.btn_log_expense_dashboard)
+        _income = findViewById(R.id.btn_log_income)
+        _expense = findViewById(R.id.btn_log_expense)
 
 
+
+        // button logic
         _income.setOnClickListener {
             // here we send the user to the add expense page
             val intent = Intent(this, AddExpense::class.java)
             startActivity(intent)
         }
 
+
+        // button logic
         _expense.setOnClickListener {
             // method to opne the set monthly bidget area
             val intent = Intent(this, ExpenseHandler::class.java)
