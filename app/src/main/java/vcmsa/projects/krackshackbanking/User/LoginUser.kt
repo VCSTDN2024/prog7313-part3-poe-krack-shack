@@ -1,7 +1,4 @@
 package vcmsa.projects.krackshackbanking.User
-//
-
-// kotlin has no proper handling for mvc esc architecture
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -55,7 +55,6 @@ public class RegisterUser : AppCompatActivity() {
             } else {
                 val isCreated = CreateUser(_txtEmailIn, _txtPasswordIn)
 
-
             }
 
         }

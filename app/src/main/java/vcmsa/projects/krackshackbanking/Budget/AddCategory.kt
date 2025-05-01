@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
-
+import androidx.compose.ui.graphics.vector.ImageVector
 import com.google.android.gms.common.util.UidVerifier
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -44,13 +44,9 @@ class AddCategory {
 
     var _catergoy = BudgetModel(categoryID,categoryName, UID.toString(),categoryTotalCost)
 
-
-
-
-
   }
 
-  /*fun DialougeBox
+  fun DialougeBox
     (
 
   )
@@ -66,6 +62,10 @@ class AddCategory {
       builder.setView(input)
 
     }
+    class UpdateCategory {
 
-*/
+    }
+    class DeleteCategory {
+
+    }
 }
