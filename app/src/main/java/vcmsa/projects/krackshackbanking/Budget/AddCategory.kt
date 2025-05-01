@@ -1,6 +1,9 @@
 package vcmsa.projects.krackshackbanking.Budget
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.google.android.gms.common.util.UidVerifier
 import com.google.firebase.Firebase
@@ -49,14 +52,18 @@ class AddCategory {
 
   fun DialougeBox
     (
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-    dialogTitle: String,
-    dialogText: String,
 
   )
-  {
-
+   {
+      val builder = AlertDialog.Builder(this)
+      builder.setTitle("New Category")
+      val input = EditText(this)
+      val lp = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.MATCH_PARENT
+      )
+      input.layoutParams = lp
+      builder.setView(input)
 
     }
 
