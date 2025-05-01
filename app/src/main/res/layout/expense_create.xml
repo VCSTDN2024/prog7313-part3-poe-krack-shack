@@ -40,7 +40,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/Category"
+                android:text="@string/budget_category"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -67,7 +67,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/Amount"
+                android:text="@string/budget_amount"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -78,7 +78,7 @@
                 android:layout_height="75dp"
                 android:background="@drawable/format_button"
                 android:gravity="center"
-                android:hint="@string/Amount_Hint"
+                android:hint="@string/transaction_amount_hint"
                 android:inputType="numberDecimal"
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
@@ -104,7 +104,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/Date"
+                android:text="@string/transaction_date"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -139,7 +139,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/UploadPhoto"
+                android:text="@string/upload_photo"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
@@ -181,7 +181,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/btnCancel"
+                android:text="@string/cancel"
                 android:textColor="@color/white" />
 
             <TextView
@@ -200,7 +200,7 @@
                 android:shadowDx="0.0"
                 android:shadowDy="0.0"
                 android:shadowRadius="10.0"
-                android:text="@string/btnEnter"
+                android:text="@string/save"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
