@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,7 +67,7 @@ class AddExpense : AppCompatActivity() {
     private fun initializeViews() {
         spinnerCategory = findViewById(R.id.spnCategory)
         editTextAmount = findViewById(R.id.txtAmountInput)
-        editTextDescription = findViewById(R.id.txtDescriptionInput)
+        editTextDescription = findViewById(R.id.txtDescriptionLabel)
         datePicker = findViewById(R.id.dpDate)
         btnUploadPhoto = findViewById(R.id.btnUploadPhoto)
         btnCancel = findViewById(R.id.btnCancel)
@@ -147,6 +148,7 @@ class AddExpense : AppCompatActivity() {
 
     private fun uploadImageToFirebase(onComplete: (String) -> Unit) {
         imageUri?.let { uri ->
+            val storage = FirebaseStorage.getInstance()
             val fileName = UUID.randomUUID().toString()
             val storageRef = storage.reference.child("expense_images/$fileName")
 
