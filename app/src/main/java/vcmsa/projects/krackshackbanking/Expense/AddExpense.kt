@@ -52,21 +52,29 @@ class AddExpense : AppCompatActivity() {
         _data = FirebaseDatabase.getInstance().reference
 
 
+        // getting categories from database to put in the spinner
+        val categories = _data.child("categories").get().addOnSuccessListener { snapshot ->
+            val categories = snapshot.children.map { it.key }.toTypedArray()
+            //writing it to the spinner
+            _categorySpinner.adapter =
+                ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
 
 
 
-        _submitButton.setOnClickListener {
-            val category = _categorySpinner.selectedItem.toString()
-            val date =
-                _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
-            val amount = _amountEditText.text.toString().toFloat()
-            val description = _descriptionEditText.text.toString()
+
+            _submitButton.setOnClickListener {
+                val category = _categorySpinner.selectedItem.toString()
+                val date =
+                    _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
+                val amount = _amountEditText.text.toString().toFloat()
+                val description = _descriptionEditText.text.toString()
+            }
+
+            _cacnelButton.setOnClickListener {
+                val intent = Intent(this, Dashboard::class.java)
+                startActivity(intent)
+            }
+
         }
-
-        _cacnelButton.setOnClickListener {
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
-        }
-
     }
 }

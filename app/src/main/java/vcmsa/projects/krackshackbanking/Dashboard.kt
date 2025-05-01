@@ -36,6 +36,8 @@ class Dashboard : AppCompatActivity() {
 
 
 
+
+
         // button logic
         _income.setOnClickListener {
             // here we send the user to the add expense page
