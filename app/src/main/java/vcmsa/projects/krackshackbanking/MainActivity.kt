@@ -13,13 +13,16 @@ import vcmsa.projects.krackshackbanking.User.RegisterUser
 class MainActivity : AppCompatActivity()
 {
     private lateinit var _auth: FirebaseAuth
+
+    // xml buttons
     private lateinit var _register: Button
     private lateinit var _login: Button
 
     private val loginUser = LoginUser()
 
-    //Imagine imagining
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // initalising elements
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -27,12 +30,12 @@ class MainActivity : AppCompatActivity()
         _register = findViewById(R.id.btnRegister)
         _login = findViewById(R.id.btnLogin)
 
-
+    // button to take user to register
         _register.setOnClickListener {
             val intent = Intent(this, RegisterUser::class.java)
             startActivity(intent)
         }
-
+    // button to take user to login
         _login.setOnClickListener {
             val intent = Intent(this, LoginUser::class.java)
             startActivity(intent)
