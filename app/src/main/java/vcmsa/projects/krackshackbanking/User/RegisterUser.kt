@@ -16,6 +16,7 @@ import com.google.firebase.database.database
 import vcmsa.projects.krackshackbanking.MainActivity
 import vcmsa.projects.krackshackbanking.User.UserModel
 
+
 import java.util.UUID
 
 public class RegisterUser : AppCompatActivity() {
@@ -77,7 +78,7 @@ public class RegisterUser : AppCompatActivity() {
         val user = UserModel(
             userEmail = _txtEmailIn,
             userPassword = _txtPasswordIn,
-            UID = _txtEmailIn + UUID.randomUUID().toString(),
+            UID = _txtEmailIn.split("@")[0]+ UUID.randomUUID().toString(),
             userName = _txtEmailIn.split("@")[0],
         )
 

@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity()
     private lateinit var _register: Button
     private lateinit var _login: Button
 
+    private lateinit var RegesterView: RegisterUser
+
     private val loginUser = LoginUser()
 
 
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity()
         _register.setOnClickListener {
             val intent = Intent(this, RegisterUser::class.java)
             startActivity(intent)
+
         }
     // button to take user to login
         _login.setOnClickListener {

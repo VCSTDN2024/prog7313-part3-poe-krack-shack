@@ -11,7 +11,7 @@ data class BudgetModel(
     val CategoryID: String = "",
     val Name: String = "",
     val UID: String = "",
-    val totalCost: String = ""
+    val totalCost: Int = 0
 )
 {
 
