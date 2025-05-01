@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
-    <string name="app_name">KracKShacK Banking</string>
+    <string name="app_name">KracK ShacK Banking</string>
     <string name="StartDate">Start Date</string>
     <string name="EndDate">End Date</string>
     <string name="Expenses">Expenses</string>
