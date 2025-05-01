@@ -2,7 +2,16 @@
 <resources>
     <!-- App Name -->
     <string name="app_name">KracKShacK Banking</string>
-
+    <string name="StartDate">Start Date</string>
+    <string name="EndDate">End Date</string>
+    <string name="Expenses">Expenses</string>
+    <string name="Login">Login</string>
+    <string name="Register">Register</string>
+    <string name="Or">Or</string>
+    <string name="Username">Username</string>
+    <string name="EnterUsername">Enter Username</string>
+    <string name="Password">Password</string>
+    <string name="EnterPassword">Enter Password</string>
     <!-- Common -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -98,4 +107,6 @@
     <string name="error_required_field">This field is required</string>
     <string name="error_network">Network error. Please try again.</string>
     <string name="error_unknown">An unknown error occurred</string>
+
+
 </resources>

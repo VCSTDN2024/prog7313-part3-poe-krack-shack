@@ -2,16 +2,12 @@ package vcmsa.projects.krackshackbanking.Expense
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 
 class ExpenseHandler {
-    private val db = FirebaseFirestore.getInstance()
     private val expensesCollection = db.collection("expenses")
-    private val budgetHandler = BudgetHandler()
     private val auth: FirebaseAuth = Firebase.auth
 
     fun createExpense(expense: ExpenseModel, onComplete: (String?, String?) -> Unit) {
@@ -59,7 +55,6 @@ class ExpenseHandler {
                 date = doc.getString("Date") ?: "",
                 description = doc.getString("Description") ?: "",
                 imageUrl = doc.getString("Image") ?: "",
-                UID = doc.getString("UID") ?: "",
                 expenseID = doc.getString("expenseID") ?: "",
                 budgetId = doc.getString("budgetId") ?: ""
             )

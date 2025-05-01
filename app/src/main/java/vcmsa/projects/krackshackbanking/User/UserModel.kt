@@ -1,6 +1,6 @@
 package vcmsa.projects.krackshackbanking.User
 
-import com.google.firebase.firestore.Exclude
+
 import java.util.Date
 
 data class UserModel(
@@ -12,10 +12,10 @@ data class UserModel(
     val lastLogin: Date = Date(),
     val monthlyIncome: Double = 0.0,
     val savingsGoal: Double = 0.0,
-    val currency: String = "USD",
+    val currency: String = "R",
     val notificationEnabled: Boolean = true,
     val budgetCategories: List<String> = listOf(),
-    @get:Exclude
+
     val password: String = ""
 ) {
     fun toMap(): Map<String, Any> {
@@ -23,7 +23,6 @@ data class UserModel(
             "id" to id,
             "email" to email,
             "name" to name,
-            "phoneNumber" to phoneNumber,
             "createdAt" to createdAt,
             "lastLogin" to lastLogin,
             "monthlyIncome" to monthlyIncome,

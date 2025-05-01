@@ -37,10 +37,7 @@ class AddExpense : AppCompatActivity() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val user = auth.currentUser
     private val uid = user?.uid
-
-
     private val expenseHandler = ExpenseHandler()
-
     private val pickImage = 100
     private var imageUri: Uri? = null
     private var imageUrl: String = ""
@@ -187,7 +184,6 @@ class AddExpense : AppCompatActivity() {
             categoryID = categoryID,
             date = formattedDate,
             description = description,
-            imageUrl = imageUrl,
             expenseID = expenseID
         )
 

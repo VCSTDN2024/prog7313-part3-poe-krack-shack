@@ -5,10 +5,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DeleteUser {
     private val auth = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
 
     fun deleteUser(userId: String, onComplete: (Boolean, String?) -> Unit) {
-        // Delete user from Firestore
         db.collection("users").document(userId)
             .delete()
             .addOnSuccessListener {

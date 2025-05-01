@@ -4,28 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/maincolour"
     android:orientation="vertical">
 
-    <SearchView
-        android:id="@+id/searchView_dashboard"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/search_view_background"
-        android:queryHint="@string/SearchExpenses"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/search_expenses"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SearchBar"/>
 
     <Button
         android:id="@+id/btnStartDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:backgroundTint="@color/darkgrey"
+        android:backgroundTint="@color/white"
         android:paddingTop="6dp"
         android:rotationX="0"
         android:text="@string/StartDate"
@@ -41,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/darkgrey"
+        android:backgroundTint="@color/white"
         android:text="@string/EndDate"
         android:textColor="@color/black"
         android:textSize="25sp"

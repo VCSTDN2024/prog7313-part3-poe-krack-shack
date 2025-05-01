@@ -31,13 +31,7 @@ data class ExpenseModel(
     val category: String = "",
     val budgetId: String = "",
     val date: Date = Date(),
-    val paymentMethod: String = "",
     val location: String = "",
-    val receiptUrl: String = "",
-    val isRecurring: Boolean = false,
-    val recurringFrequency: String = "", // "daily", "weekly", "monthly", "yearly"
-    val tags: List<String> = listOf(),
-    val notes: String = "",
     @get:Exclude
     val attachments: List<String> = listOf() // URLs to attached files
 ) {
@@ -50,13 +44,6 @@ data class ExpenseModel(
             "category" to category,
             "budgetId" to budgetId,
             "date" to date,
-            "paymentMethod" to paymentMethod,
-            "location" to location,
-            "receiptUrl" to receiptUrl,
-            "isRecurring" to isRecurring,
-            "recurringFrequency" to recurringFrequency,
-            "tags" to tags,
-            "notes" to notes
         )
     }
 
@@ -64,7 +51,5 @@ data class ExpenseModel(
         return amount > 0 && description.isNotBlank() && category.isNotBlank()
     }
 
-    fun getFormattedAmount(): String {
-        return String.format("%.2f", amount)
-    }
+
 }

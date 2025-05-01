@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/maincolour">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -13,16 +13,9 @@
         android:background="@android:color/transparent"
         android:elevation="0dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            app:title="@string/app_name"
-            app:titleTextColor="@color/white"
-            app:menu="@menu/dashboard_menu"/> <!-- where is our @menu-->
 
-        <!-- to:do make a search bar -->
+
+
 
         <com.google.android.material.search.SearchBar
             android:id="@+id/searchBar"
