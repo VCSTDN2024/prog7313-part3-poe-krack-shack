@@ -29,9 +29,9 @@
     <string name="logout">Logout</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="password_input_hint">Password Input Hint</string>
+    <string name="password_input_hint">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="confirm_password_input_hint">Confirm Password Input Hint</string>
+    <string name="confirm_password_input_hint">Confirm Password</string>
     <string name="username">Name</string>
     <string name="username_input_hint">Username Input Hint</string>
     <string name="phone_number">Phone Number</string>
@@ -117,4 +117,7 @@
     <string name="Profile">Profile</string>
     <string name="Menu">Menu</string>
     <string name="Money">Money</string>
+
+    <!--Register-->
+
 </resources>
