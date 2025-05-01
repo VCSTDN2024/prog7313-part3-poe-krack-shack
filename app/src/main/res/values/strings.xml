@@ -22,6 +22,7 @@
     <string name="error">Error</string>
     <string name="success">Success</string>
     <string name="warning">Warning</string>
+    <string name="create">Create</string>
 
     <!-- Authentication -->
     <string name="login">Login</string>
@@ -63,6 +64,7 @@
     <string name="budget_remaining">Remaining</string>
     <string name="budget_spent">Spent</string>
     <string name="budget_limit">Limit</string>
+    <string name="category_create">Enter Category name below</string>
 
     <!-- Transactions -->
     <string name="transactions">Transactions</string>
