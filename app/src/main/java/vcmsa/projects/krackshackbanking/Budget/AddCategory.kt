@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
-import androidx.compose.ui.graphics.vector.ImageVector
+
 import com.google.android.gms.common.util.UidVerifier
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -51,7 +51,7 @@ class AddCategory {
 
   )
    {
-      val builder = AlertDialog.Builder(this)
+     /* val builder = AlertDialog.Builder(this)
       builder.setTitle("New Category")
       val input = EditText(this)
       val lp = LinearLayout.LayoutParams(
@@ -59,7 +59,7 @@ class AddCategory {
         LinearLayout.LayoutParams.MATCH_PARENT
       )
       input.layoutParams = lp
-      builder.setView(input)
+      builder.setView(input)*/
 
     }
     class UpdateCategory {

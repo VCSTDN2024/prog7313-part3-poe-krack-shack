@@ -44,7 +44,7 @@ class AddExpense : AppCompatActivity() {
         _categorySpinner = findViewById(R.id.spnCategory)
         _datePicker = findViewById(R.id.dpDate)
         _amountEditText = findViewById(R.id.txtAmountInput)
-        _descriptionEditText = findViewById(R.id.txtDescriptionLabel)
+        _descriptionEditText = findViewById(R.id.txtDescription)
         _submitButton = findViewById(R.id.btnEnter)
         _cacnelButton = findViewById(R.id.btnCancel)
 
@@ -68,6 +68,9 @@ class AddExpense : AppCompatActivity() {
                     _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
                 val amount = _amountEditText.text.toString().toFloat()
                 val description = _descriptionEditText.text.toString()
+
+                val Intent = Intent(this, Dashboard::class.java)
+                startActivity(Intent)
             }
 
             _cacnelButton.setOnClickListener {
