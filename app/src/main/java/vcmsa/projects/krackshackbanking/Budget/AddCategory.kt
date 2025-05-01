@@ -2,20 +2,14 @@ package vcmsa.projects.krackshackbanking.Budget
 
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.google.android.gms.common.util.UidVerifier
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import vcmsa.projects.krackshackbanking.R
 
-class AddCategory {
-
+class AddCategory(private val context: Context) {
 
 //     "category" {
 //         "CategoryID": "cat_testCate",
@@ -27,8 +21,6 @@ class AddCategory {
     private lateinit var _database: FirebaseDatabase
     private lateinit var _auth: FirebaseAuth
 
-
-    //
     fun getCategory(category: String): Boolean { // looks for current selected category
 
         return false
@@ -36,17 +28,13 @@ class AddCategory {
 
     fun CreateCategory() // if user selects create new category , we go here
     {
-
         // here we will have a dialogue box to create new category
-
         var categoryName = ""
         var categoryID = ""
         var categoryTotalCost = 0
         var UID = _auth.currentUser?.uid
-
-        var _catergory = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
-
-
+        openDialog(context = context, onSubmit = { categoryName = it })
+        var _category = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
     }
 
     fun openDialog(context: Context, onSubmit: (String) -> Unit) {
