@@ -19,8 +19,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.R
+
 import java.util.Calendar
 import java.util.Locale
+import java.util.Objects
 import java.util.UUID
 
 class AddExpense : AppCompatActivity() {
@@ -30,8 +32,10 @@ class AddExpense : AppCompatActivity() {
     private lateinit var _amountEditText: EditText
     private lateinit var _descriptionEditText: EditText
     private lateinit var _submitButton: Button
-    private lateinit var _cacnelButton: Button
+    private lateinit var _cancelButton: Button
     private lateinit var _imageUri: Uri
+
+    private lateinit var _catArray: Array<DatabaseReference>
 
     // database reference
     private lateinit var _data: DatabaseReference
@@ -46,18 +50,32 @@ class AddExpense : AppCompatActivity() {
         _amountEditText = findViewById(R.id.txtAmountInput)
         _descriptionEditText = findViewById(R.id.txtDescription)
         _submitButton = findViewById(R.id.btnEnter)
-        _cacnelButton = findViewById(R.id.btnCancel)
+        _cancelButton = findViewById(R.id.btnCancel)
 
 
         _data = FirebaseDatabase.getInstance().reference
 
 
-        // getting categories from database to put in the spinner
-        val categories = _data.child("categories").get().addOnSuccessListener { snapshot ->
-            val categories = snapshot.children.map { it.key }.toTypedArray()
-            //writing it to the spinner
-            _categorySpinner.adapter =
-                ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
+        //here we make the array for the spinner
+
+        _catArray = arrayOf(
+            _data.child(""),
+        )
+        //convert to spinner object
+        val categoryAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            _catArray
+        )
+
+        val convert : ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, _catArray)
+
+        convert.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        _categorySpinner.adapter = convert
+
+
+
+
 
 
 
@@ -73,11 +91,12 @@ class AddExpense : AppCompatActivity() {
                 startActivity(Intent)
             }
 
-            _cacnelButton.setOnClickListener {
+            _cancelButton.setOnClickListener {
                 val intent = Intent(this, Dashboard::class.java)
                 startActivity(intent)
             }
 
         }
-    }
+
+
 }
