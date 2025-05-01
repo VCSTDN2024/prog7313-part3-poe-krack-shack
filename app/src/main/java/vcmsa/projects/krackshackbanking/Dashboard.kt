@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -19,6 +20,7 @@ class Dashboard : AppCompatActivity() {
     // xml components
     private lateinit var _income: Button
     private lateinit var _expense: Button
+    private lateinit var _totalExpense: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class Dashboard : AppCompatActivity() {
         _data = FirebaseDatabase.getInstance().reference
         _income = findViewById(R.id.btn_log_income)
         _expense = findViewById(R.id.btn_log_expense)
+        _totalExpense = findViewById(R.id.balanceCard)
 
 
 
@@ -47,5 +50,12 @@ class Dashboard : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    // method to fetch total expense per category and display it on dashbaord
+    fun GetTotalExpense()
+    {
+
+    }
+
 }
 

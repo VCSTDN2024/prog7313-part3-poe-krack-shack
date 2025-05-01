@@ -13,7 +13,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +24,7 @@ import java.util.Locale
 import java.util.UUID
 
 class AddExpense : AppCompatActivity() {
+    // xml elements
     private lateinit var spinnerCategory: Spinner
     private lateinit var editTextAmount: EditText
     private lateinit var editTextDescription: EditText
@@ -32,7 +33,12 @@ class AddExpense : AppCompatActivity() {
     private lateinit var btnCancel: Button
     private lateinit var btnEnter: Button
 
-    private val storage = FirebaseStorage.getInstance()
+    // firebase elements
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val user = auth.currentUser
+    private val uid = user?.uid
+
+
     private val expenseHandler = ExpenseHandler()
 
     private val pickImage = 100
@@ -48,7 +54,9 @@ class AddExpense : AppCompatActivity() {
         "Rent/Mortgage" to "cat_rent",
         "Healthcare" to "cat_healthcare",
         "Education" to "cat_education",
-        "Other" to "cat_other"
+        "Create New" to "create_new"
+
+        // so are we making these our prebuilt categories
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +79,8 @@ class AddExpense : AppCompatActivity() {
         btnEnter = findViewById(R.id.btnEnter)
     }
 
+    // when the user selects new they should recive a pop up to create a new category
+    // code here https://developer.android.com/develop/ui/compose/quick-guides/content/display-user-input
     private fun setupCategorySpinner() {
         val categories = categoriesMap.keys.toList()
         val adapter = ArrayAdapter(

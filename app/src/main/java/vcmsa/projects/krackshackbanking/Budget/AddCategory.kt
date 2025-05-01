@@ -15,8 +15,17 @@ class AddCategory {
 //         "totalCost": 10000
 //       }
 
+  private lateinit var _database : FirebaseDatabase
 
-  fun createCategory(){
+
+  fun getCategory() { // looks for current selected category
 
   }
+
+  fun CreateCategory() // if user selects create new category , we go here
+  {
+
+
+  }
+
 }

@@ -23,6 +23,7 @@ public class RegisterUser : AppCompatActivity() {
     lateinit var _userPasswordIn: EditText
     lateinit var _userConfirmPasswordIn: EditText
     lateinit var _register: Button
+    // we dont use firestore ?????????/
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {

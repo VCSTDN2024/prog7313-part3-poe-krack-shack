@@ -1,15 +1,19 @@
 package vcmsa.projects.krackshackbanking.User
 
-import com.google.firebase.firestore.FirebaseFirestore
 
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
+
+//tf is this?????
 class UpdateUserDetails {
-    private val db = FirebaseFirestore.getInstance()
+    private val db = Firebase.database
 
     fun updateUserDetails(
         userId: String,
         updates: Map<String, Any>,
         onComplete: (Boolean, String?) -> Unit
     ) {
+        // what is collection????
         db.collection("users").document(userId)
             .update(updates)
             .addOnSuccessListener {
@@ -29,6 +33,8 @@ class UpdateUserDetails {
         updateUserDetails(userId, updates, onComplete)
     }
 
+
+    // we dont have phone numbers???????
     fun updateUserContactInfo(
         userId: String,
         phoneNumber: String,
