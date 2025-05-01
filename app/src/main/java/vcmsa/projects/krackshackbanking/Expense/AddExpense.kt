@@ -22,7 +22,7 @@ import java.util.UUID
 
 class AddExpense : AppCompatActivity() {
     // xml elements
-    private lateinit var spinnerCategory: Spinner
+   /* private lateinit var spinnerCategory: Spinner
     private lateinit var editTextAmount: EditText
     private lateinit var editTextDescription: EditText
     private lateinit var datePicker: DatePicker
@@ -66,7 +66,7 @@ class AddExpense : AppCompatActivity() {
     private fun initializeViews() {
         spinnerCategory = findViewById(R.id.spnCategory)
         editTextAmount = findViewById(R.id.txtAmountInput)
-        editTextDescription = findViewById(R.id.txtDescriptionInput)
+        //editTextDescription = findViewById(R.id.txtDescriptionInput)
         datePicker = findViewById(R.id.dpDate)
         btnUploadPhoto = findViewById(R.id.btnUploadPhoto)
         btnCancel = findViewById(R.id.btnCancel)
@@ -134,7 +134,7 @@ class AddExpense : AppCompatActivity() {
         return true
     }
 
-    private fun saveExpense() {
+   *//* private fun saveExpense() {
         if (imageUri != null) {
             uploadImageToFirebase { url ->
                 imageUrl = url
@@ -143,9 +143,9 @@ class AddExpense : AppCompatActivity() {
         } else {
             createExpense()
         }
-    }
+    }*//*
 
-    private fun uploadImageToFirebase(onComplete: (String) -> Unit) {
+   *//* private fun uploadImageToFirebase(onComplete: (String) -> Unit) {
         imageUri?.let { uri ->
             val fileName = UUID.randomUUID().toString()
             val storageRef = storage.reference.child("expense_images/$fileName")
@@ -163,7 +163,7 @@ class AddExpense : AppCompatActivity() {
         } ?: run {
             onComplete("")
         }
-    }
+    }*//*
 
     private fun createExpense() {
         val categoryName = spinnerCategory.selectedItem.toString()
@@ -176,15 +176,15 @@ class AddExpense : AppCompatActivity() {
         val description = editTextDescription.text.toString()
         val expenseID = "${formattedDate}_${UUID.randomUUID()}"
 
-        val expense = ExpenseModel(
+      *//*  val expense = ExpenseModel(
             amount = amount,
             category = categoryID,
             date = formattedDate,
             description = description,
             expenseID = expenseID
-        )
+        )*//*
 
-        CoroutineScope(Dispatchers.Main).launch {
+*//*        CoroutineScope(Dispatchers.Main).launch {
             try {
                 expenseHandler.createExpense(expense)
                 Toast.makeText(this@AddExpense, "Expense saved successfully", Toast.LENGTH_SHORT).show()
@@ -201,4 +201,6 @@ class AddExpense : AppCompatActivity() {
             imageUri = data?.data
         }
     }
+    */
+
 }

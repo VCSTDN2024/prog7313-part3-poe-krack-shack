@@ -1,15 +1,17 @@
+
 package vcmsa.projects.krackshackbanking.Budget
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import java.util.Date
 
-class BudgetHandler {
+/*class BudgetHandler {
     private val db = FirebaseFirestore.getInstance()
     private val budgetsCollection = db.collection("budgets")
 
-    fun createBudget(budget: BudgetModel, onComplete: (String?, String?) -> Unit) {
-        if (!budget.isValid()) {
+    */
+/*fun createBudget(budget: BudgetModel, onComplete: (String?, String?) -> Unit) {
+       if (!budget.isValid()) {
             onComplete(null, "Invalid budget data")
             return
         }
@@ -24,9 +26,11 @@ class BudgetHandler {
             .addOnFailureListener { e ->
                 onComplete(null, e.message)
             }
-    }
+    }*//*
 
-    fun updateBudget(budget: BudgetModel, onComplete: (String?) -> Unit) {
+
+   */
+/* fun updateBudget(budget: BudgetModel, onComplete: (String?) -> Unit) {
         if (!budget.isValid()) {
             onComplete("Invalid budget data")
             return
@@ -40,7 +44,8 @@ class BudgetHandler {
             .addOnFailureListener { e ->
                 onComplete(e.message)
             }
-    }
+    *//*
+}
 
     fun deleteBudget(budgetId: String, onComplete: (String?) -> Unit) {
         budgetsCollection.document(budgetId)
@@ -140,4 +145,4 @@ class BudgetHandler {
                 onComplete(null, e.message)
             }
     }
-}
+}*/

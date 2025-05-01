@@ -14,25 +14,18 @@ class UpdateUserDetails {
         onComplete: (Boolean, String?) -> Unit
     ) {
         // what is collection????
-        db.collection("users").document(userId)
-            .update(updates)
-            .addOnSuccessListener {
-                onComplete(true, null)
-            }
-            .addOnFailureListener { e ->
-                onComplete(false, e.message)
-            }
+
+
+        fun updateUserPassword(
+            userId: String,
+            newPassword: String,
+            onComplete: (Boolean, String?) -> Unit
+        ) {
+            val updates = mapOf("password" to newPassword)
+            updateUserDetails(userId, updates, onComplete)
+        }
     }
-
-    fun updateUserPassword(
-        userId: String,
-        newPassword: String,
-        onComplete: (Boolean, String?) -> Unit
-    ) {
-        val updates = mapOf("password" to newPassword)
-        updateUserDetails(userId, updates, onComplete)
-    }
-
-
-
 }
+
+
+
