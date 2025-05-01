@@ -107,6 +107,10 @@
     <string name="error_required_field">This field is required</string>
     <string name="error_network">Network error. Please try again.</string>
     <string name="error_unknown">An unknown error occurred</string>
-
-
+<!-- Dashboard-->
+    <string name="Home">Home</string>
+    <string name="Graph">Graph</string>
+    <string name="Profile">Profile</string>
+    <string name="Menu">Menu</string>
+    <string name="Money">Money</string>
 </resources>
