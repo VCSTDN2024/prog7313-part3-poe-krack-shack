@@ -11,108 +11,86 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import vcmsa.projects.krackshackbanking.MainActivity
-import com.google.firebase.firestore.FirebaseFirestore
+import vcmsa.projects.krackshackbanking.User.UserModel
+
 import java.util.UUID
 
 public class RegisterUser : AppCompatActivity() {
 
-    lateinit var _database: DatabaseReference
-    lateinit var _auth: FirebaseAuth
-    lateinit var _userEmailIn: EditText
-    lateinit var _userPasswordIn: EditText
-    lateinit var _userConfirmPasswordIn: EditText
-    lateinit var _register: Button
-    // we dont use firestore ?????????/
-    private val db = FirebaseFirestore.getInstance()
+    private lateinit var _auth: FirebaseAuth
+
+    private lateinit var _database: DatabaseReference
+    private lateinit var _btnRegister: Button
+    private lateinit var _txtEmail: EditText
+    private lateinit var _txtPassword: EditText
+    private lateinit var _txtConfirm: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
-        _userEmailIn = findViewById(R.id.txtUsernameInput)
-        _userPasswordIn = findViewById(R.id.txtPasswordInput)
-        _userConfirmPasswordIn = findViewById(R.id.txtConfirmPasswordInput)
-        _register = findViewById(R.id.btnEnter)
-        _auth = FirebaseAuth.getInstance()
-        _database = FirebaseDatabase.getInstance().reference
 
-        _register.setOnClickListener {
-            var email: String = _userEmailIn.text.toString()
-            var password: String = _userPasswordIn.text.toString()
-            var confirmPassword: String = _userConfirmPasswordIn.text.toString()
-            if (TextUtils.isEmpty(email) ||
-                TextUtils.isEmpty(password) ||
-                TextUtils.isEmpty(confirmPassword)
-            ) {
-                Toast.makeText(
-                    this,
-                    "Please fill all the fields", Toast.LENGTH_LONG
-                ).show()
-            } else if (password != confirmPassword) {
-                registerUser(email, password, "", "", "", onComplete)
+        _auth = FirebaseAuth.getInstance()
+        _database = Firebase.database.reference
+
+        _btnRegister = findViewById(R.id.btnEnter)
+        _txtEmail = findViewById(R.id.txtUsernameInput)
+        _txtPassword = findViewById(R.id.txtPasswordInput)
+        _txtConfirm = findViewById(R.id.txtConfirmPasswordInput)
+
+        _btnRegister.setOnClickListener {
+
+            val _txtEmailIn = _txtEmail.text.toString()
+            val _txtPasswordIn = _txtPassword.text.toString()
+            val _txtConfirmIn = _txtConfirm.text.toString()
+
+            if (_txtEmailIn.isEmpty() || _txtPasswordIn.isEmpty() || _txtConfirmIn.isEmpty()) {
+                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
+            } else if (_txtPasswordIn != _txtConfirmIn) {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            } else {
+                val isCreated = CreateUser(_txtEmailIn, _txtPasswordIn)
+
+
             }
+
         }
+
     }
 
-    fun registerUser(
-        email: String,
-        password: String,
-        firstName: String,
-        lastName: String,
-        phoneNumber: String,
-        onComplete: (Boolean, String?, String?) -> Unit
-    ) {
-        _auth.createUserWithEmailAndPassword(email, password)
+    fun CreateUser(_txtEmailIn: String, _txtPasswordIn: String): Boolean {
+
+        _auth.createUserWithEmailAndPassword(_txtEmailIn, _txtPasswordIn)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val userId = _auth.currentUser?.uid
-                    if (userId != null) {
-                        val user = UserModel(
-                            userId = userId,
-                            email = email,
-                            firstName = firstName,
-                            lastName = lastName,
-                            phoneNumber = phoneNumber,
-                            accountNumber = generateAccountNumber()
-                        )
-
-                        db.collection("users").document(userId)
-                            .set(user)
-                            .addOnSuccessListener {
-                                onComplete(true, userId, null)
-                                Toast.makeText(
-                                    this,
-                                    "Successfully Registered", Toast.LENGTH_LONG
-                                ).show()
-                                val intent = Intent(
-                                    this,
-                                    MainActivity::class.java
-                                )
-                                startActivity(intent)
-                                finish()
-                            }
-                            .addOnFailureListener { e ->
-                                onComplete(false, null, e.message)
-                                Toast.makeText(
-                                    this,
-                                    "Registration Failed", Toast.LENGTH_LONG
-                                ).show()
-                            }
-                    } else {
-                        onComplete(false, null, "Failed to get user ID")
-                    }
+                    Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
-                    onComplete(false, null, task.exception?.message)
-                    Toast.makeText(
-                        this,
-                        "Registration Failed", Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this, "User could not be created", Toast.LENGTH_SHORT).show()
                 }
             }
-    }
 
-    private fun generateAccountNumber(): String {
-        return "KR" + UUID.randomUUID().toString().substring(0, 8).toUpperCase()
+        val user = UserModel(
+            userEmail = _txtEmailIn,
+            userPassword = _txtPasswordIn,
+            UID = _txtEmailIn + UUID.randomUUID().toString(),
+            userName = _txtEmailIn.split("@")[0],
+        )
+
+        _database.child("User").child(user.UID.toString()).setValue(user)
+
+
+        return false
     }
 }
+
+
+
+
+
+
 
