@@ -67,7 +67,7 @@
             android:scrollbars="vertical"
             android:text="@string/budget_summary"
             android:textColor="@color/white"
-            android:textSize="48sp" />
+            android:textSize="40sp" />
     </LinearLayout>
 
     <TextView
