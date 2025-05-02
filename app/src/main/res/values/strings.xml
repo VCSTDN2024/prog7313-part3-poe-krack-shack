@@ -132,4 +132,7 @@
     <!-- Temporary data -->
     <string name="tempEmail">forstupidstuff4444@gmail.com</string>
     <string name="tempPassword">Suhana@101</string>
+    <string name="tempAmount">1000</string>
+    <string name="tempDate">2025/05/01</string>
+    <string name="tempDescription">Bought food</string>
 </resources>
