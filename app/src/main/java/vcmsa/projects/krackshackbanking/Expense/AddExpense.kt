@@ -94,26 +94,33 @@ class AddExpense : AppCompatActivity() {
 
     }
 
+    // This method is called once with the initial value and again
+    // whenever data at this location is updated.
     private fun RetriveData(): Array<String> {
         var _getData: Array<String> = emptyArray()
-        _data.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (snapshot in dataSnapshot.children) {
-                    val category = snapshot.getValue(String::class.java)
-                    _getData + (category.toString())
+        _getData += "Food"
+        _getData += "Water"
+        _getData += "Entertainment"
+        _getData += "Transportation"
+        _getData += "Add Category"
+        try {
+            _data.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    dataSnapshot.children.forEach { snapshot ->
+                        val category = snapshot.getValue(String::class.java)
+                        _getData += (category.toString())
+                    }
                 }
 
-            }
-
-
-            override fun onCancelled(error: DatabaseError) {
-                // failed exception handling here
-            }
-            // This method is called once with the initial value and again
-            // whenever data at this location is updated.
-        })
-        return _getData
-
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+            return _getData
+        } catch (e: Exception) {
+            // failed exception handling here
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            return _getData
+        }
     }
 }
 
