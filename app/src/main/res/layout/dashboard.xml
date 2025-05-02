@@ -87,8 +87,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:backgroundTint="@color/green"
                         android:text="@string/log_income"
-                        android:backgroundTint="@color/green" />
+                        android:textColor="@color/white" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_log_expense"
@@ -97,8 +99,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:backgroundTint="@color/red"
                         android:text="@string/log_expense"
-                        android:backgroundTint="@color/red" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
