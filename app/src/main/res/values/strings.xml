@@ -58,7 +58,7 @@
     <string name="edit_budget">Edit Budget</string>
     <string name="delete_budget">Delete Budget</string>
     <string name="budget_name">Budget Name</string>
-    <string name="budget_summary">Electricity\t\t\t\t\t\t\tR1250\nGroceries\t\t\t\t\t\t\tR500\nEntertainment\t\t\t\tR200</string>
+    <string name="budget_summary">Electricity\t\t\t\t\t\t\tR1250\n\nGroceries\t\t\t\t\t\t\tR500\n\nEntertainment\t\t\t\tR200</string>
     <string name="budget_amount">Budget Amount</string>
     <string name="budget_category">Category</string>
     <string name="budget_period">Period</string>
