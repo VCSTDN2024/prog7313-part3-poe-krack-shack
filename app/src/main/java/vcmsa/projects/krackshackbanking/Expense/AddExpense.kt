@@ -48,34 +48,27 @@ class AddExpense : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.expense_create)
-
         _categorySpinner = findViewById(R.id.spnCategory)
         _datePicker = findViewById(R.id.dpDate)
         _amountEditText = findViewById(R.id.txtAmountInput)
         _descriptionEditText = findViewById(R.id.txtDescription)
         _submitButton = findViewById(R.id.btnEnter)
         _cancelButton = findViewById(R.id.btnCancel)
-
-
-
         _data = FirebaseDatabase.getInstance().reference
         //here we make the array for the spinner
-
-
         _catArray = RetriveData()
+        // Temporary date
+        val today = Calendar.getInstance()
+        _datePicker.updateDate(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        )
+
         val convert: ArrayAdapter<*> =
             ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, _catArray)
-
         convert.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         _categorySpinner.adapter = convert
-
-
-
-
-
-
-
-
         _submitButton.setOnClickListener {
             val category = _categorySpinner.selectedItem.toString()
             val date =
