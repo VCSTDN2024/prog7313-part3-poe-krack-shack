@@ -31,6 +31,8 @@ import java.util.UUID
 
 class AddExpense : AppCompatActivity() {
 
+
+    // xml components
     private lateinit var _categorySpinner: Spinner
     private lateinit var _datePicker: DatePicker
     private lateinit var _amountEditText: EditText
@@ -39,6 +41,8 @@ class AddExpense : AppCompatActivity() {
     private lateinit var _cancelButton: Button
     private lateinit var _imageUri: Uri
 
+
+    // read data array from database
     private lateinit var _catArray: Array<String>
 
     // database reference
@@ -47,6 +51,8 @@ class AddExpense : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // initialising all components
         setContentView(R.layout.expense_create)
         _categorySpinner = findViewById(R.id.spnCategory)
         _datePicker = findViewById(R.id.dpDate)
@@ -65,10 +71,13 @@ class AddExpense : AppCompatActivity() {
             today.get(Calendar.DAY_OF_MONTH)
         )
 
+        // converting array to spinner array because kotlin
         val convert: ArrayAdapter<*> =
             ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, _catArray)
         convert.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         _categorySpinner.adapter = convert
+
+        // once the user is happy the submit an expense entry to the database
         _submitButton.setOnClickListener {
             val category = _categorySpinner.selectedItem.toString()
             val date =
@@ -80,6 +89,7 @@ class AddExpense : AppCompatActivity() {
             startActivity(Intent)
         }
 
+        // cancel button to return to dashboard
         _cancelButton.setOnClickListener {
             val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)

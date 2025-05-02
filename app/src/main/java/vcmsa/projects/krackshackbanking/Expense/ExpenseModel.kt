@@ -1,5 +1,7 @@
 package vcmsa.projects.krackshackbanking.Expense
 
+
+// data model for expenses
 data class expenseModel
     (
         var ExpenseID: String = "",

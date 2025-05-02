@@ -29,7 +29,7 @@ class LoginUser: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
-    // initalising components
+    // initialising components
         _auth = FirebaseAuth.getInstance()
         _userEmailIn = findViewById(R.id.Username_txt)
         _userPasswordIn = findViewById(R.id.Password_txt)
