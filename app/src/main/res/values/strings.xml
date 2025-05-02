@@ -123,7 +123,13 @@
     <string name="Profile">Profile</string>
     <string name="Menu">Menu</string>
     <string name="Money">Money</string>
-
+    <string name="Woolworths">Woolworths</string>
+    <string name="Netflix">Netflix</string>
+    <string name="Uber">Uber</string>
+    <string name="Transport">Transport</string>
+    <string name="Entertainment">Entertainment</string>
+    <string name="Groceries">Groceries</string>
+    <string name="AmountMoney">R5,000</string>
     <string name="Settings">Settings</string>
     <string name="Reports">Reports</string>
     <string name="Logout">Logout</string>
