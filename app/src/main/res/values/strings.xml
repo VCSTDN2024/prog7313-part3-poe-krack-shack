@@ -128,4 +128,8 @@
     <string name="Logout">Logout</string>
 
     <string name="Category_Input_Hint">Enter Category</string>
+
+    <!-- Temporary data -->
+    <string name="tempEmail">forstupidstuff4444@gmail.com</string>
+    <string name="tempPassword">Suhana@101</string>
 </resources>
