@@ -11,8 +11,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class AddCategory {
-
+class AddCategory
+{
 
 
 //     "category" {
@@ -22,42 +22,31 @@ class AddCategory {
 //         "totalCost": 10000
 //       }
 
-  private lateinit var _database : FirebaseDatabase
-  private lateinit var _auth : FirebaseAuth
+    private lateinit var _database: FirebaseDatabase
+    private lateinit var _auth: FirebaseAuth
 
 
+    //
+    fun getCategory(ctaegory: String): Boolean
+    { // looks for current selected category
 
-  //
-  fun getCategory(ctaegory: String): Boolean { // looks for current selected category
+        return false
+    }
 
-  return false
-  }
+    fun CreateCategory() // if user selects create new category , we go here
+    {
 
-  fun CreateCategory() // if user selects create new category , we go here
-  {
+        // here we will have a dialouge box to create new category
 
-    // here we will have a dialouge box to create new category
+        var categoryName = ""
+        var categoryID = ""
+        var categoryTotalCost = 0
+        var UID = _auth.currentUser?.uid
 
-    var categoryName = ""
-    var categoryID = ""
-    var categoryTotalCost = 0
-    var UID = _auth.currentUser?.uid
-
-    var _catergoy = BudgetModel(categoryID,categoryName, UID.toString(),categoryTotalCost)
-
-
+        var _catergoy = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
 
 
-
-  }
-
+    }
 
 
-
-
-
-}
-class Dialoug (context: Context) : AlertDialog.Builder(context)
-{
-    fun show 
 }
