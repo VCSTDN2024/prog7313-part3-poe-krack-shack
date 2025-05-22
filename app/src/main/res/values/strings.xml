@@ -93,6 +93,9 @@
     <string name="trends">Trends</string>
     <string name="reports">Reports</string>
 
+    <!-- Bar graph -->
+    <string name="budgetsummary">Budget Summary</string>
+    
     <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>

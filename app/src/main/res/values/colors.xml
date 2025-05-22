@@ -2,7 +2,6 @@
 <resources>
     <color name="primary">#2196F3</color>
     <color name="gray" >#9E9E9E</color>
-    <color name="primary_light">#BBDEFB</color>
     <color name="secondary">#FFC107</color>
     <color name="secondary_dark">#FFA000</color>
     <color name="secondary_light">#FFECB3</color>
@@ -20,5 +19,6 @@
     <color name="transparent">#00000000</color>
     <color name="maincolour">#075985</color>
     <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#42C3D1</color>
 
 </resources>
