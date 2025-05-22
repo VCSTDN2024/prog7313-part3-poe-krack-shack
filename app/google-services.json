@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562544180558",
+    "project_id": "prog7313poe",
+    "storage_bucket": "prog7313poe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562544180558:android:e8283772b6255d738df21f",
+        "android_client_info": {
+          "package_name": "vcmsa.projects.krackshackbanking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDehbQZ7Rp9G7T8O0eJmjcpq2_iKfi_hHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
