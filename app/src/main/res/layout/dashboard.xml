@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/maincolour">
+    android:background="@color/main_colour">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -85,7 +85,9 @@
                         android:id="@+id/btn_log_income"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/green"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginEnd="8dp"
                         android:text="@string/log_income"
                         style="@style/Widget.Material3.Button.TonalButton"/>
@@ -94,6 +96,8 @@
                         android:id="@+id/btn_log_expense"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
                         android:text="@string/log_expense"
@@ -152,6 +156,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/recent_transactions"
                         android:textAppearance="?attr/textAppearanceHeadline6"/>
 
@@ -170,19 +175,19 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        app:menu="@menu/bottom_nav_menu"/>
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigationView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="@color/white"-->
+<!--        app:menu="@menu/bottom_nav_menu"/>-->
 
-    <ProgressBar
-        android:id="@+id/loading_spinner"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/loading_spinner"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:visibility="gone"/>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

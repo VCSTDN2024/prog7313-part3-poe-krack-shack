@@ -65,7 +65,7 @@
     <string name="budget_remaining">Remaining</string>
     <string name="budget_spent">Spent</string>
     <string name="budget_limit">Limit</string>
-    <string name="category_create">Enter Category name below</string>
+    <string name="category_create">Enter Category Name</string>
 
     <!-- Transactions -->
     <string name="transactions">Transactions</string>
@@ -129,5 +129,5 @@
     <string name="Reports">Reports</string>
     <string name="Logout">Logout</string>
 
-    <string name="Category_Input_Hint">Enter Category</string>
+    <string name="Category_Input_Hint">Category</string>
 </resources>
