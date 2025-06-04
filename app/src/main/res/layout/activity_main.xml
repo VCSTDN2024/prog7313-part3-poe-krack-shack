@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_colour"
+    android:background="@color/maincolour"
     android:theme="@style/Theme.AppCompat"
     tools:context=".MainActivity">
 
@@ -29,7 +29,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/format_button"
-        android:backgroundTint="@color/light_blue"
+        android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/format_button"
-        android:backgroundTint="@color/light_blue"
+        android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"

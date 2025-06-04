@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_colour"
+    android:background="@color/maincolour"
     tools:context=".MainActivity">
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/format_text_input"
-        android:backgroundTint="@color/light_blue"
+        android:backgroundTint="@color/primary"
         android:gravity="center"
         android:hint="@string/Category_Input_Hint"
         android:paddingStart="10dp"

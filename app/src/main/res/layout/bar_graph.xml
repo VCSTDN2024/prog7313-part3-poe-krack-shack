@@ -24,7 +24,7 @@
         android:shadowDx="0.0"
         android:shadowDy="0.0"
         android:shadowRadius="100.0"
-        android:text="@string/budgetsummary"
+        android:text="@string/BudgetSummary"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"

@@ -138,6 +138,9 @@
 
     <string name="Category_Input_Hint">Enter Category</string>
 
+    <!-- Bar graph -->
+    <string name="BudgetSummary">Budget Summary</string>
+
     <!-- Temporary data -->
     <string name="tempEmail">forstupidstuff4444@gmail.com</string>
     <string name="tempPassword">Suhana@101</string>
