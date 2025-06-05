@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/maincolour"
+    android:background="@color/main_colour"
     tools:context=".BarGraphActivity"
     android:padding="15dp"
     >
@@ -24,7 +24,7 @@
         android:shadowDx="0.0"
         android:shadowDy="0.0"
         android:shadowRadius="100.0"
-        android:text="@string/budgetsummary"
+        android:text="@string/BudgetSummary"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"

@@ -9,7 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +26,7 @@
                 android:id="@+id/txtCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="500dp"
                 android:width="300dp"
                 android:height="100dp"
                 android:autoSizeTextType="uniform"
@@ -84,8 +83,9 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp"
+                android:text="@string/tempAmount"
                 android:textColor="@color/white"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:textSize="30sp" />
 
             <TextView
@@ -116,9 +116,7 @@
                 android:background="@drawable/format_button"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:padding="0dp">
-
-            </DatePicker>
+                android:padding="0dp" />
 
             <TextView
                 android:id="@+id/txtDescriptionLabel"
@@ -153,19 +151,20 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp"
+                android:text="@string/tempDescription"
                 android:textColor="@color/white"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadPhoto"
+                android:id="@+id/button_capture"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/format_button" />
 
             <TextView
-                android:id="@+id/txtUploadPhoto"
+                android:id="@+id/image_view"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="-100dp"
@@ -184,10 +183,8 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="-75dp"
-                android:text="@string/cancel"
-                android:textSize="24sp"
+                android:layout_marginTop="10dp"
                 android:width="125dp"
                 android:height="75dp"
                 android:backgroundTint="@color/red" />
@@ -200,49 +197,47 @@
                 android:layout_marginEnd="-75dp"
                 android:width="125dp"
                 android:height="75dp"
-                android:text="@string/save"
-                android:textSize="24sp"
                 android:backgroundTint="@color/green"
                 app:layout_constraintEnd_toEndOf="@+id/txtConfirmPasswordInput"
                 app:layout_constraintTop_toBottomOf="@+id/txtConfirmPasswordInput" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/btnCancelText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="-75dp"-->
-<!--                android:layout_marginStart="-75dp"-->
-<!--                android:autoSizeTextType="uniform"-->
-<!--                android:width="125dp"-->
-<!--                android:height="75dp"-->
-<!--                android:elevation="5dp"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="20dp"-->
-<!--                android:shadowColor="@color/black"-->
-<!--                android:shadowDx="0.0"-->
-<!--                android:shadowDy="0.0"-->
-<!--                android:shadowRadius="10.0"-->
-<!--                android:text="@string/cancel"-->
-<!--                android:textColor="@color/white" />-->
+            <TextView
+                android:id="@+id/btnCancelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-75dp"
+                android:layout_marginTop="-75dp"
+                android:width="125dp"
+                android:height="75dp"
+                android:autoSizeTextType="uniform"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="10.0"
+                android:text="@string/cancel"
+                android:textColor="@color/white" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/btnEnterText"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="-75dp"-->
-<!--                android:layout_marginEnd="-75dp"-->
-<!--                android:autoSizeTextType="uniform"-->
-<!--                android:width="125dp"-->
-<!--                android:height="75dp"-->
-<!--                android:elevation="5dp"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="20dp"-->
-<!--                android:shadowColor="@color/black"-->
-<!--                android:shadowDx="0.0"-->
-<!--                android:shadowDy="0.0"-->
-<!--                android:shadowRadius="10.0"-->
-<!--                android:text="@string/save"-->
-<!--                android:textColor="@color/white" />-->
+            <TextView
+                android:id="@+id/btnEnterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-75dp"
+                android:layout_marginEnd="-75dp"
+                android:width="125dp"
+                android:height="75dp"
+                android:autoSizeTextType="uniform"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:padding="20dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="10.0"
+                android:text="@string/save"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

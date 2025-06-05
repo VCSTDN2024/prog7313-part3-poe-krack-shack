@@ -1,5 +1,7 @@
 package vcmsa.projects.krackshackbanking.Budget
 
+
+// data clas for category objects
 import com.google.firebase.firestore.Exclude
 import java.util.Date
 

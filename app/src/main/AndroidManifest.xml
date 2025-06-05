@@ -38,4 +38,14 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.hardware.camera.any" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="false"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware,ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
 </manifest>

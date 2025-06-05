@@ -25,14 +25,16 @@ class Dashboard : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dashboard) // replace with your correct layout resource name
+        setContentView(R.layout.dashboard)
 
-        // initalising components
+        // initialising components
         _auth = FirebaseAuth.getInstance()
         _data = FirebaseDatabase.getInstance().reference
         _income = findViewById(R.id.btn_log_income)
         _expense = findViewById(R.id.btn_log_expense)
         _totalExpense = findViewById(R.id.balanceCard)
+
+
 
 
 

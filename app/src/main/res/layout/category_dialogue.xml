@@ -32,7 +32,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/format_text_input"
-        android:backgroundTint="@color/info"
+        android:backgroundTint="@color/primary"
         android:gravity="center"
         android:hint="@string/Category_Input_Hint"
         android:paddingStart="10dp"

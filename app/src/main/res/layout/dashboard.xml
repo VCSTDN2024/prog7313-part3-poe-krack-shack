@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,7 +19,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/search_expenses"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SearchBar"/>
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.SearchBar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -38,7 +37,6 @@
                 android:id="@+id/balanceCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:layout_constraintTop_toTopOf="parent">
@@ -53,14 +51,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_balance"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"/>
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                     <TextView
                         android:id="@+id/totalBalanceText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textAppearance="?attr/textAppearanceHeadline4"/>
+                        android:text="@string/AmountMoney"
+                        android:textAppearance="?attr/textAppearanceHeadline4" />
 
                 </LinearLayout>
 
@@ -70,7 +69,7 @@
                 android:id="@+id/quickActionsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:layout_constraintTop_toBottomOf="@id/balanceCard">
@@ -83,25 +82,27 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_log_income"
+                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/green"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:backgroundTint="@color/green"
                         android:text="@string/log_income"
-                        style="@style/Widget.Material3.Button.TonalButton"/>
+                        android:textColor="@color/white" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_log_expense"
+                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/red"
-                        android:gravity="center"
-                        android:layout_weight="1"
                         android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:backgroundTint="@color/red"
                         android:text="@string/log_expense"
-                        style="@style/Widget.Material3.Button.TonalButton"/>
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -111,7 +112,7 @@
                 android:id="@+id/budgetsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:layout_constraintTop_toBottomOf="@id/quickActionsCard">
@@ -125,15 +126,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/budgets"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:text="@string/Groceries"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/budgetsRecyclerView"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:nestedScrollingEnabled="false"/>
+                        android:text="@string/Entertainment"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Transport"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                 </LinearLayout>
 
@@ -143,6 +149,7 @@
                 android:id="@+id/recentTransactionsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:layout_constraintTop_toBottomOf="@id/budgetsCard">
@@ -156,16 +163,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/recent_transactions"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:text="@string/Woolworths"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/transactionsRecyclerView"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:nestedScrollingEnabled="false"/>
+                        android:text="@string/Netflix"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Uber"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                 </LinearLayout>
 
@@ -175,19 +186,22 @@
 
     </androidx.core.widget.NestedScrollView>
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:background="@color/white"-->
-<!--        app:menu="@menu/bottom_nav_menu"/>-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:foregroundTint="@color/black"
+        app:itemIconTint="@color/gray"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottom_nav_menu" />
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/loading_spinner"-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:visibility="gone"/>-->
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
