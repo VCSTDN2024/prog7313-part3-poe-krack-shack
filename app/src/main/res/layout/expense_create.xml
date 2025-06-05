@@ -157,14 +157,14 @@
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadPhoto"
+                android:id="@+id/button_capture"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/format_button" />
 
             <TextView
-                android:id="@+id/txtUploadPhoto"
+                android:id="@+id/image_view"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="-100dp"
