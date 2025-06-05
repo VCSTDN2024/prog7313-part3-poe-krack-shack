@@ -48,13 +48,13 @@ class Dashboard : AppCompatActivity() {
 
         // button logic
         _expense.setOnClickListener {
-            // method to opne the set monthly bidget area
+            // method to open the set monthly bidget area
             val intent = Intent(this, AddExpense::class.java)
             startActivity(intent)
         }
     }
 
-    // method to fetch total expense per category and display it on dashbaord
+    // method to fetch total expense per category and display it on dashboard
     fun GetTotalExpense()
     {
 
