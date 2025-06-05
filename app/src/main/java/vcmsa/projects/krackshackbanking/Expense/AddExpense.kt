@@ -83,7 +83,6 @@ class AddExpense : AppCompatActivity() {
             today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
         )
-        imageView = findViewById(R.id.image_view)
         captureButton = findViewById(R.id.button_capture)
         captureButton.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
