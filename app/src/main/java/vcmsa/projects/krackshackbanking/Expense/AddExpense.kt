@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,11 +24,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.R
-
 import java.util.Calendar
 import java.util.Locale
 import java.util.Objects
 import java.util.UUID
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import android.Manifest
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class AddExpense : AppCompatActivity() {
 
@@ -40,6 +49,10 @@ class AddExpense : AppCompatActivity() {
     private lateinit var _submitButton: Button
     private lateinit var _cancelButton: Button
     private lateinit var _imageUri: Uri
+    private val CAMERA_PERMISSION_REQUEST_CODE = 100
+    private val CAMERA_REQUEST_CODE = 101
+    private lateinit var imageView: ImageView
+    private lateinit var captureButton: Button
 
 
     // read data array from database
@@ -62,7 +75,7 @@ class AddExpense : AppCompatActivity() {
         _cancelButton = findViewById(R.id.btnCancel)
         _data = FirebaseDatabase.getInstance().reference
         //here we make the array for the spinner
-        _catArray = RetriveData()
+        _catArray = RetrieveData()
         // Temporary date
         val today = Calendar.getInstance()
         _datePicker.updateDate(
@@ -70,6 +83,24 @@ class AddExpense : AppCompatActivity() {
             today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
         )
+        imageView = findViewById(R.id.image_view)
+        captureButton = findViewById(R.id.button_capture)
+        captureButton.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            )
+            {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_REQUEST_CODE
+                )
+            } else
+            {
+                openCamera()
+            }
+        }
 
         // converting array to spinner array because kotlin
         val convert: ArrayAdapter<*> =
@@ -99,7 +130,7 @@ class AddExpense : AppCompatActivity() {
 
     // This method is called once with the initial value and again
     // whenever data at this location is updated.
-    private fun RetriveData(): Array<String> {
+    private fun RetrieveData(): Array<String> {
         var _getData: Array<String> = emptyArray()
         _getData += "Food"
         _getData += "Water"
@@ -123,6 +154,49 @@ class AddExpense : AppCompatActivity() {
             // failed exception handling here
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             return _getData
+        }
+    }
+
+    private fun openCamera()
+    {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (cameraIntent.resolveActivity(packageManager) != null)
+        {
+            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode ==
+            RESULT_OK
+        )
+        {
+            val extras = data?.extras
+            val imageBitmap = extras?.get("data") as Bitmap
+            imageView.setImageBitmap(imageBitmap)
+            imageView.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>, grantResults: IntArray
+    )
+    {
+        super.onRequestPermissionsResult(
+            requestCode, permissions,
+            grantResults
+        )
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE)
+        {
+            if (grantResults.isNotEmpty() && grantResults[0] ==
+                PackageManager.PERMISSION_GRANTED
+            )
+            {
+                openCamera()
+            }
         }
     }
 }
