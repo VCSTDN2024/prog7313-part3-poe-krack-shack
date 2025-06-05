@@ -77,17 +77,11 @@
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/format_button"
                 android:color="@color/light_gray"
-                android:elevation="5dp"
                 android:fontFamily="@font/outfit_extrabold"
                 android:gravity="center"
                 android:hint="@string/transaction_amount_hint"
                 android:inputType="numberDecimal"
                 android:padding="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
-                android:text="@string/tempAmount"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="30sp" />
@@ -103,7 +97,6 @@
                 android:elevation="5dp"
                 android:fontFamily="@font/outfit_extrabold"
                 android:padding="10dp"
-                android:paddingStart="10dp"
                 android:text="@string/transaction_date"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -135,13 +128,12 @@
                 android:padding="10dp"
                 android:text="@string/transaction_description"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/txtDescription"
                 android:layout_width="300dp"
-                android:layout_height="100dp"
+                android:layout_height="75dp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/format_button"
                 android:elevation="5dp"
@@ -150,9 +142,10 @@
                 android:hint="@string/transaction_description_hint"
                 android:inputType="text"
                 android:padding="5dp"
-                android:text="@string/tempDescription"
                 android:textColor="@color/light_gray"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:textSize="30sp" />
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_capture"
@@ -163,7 +156,7 @@
                 android:background="@drawable/format_button"
                 android:elevation="5dp"
                 android:fontFamily="@font/outfit_extrabold"
-                android:padding="10dp"
+                android:padding="20dp"
                 android:text="@string/upload_photo"
                 android:textColor="@color/light_gray" />
 
@@ -176,13 +169,12 @@
                 android:width="125dp"
                 android:height="75dp"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/light_gray"
+                android:backgroundTint="@color/red"
                 android:elevation="5dp"
                 android:fontFamily="@font/outfit_extrabold"
                 android:padding="10dp"
-                android:backgroundTint="@color/red"
                 android:text="@string/cancel"
-                />
+                android:textColor="@color/light_gray" />
 
             <Button
                 android:id="@+id/btnEnter"
@@ -193,12 +185,12 @@
                 android:width="125dp"
                 android:height="75dp"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/light_gray"
+                android:backgroundTint="@color/green"
                 android:elevation="5dp"
                 android:fontFamily="@font/outfit_extrabold"
                 android:padding="10dp"
-                android:backgroundTint="@color/green"
                 android:text="@string/save"
+                android:textColor="@color/light_gray"
                 app:layout_constraintEnd_toEndOf="@+id/txtConfirmPasswordInput"
                 app:layout_constraintTop_toBottomOf="@+id/txtConfirmPasswordInput" />
 
