@@ -62,46 +62,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txtLogin"-->
-<!--        android:layout_width="@+id/btnLogin"-->
-<!--        android:layout_height="@+id/btnLogin"-->
-<!--        android:autoSizeTextType="uniform"-->
-<!--        android:elevation="5dp"-->
-<!--        android:padding="10dp"-->
-<!--        android:shadowColor="@color/black"-->
-<!--        android:shadowDx="0.0"-->
-<!--        android:shadowDy="0.0"-->
-<!--        android:shadowRadius="10.0"-->
-<!--        android:background="@drawable/format_button_text"-->
-<!--        android:text="@string/login"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/btnLogin"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/btnLogin"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/btnLogin"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/btnLogin" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/txtRegister"-->
-<!--        android:layout_width="@+id/btnRegister"-->
-<!--        android:layout_height="@+id/btnRegister"-->
-<!--        android:autoSizeTextType="uniform"-->
-<!--        android:background="@drawable/format_button_text"-->
-<!--        android:elevation="5dp"-->
-<!--        android:padding="10dp"-->
-<!--        android:shadowColor="@color/black"-->
-<!--        android:shadowDx="0.0"-->
-<!--        android:shadowDy="0.0"-->
-<!--        android:shadowRadius="10.0"-->
-<!--        android:text="@string/register"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/btnRegister"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/btnRegister"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/btnRegister"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/btnRegister"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
