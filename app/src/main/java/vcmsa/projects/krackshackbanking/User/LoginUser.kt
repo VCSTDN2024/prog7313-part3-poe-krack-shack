@@ -14,8 +14,7 @@ import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.MainActivity
 import vcmsa.projects.krackshackbanking.R
 
-class LoginUser: AppCompatActivity()
-{
+class LoginUser : AppCompatActivity() {
     // firebase auth token
     private lateinit var _auth: FirebaseAuth
 
@@ -30,7 +29,7 @@ class LoginUser: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
-    // initialising components
+        // initialising components
         _auth = FirebaseAuth.getInstance()
         _userEmailIn = findViewById(R.id.Username_txt)
         _userPasswordIn = findViewById(R.id.Password_txt)
@@ -43,10 +42,10 @@ class LoginUser: AppCompatActivity()
 
             // taking in user input
             val email: String = _userEmailIn.text.toString()
-            val pasword: String = _userPasswordIn.text.toString()
+            val password: String = _userPasswordIn.text.toString()
 
-                // checking if input exists
-            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pasword)) {
+            // checking if input exists
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                 Toast.makeText(
                     this,
                     "Please fill all the fields", Toast.LENGTH_LONG
@@ -54,7 +53,7 @@ class LoginUser: AppCompatActivity()
             } else {
 
                 // if auth successful take user to dashboard
-                _auth.signInWithEmailAndPassword(email, pasword)
+                _auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val intent = Intent(this, Dashboard::class.java)
