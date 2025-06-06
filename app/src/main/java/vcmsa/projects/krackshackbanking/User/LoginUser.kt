@@ -24,6 +24,7 @@ class LoginUser: AppCompatActivity()
     private lateinit var _userPasswordIn: EditText
 
     private lateinit var loginBtn: Button
+    private lateinit var cancelBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class LoginUser: AppCompatActivity()
         _userEmailIn = findViewById(R.id.Username_txt)
         _userPasswordIn = findViewById(R.id.Password_txt)
         loginBtn = findViewById(R.id.btnLogin)
+        cancelBtn = findViewById(R.id.btnCancel)
 
 
         // button to run login in logic
@@ -66,6 +68,10 @@ class LoginUser: AppCompatActivity()
                     }
             }
 
+        }
+        cancelBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
