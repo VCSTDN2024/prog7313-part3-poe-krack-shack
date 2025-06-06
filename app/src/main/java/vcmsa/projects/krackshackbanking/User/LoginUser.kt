@@ -33,7 +33,7 @@ class LoginUser: AppCompatActivity()
         _auth = FirebaseAuth.getInstance()
         _userEmailIn = findViewById(R.id.Username_txt)
         _userPasswordIn = findViewById(R.id.Password_txt)
-        loginBtn = findViewById(R.id.button)
+        loginBtn = findViewById(R.id.btnLogin)
 
 
         // button to run login in logic
