@@ -1,5 +1,7 @@
 package vcmsa.projects.krackshackbanking
-//second test for the ginger
-class BarGraphActivity
-{
+
+import android.os.Bundle
+
+class BarGraphActivity {
+
 }
