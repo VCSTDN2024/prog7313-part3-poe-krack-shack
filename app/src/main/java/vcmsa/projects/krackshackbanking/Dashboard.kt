@@ -34,10 +34,6 @@ class Dashboard : AppCompatActivity() {
         _expense = findViewById(R.id.btn_log_expense)
         _totalExpense = findViewById(R.id.balanceCard)
 
-
-
-
-
         // button logic
         _income.setOnClickListener {
             // here we send the user to the add expense page
