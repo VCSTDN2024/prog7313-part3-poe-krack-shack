@@ -11,6 +11,5 @@ data class UserModel(
     val UID : String? = null
 
 )
-{
 
-}
+
