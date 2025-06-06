@@ -111,5 +111,4 @@
         app:layout_constraintEnd_toEndOf="@id/Password_txt"
         app:layout_constraintTop_toBottomOf="@id/Password_txt" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
