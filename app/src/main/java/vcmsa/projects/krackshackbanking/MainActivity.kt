@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity()
 
     private val loginUser = LoginUser()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // initalising elements
         super.onCreate(savedInstanceState)
@@ -45,10 +44,4 @@ class MainActivity : AppCompatActivity()
         }
 
     }
-
-
-
-
-
-
 }
