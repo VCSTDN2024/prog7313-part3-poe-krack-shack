@@ -5,17 +5,29 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.graphics.Color
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ListView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import vcmsa.projects.krackshackbanking.BarGraph.CustomAdapter
+import vcmsa.projects.krackshackbanking.BarGraph.DataModel
 
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
 private lateinit var barDataSet: BarDataSet
 private lateinit var barEntries: ArrayList<BarEntry>
+
+// Declaring the DataModel Array
+private var dataModel: ArrayList<DataModel>? = null
+
+// Declaring the elements from the main layout file
+private lateinit var listView: ListView
+private lateinit var adapter: CustomAdapter
 
 var Income: Float = 20.0f
 var Expense: Float = 10.0f
@@ -95,6 +107,28 @@ class BarGraphActivity : AppCompatActivity() {
 
         // Invalidate the chart to refresh
         barChart.invalidate()
+
+        // Initializing the elements from the main layout file
+        listView = findViewById<View>(R.id.lvCategories) as ListView
+
+        // Initializing the model and adding data
+        // False = not checked; True = checked
+        dataModel = ArrayList<DataModel>()
+        dataModel!!.add(DataModel("Water", false))
+        dataModel!!.add(DataModel("Electricity", false))
+        dataModel!!.add(DataModel("Food", false))
+        dataModel!!.add(DataModel("Rent", false))
+        dataModel!!.add(DataModel("Slave", false))
+        // Setting the adapter
+        adapter = CustomAdapter(dataModel!!, applicationContext)
+        listView.adapter = adapter
+
+        // Upon item click, checkbox will be set to checked
+        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val dataModel: DataModel = dataModel!![position] as DataModel
+            dataModel.checked = !dataModel.checked
+            adapter.notifyDataSetChanged()
+        }
 
         // Setup bottom navigation
         bottomNavigationView.setOnItemSelectedListener { item ->
