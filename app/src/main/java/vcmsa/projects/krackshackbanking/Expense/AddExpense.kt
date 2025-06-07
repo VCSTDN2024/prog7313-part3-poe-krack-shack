@@ -58,6 +58,9 @@ class AddExpense : AppCompatActivity() {
     // read data array from database
     private lateinit var _catArray: Array<String>
 
+
+    // databsase list
+    private val _expense = mutableListOf<Pair<String,ExpenseModel>>()
     // database reference
     private lateinit var _data: DatabaseReference
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -114,6 +117,13 @@ class AddExpense : AppCompatActivity() {
                 _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
             val amount = _amountEditText.text.toString().toFloat()
             val description = _descriptionEditText.text.toString()
+            val id = UUID.randomUUID().toString()
+            var expense = ExpenseModel(id,category, date, amount, description.toString(), _imageUri.toString())
+
+            var UID = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+            _data.child(UID).child("Expenses").child(id).setValue(expense)
+
 
             val Intent = Intent(this, Dashboard::class.java)
             startActivity(Intent)
