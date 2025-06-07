@@ -13,7 +13,11 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,11 +35,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.view.View
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import vcmsa.projects.krackshackbanking.databinding.ActivityMainBinding
 
 class AddExpense : AppCompatActivity() {
 
@@ -53,9 +54,6 @@ class AddExpense : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var captureButton: Button
 
-    //binding datamodel
-    private lateinit var _expenseBinding: ActivityMainBinding
-
 
     // read data array from database
     private lateinit var _catArray: Array<String>
@@ -66,10 +64,6 @@ class AddExpense : AppCompatActivity() {
     // database reference
     private lateinit var _data: DatabaseReference
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
-    private lateinit var _UID: String
-
-    object private var selectedUserKey: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +76,8 @@ class AddExpense : AppCompatActivity() {
         _descriptionEditText = findViewById(R.id.txtDescription)
         _submitButton = findViewById(R.id.btnEnter)
         _cancelButton = findViewById(R.id.btnCancel)
+        imageView = findViewById(R.id.image_view)
+
         _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
         //here we make the array for the spinner
         _catArray = RetrieveData()
@@ -92,7 +88,6 @@ class AddExpense : AppCompatActivity() {
             today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
         )
-        _UID = FirebaseAuth.getInstance().currentUser?.uid.toString()
         captureButton = findViewById(R.id.button_capture)
         captureButton.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
@@ -145,6 +140,7 @@ class AddExpense : AppCompatActivity() {
                     Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
                 }
 
+            _data.child(UID).child("Expenses").child(id).setValue(expense)
 
             }
             else {
@@ -162,7 +158,7 @@ class AddExpense : AppCompatActivity() {
 
     // This method is called once with the initial value and again
     // whenever data at this location is updated.
-    fun RetrieveData(): Array<String> {
+    private fun RetrieveData(): Array<String> {
         var _getData: Array<String> = emptyArray()
         _getData += "Food"
         _getData += "Water"
