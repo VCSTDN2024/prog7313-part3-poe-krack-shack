@@ -16,11 +16,11 @@ import java.util.Calendar
  class ExpenseHandler : AppCompatActivity() {
   private lateinit var btnStartDate: Button
   private lateinit var btnEndDate: Button
-  private var isStartDate = true  // Flag to track which button was tapped
+  private var isStartDate = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
    super.onCreate(savedInstanceState)
-   setContentView(R.layout.expenses) // <-- Replace with your actual layout XML file name
+   setContentView(R.layout.expenses)
 
    btnStartDate = findViewById(R.id.btnStartDate)
    btnEndDate = findViewById(R.id.btnEndDate)

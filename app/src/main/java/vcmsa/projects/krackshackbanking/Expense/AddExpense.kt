@@ -73,6 +73,7 @@ class AddExpense : AppCompatActivity() {
         _descriptionEditText = findViewById(R.id.txtDescription)
         _submitButton = findViewById(R.id.btnEnter)
         _cancelButton = findViewById(R.id.btnCancel)
+        imageView = findViewById(R.id.image_view)
         _data = FirebaseDatabase.getInstance().reference
         //here we make the array for the spinner
         _catArray = RetrieveData()
