@@ -68,6 +68,8 @@
     <string name="budget_spent">Spent</string>
     <string name="budget_limit">Limit</string>
     <string name="category_create">Enter Category name below</string>
+    <string name="uploaded_image_preview">Uploaded image preview</string>
+    <string name="edit_category">Edit Category</string>
 
     <!-- Transactions -->
     <string name="transactions">Transactions</string>
