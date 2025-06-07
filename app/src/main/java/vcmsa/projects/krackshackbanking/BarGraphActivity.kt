@@ -17,6 +17,9 @@ private lateinit var barChart: BarChart
 private lateinit var barDataSet: BarDataSet
 private lateinit var barEntries: ArrayList<BarEntry>
 
+var Income: Float = 20.0f
+var Expense: Float = 10.0f
+
 // ArrayList for the first set of bar entries
 private val barEntriesList: ArrayList<BarEntry>
     get() {
@@ -24,8 +27,8 @@ private val barEntriesList: ArrayList<BarEntry>
         barEntries = ArrayList()
 
         // Adding entries to the ArrayList for the first set
-        barEntries.add(BarEntry(1f, 4f))
-        barEntries.add(BarEntry(2f, 5f))
+        barEntries.add(BarEntry(1f, Expense))
+        barEntries.add(BarEntry(2f, Income))
 
         return barEntries
     }
@@ -46,19 +49,19 @@ class BarGraphActivity : AppCompatActivity() {
         // Set the colors for the bars
         barDataSet.colors = colors.toList()
 
-        barDataSet.valueTextSize = 11f
+        barDataSet.valueTextSize = 10f
 
         // Working on BarChart
         barChart = findViewById(R.id.BCBudgetSummary)
         val data = BarData(barDataSet)
         barChart.data = data
-        barChart.animateY(2000)
+        barChart.animateY(1000)
         barChart.description.isEnabled = false
         barChart.isDragEnabled = true
-        barChart.setVisibleXRangeMaximum(6f)
+        barChart.setVisibleXRangeMaximum(5f)
 
         // Set bar width
-        data.barWidth = 0.15f
+        data.barWidth = 1f
 
         // X-Axis Data
         val xAxis: XAxis = barChart.xAxis
@@ -67,10 +70,10 @@ class BarGraphActivity : AppCompatActivity() {
         xAxis.isGranularityEnabled = true
 
         // Enable grid lines for X-axis
-        xAxis.setDrawGridLines(true)
+        xAxis.setDrawGridLines(false)
 
         // Set grid line color
-        xAxis.gridColor = Color.LTGRAY
+        xAxis.gridColor = Color.BLACK
 
         // Set grid line width
         xAxis.gridLineWidth = 1f
