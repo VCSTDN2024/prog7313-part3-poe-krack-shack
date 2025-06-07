@@ -64,10 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/primary_dark"
+            android:fontFamily="@font/outfit_extrabold"
             android:scrollbars="vertical"
             android:text="@string/budget_summary"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
     </LinearLayout>
 
     <TextView
