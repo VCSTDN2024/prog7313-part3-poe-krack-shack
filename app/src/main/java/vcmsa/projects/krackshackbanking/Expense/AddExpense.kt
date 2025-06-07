@@ -54,10 +54,12 @@ class AddExpense : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var captureButton: Button
 
-
+    private val _auth = FirebaseAuth.getInstance()
     // read data array from database
     private lateinit var _catArray: Array<String>
 
+    //
+    private lateinit var _UID: String
 
     // databsase list
     private val _expense = mutableListOf<Pair<String,ExpenseModel>>()
@@ -77,7 +79,7 @@ class AddExpense : AppCompatActivity() {
         _submitButton = findViewById(R.id.btnEnter)
         _cancelButton = findViewById(R.id.btnCancel)
         imageView = findViewById(R.id.image_view)
-
+        _UID = _auth.currentUser?.uid.toString()
         _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
         //here we make the array for the spinner
         _catArray = RetrieveData()
@@ -140,7 +142,7 @@ class AddExpense : AppCompatActivity() {
                     Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
                 }
 
-            _data.child(UID).child("Expenses").child(id).setValue(expense)
+            _data.child(_UID).child("Expenses").child(id).setValue(expense)
 
             }
             else {
