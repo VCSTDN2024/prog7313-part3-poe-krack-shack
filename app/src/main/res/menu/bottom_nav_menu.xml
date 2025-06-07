@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_icon"
+        android:title="@string/Home" />
+    <item
+        android:id="@+id/navigation_graph"
+        android:icon="@drawable/graph_icon"
+        android:title="@string/Graph" />
+    <item
+        android:id="@+id/navigation_money"
+        android:icon="@drawable/money_icon"
+        android:title="@string/Money" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/navigation_menu"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/Menu" />
+</menu>
