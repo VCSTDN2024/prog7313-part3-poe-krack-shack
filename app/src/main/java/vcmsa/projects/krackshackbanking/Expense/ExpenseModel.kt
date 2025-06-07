@@ -2,12 +2,12 @@ package vcmsa.projects.krackshackbanking.Expense
 
 
 // data model for expenses
-data class expenseModel
+data class ExpenseModel
     (
         var ExpenseID: String = "",
         var CategoryID: String = "",
         var Date: String = "",
-        var Amount: Double = 0.0,
+        var Amount: Float = 0.0f,
         var Discription: String = "",
         var Image: String = "",
         var UID: String = ""
