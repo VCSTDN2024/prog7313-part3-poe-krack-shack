@@ -64,10 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/primary_dark"
+            android:fontFamily="@font/outfit_extrabold"
             android:scrollbars="vertical"
             android:text="@string/budget_summary"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
     </LinearLayout>
 
     <TextView
@@ -78,10 +79,7 @@
         android:layout_marginTop="88dp"
         android:layout_marginEnd="65dp"
         android:layout_marginBottom="4dp"
-        android:shadowColor="@color/black"
-        android:shadowDx="0.0"
-        android:shadowDy="0.0"
-        android:shadowRadius="10.0"
+        android:fontFamily="@font/outfit_extrabold"
         android:text="@string/Expenses"
         android:textAlignment="center"
         android:textColor="#FF0000"

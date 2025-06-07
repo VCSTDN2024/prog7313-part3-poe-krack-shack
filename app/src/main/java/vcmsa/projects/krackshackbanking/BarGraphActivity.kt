@@ -4,8 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.graphics.Color
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 
 private lateinit var bottomNavigationView: BottomNavigationView
+private lateinit var barChart: BarChart
+private lateinit var barDataSet: BarDataSet
+private lateinit var barEntries: ArrayList<BarEntry>
+
+var Income: Float = 20.0f
+var Expense: Float = 10.0f
+
+// ArrayList for the first set of bar entries
+private val barEntriesList: ArrayList<BarEntry>
+    get() {
+        // Creating a new ArrayList
+        barEntries = ArrayList()
+
+        // Adding entries to the ArrayList for the first set
+        barEntries.add(BarEntry(1f, Expense))
+        barEntries.add(BarEntry(2f, Income))
+
+        return barEntries
+    }
 
 class BarGraphActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +39,62 @@ class BarGraphActivity : AppCompatActivity() {
         setContentView(R.layout.bar_graph)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_graph
+
+        // Working on DataSet
+        barDataSet = BarDataSet(barEntriesList, "Data")
+
+        // Set colour for the bars
+        val colors = intArrayOf(Color.RED, Color.GREEN)
+
+        // Set the colors for the bars
+        barDataSet.colors = colors.toList()
+
+        barDataSet.valueTextSize = 10f
+
+        // Working on BarChart
+        barChart = findViewById(R.id.BCBudgetSummary)
+        val data = BarData(barDataSet)
+        barChart.data = data
+        barChart.animateY(1000)
+        barChart.description.isEnabled = false
+        barChart.isDragEnabled = true
+        barChart.setVisibleXRangeMaximum(5f)
+
+        // Set bar width
+        data.barWidth = 1f
+
+        // X-Axis Data
+        val xAxis: XAxis = barChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+
+        // Enable grid lines for X-axis
+        xAxis.setDrawGridLines(false)
+
+        // Set grid line color
+        xAxis.gridColor = Color.BLACK
+
+        // Set grid line width
+        xAxis.gridLineWidth = 1f
+
+        // Y-Axis Data
+        val leftAxis: YAxis = barChart.axisLeft
+        leftAxis.setDrawGridLines(true)
+        leftAxis.gridColor = Color.LTGRAY
+        leftAxis.gridLineWidth = 1f
+        leftAxis.textColor = Color.WHITE
+
+        val rightAxis: YAxis = barChart.axisRight
+
+        // Disable right Y-axis
+        rightAxis.isEnabled = false
+
+        barChart.xAxis.axisMinimum = 0f
+        barChart.animate()
+
+        // Invalidate the chart to refresh
+        barChart.invalidate()
 
         // Setup bottom navigation
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -53,5 +135,6 @@ class BarGraphActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
     }
 }
