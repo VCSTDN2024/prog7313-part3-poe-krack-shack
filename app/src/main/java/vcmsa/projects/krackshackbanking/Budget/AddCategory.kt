@@ -42,7 +42,7 @@ class AddCategory(private val context: Context) {
         // to add a category the app opens a dialog pop up to enter category name
         // then it stores the new category here
         openDialog(context = context, onSubmit = { categoryName = it })
-        var _category = BudgetModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
+        var _category = CategoryModel(categoryID, categoryName, UID.toString(), categoryTotalCost)
     }
 
 
