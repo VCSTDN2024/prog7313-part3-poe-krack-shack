@@ -22,6 +22,12 @@ import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import android.view.View
 import android.util.Log
+import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.launch
 
 
 class Dashboard : AppCompatActivity() {
@@ -34,12 +40,15 @@ class Dashboard : AppCompatActivity() {
     private val expenseList = mutableListOf<CategoryExpense>() // updated
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
-
+    private lateinit var _displayBudget: TextView
     //budget model array
     //UID for search functions
     private lateinit var _UID: String
 
+    //budget value
 
+    //total expense value
+    private var TotalExpense: Float = 0f
     //list of categories
     private val categoryList = mutableListOf<String>("Food", "Water", "Entertainment", "Transportation", "Other")
     // xml components
@@ -66,6 +75,14 @@ class Dashboard : AppCompatActivity() {
         _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference(_UID)
 
+        //getting our total budget
+        lifecycleScope.launch {
+            getTotalBudget().collect { budget ->
+                val netMoney = budget// added minus for total expense
+                _displayBudget.text = String.format("R%.2f", netMoney)
+            }
+        }
+
         // XML components
 
         searchBar = findViewById(R.id.searchBar)
@@ -75,6 +92,7 @@ class Dashboard : AppCompatActivity() {
         _totalExpense = findViewById(R.id.balanceCard)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_home
+        _displayBudget = findViewById(R.id.totalBalanceText)
 
         searchBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -130,6 +148,11 @@ class Dashboard : AppCompatActivity() {
 
         // Now fetch the data
         getTotalExpense()
+
+
+        //val netMoney = Budget - TotalExpense
+        //_displayBudget.text = netMoney.toString()
+
     }
 
     // method to fetch total expense per category and display it on dashboard
@@ -137,7 +160,7 @@ class Dashboard : AppCompatActivity() {
          val dataPath = ("$_UID/$_UID/Expenses")
         val database = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
          val _expensedata = database.getReference(dataPath)
-        // this will be the event listener for each category expensex
+        // this will be the event listener for each category expenses
         _expensedata.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
                 // Clear old data before updating
@@ -171,6 +194,35 @@ class Dashboard : AppCompatActivity() {
             }
         })
     }
+    fun getTotalBudget(): Flow<Float> = callbackFlow {
+        var total = 0f
+
+        val dataPath = ("$_UID/Budget/amount")
+        val database = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val _expensedata = database.getReference(dataPath)
+        val listener = object : com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                total = 0f
+
+                    try {
+                        total = snapshot.value.toString().toFloat()
+                    } catch (e: Exception) {
+                        Log.e("Dashboard", "Error parsing amount: ${e.message}")
+                    }
+
+                trySend(total).isSuccess
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Dashboard", "Database error: ${error.message}")
+                close(error.toException())
+            }
+        }
+        _expensedata.addValueEventListener(listener)
+        awaitClose { _expensedata.removeEventListener(listener) }
+    }
+
+
 }
 
 
