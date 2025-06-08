@@ -81,13 +81,13 @@ class RegisterUser : AppCompatActivity() {
                             if (dbTask.isSuccessful) {
                                 Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                                 finish()
                             } else {
                                 Toast.makeText(this, "Database error: ${dbTask.exception?.message}", Toast.LENGTH_SHORT).show()
                             }
                         }
-
                 } else {
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
