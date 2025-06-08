@@ -214,13 +214,11 @@ class Dashboard : AppCompatActivity() {
         val _expensedata = database.getReference(dataPath)
         val listener = object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
-                total = 0f
-
-                    try {
-                        total = snapshot.value.toString().toFloat()
-                    } catch (e: Exception) {
-                        Log.e("Dashboard", "Error parsing amount: ${e.message}")
-                    }
+                try {
+                    total = snapshot.value.toString().toFloat()
+                } catch (e: Exception) {
+                    Log.e("Dashboard", "Error parsing amount: ${e.message}")
+                }
 
                 trySend(total).isSuccess
             }
