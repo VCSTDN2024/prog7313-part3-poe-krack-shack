@@ -20,6 +20,7 @@ import vcmsa.projects.krackshackbanking.R
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
 private lateinit var barDataSet: BarDataSet
+private lateinit var lvCategories: ListView
 private lateinit var barEntries: ArrayList<BarEntry>
 
 // Declaring the DataModel Array
@@ -47,8 +48,21 @@ class BarGraphActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bar_graph)
+
+        lvCategories = findViewById<View>(R.id.lvCategories) as ListView
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_graph
+
+
+        // Initializing the model and adding data
+        dataModel = ArrayList<DataModel>()
+
+        // Todo: Replace with data from database
+        dataModel!!.add(DataModel("Water", true, 500f))
+        dataModel!!.add(DataModel("Electricity", true, 200f))
+        dataModel!!.add(DataModel("Food", true, 1000f))
+        dataModel!!.add(DataModel("Rent", true, 2000f))
+        dataModel!!.add(DataModel("Fuel", true, 4000f))
 
         // Working on DataSet
         barDataSet = BarDataSet(barEntriesList, "Data")
@@ -106,24 +120,14 @@ class BarGraphActivity : AppCompatActivity() {
         // Invalidate the chart to refresh
         barChart.invalidate()
 
-        // Initializing the elements from the main layout file
-        val listView = findViewById<View>(R.id.lvCategories) as ListView
 
-        // Initializing the model and adding data
-        // False = not checked; True = checked
-        dataModel = ArrayList<DataModel>()
-        dataModel!!.add(DataModel("Water", false))
-        dataModel!!.add(DataModel("Electricity", false))
-        dataModel!!.add(DataModel("Food", false))
-        dataModel!!.add(DataModel("Rent", false))
-        dataModel!!.add(DataModel("Slave", false))
         // Setting the adapter
         adapter = CustomAdapter(dataModel!!, applicationContext)
-        listView.adapter = adapter
+        lvCategories.adapter = adapter
 
-        // Upon item click, checkbox will be set to checked
-        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val dataModel: DataModel = dataModel!![position] as DataModel
+        // Upon item click, checkbox will be opposite
+        lvCategories.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val dataModel: DataModel = dataModel!![position]
             dataModel.checked = !dataModel.checked
             adapter.notifyDataSetChanged()
         }
