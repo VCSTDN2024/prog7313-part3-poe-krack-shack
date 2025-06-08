@@ -56,13 +56,13 @@ class BudgetHandler: AppCompatActivity()
             val date = java.time.LocalDate.now().format(dateFormat).toString()
 
             if (BudgetAmount.isNotEmpty()) {
-                val budget = BudgetModel(id, BudgetAmount, date)
+                val budget = BudgetModel(id,date, BudgetAmount)
                 _data.child("Budget").setValue(budget).addOnCompleteListener {
-                    Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Budget added successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, Dashboard::class.java)
                     startActivity(intent)
                 }.addOnFailureListener {
-                    Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Failed to set budget", Toast.LENGTH_SHORT).show()
                 }
 
             }

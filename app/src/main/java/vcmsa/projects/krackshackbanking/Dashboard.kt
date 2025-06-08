@@ -146,7 +146,7 @@ class Dashboard : AppCompatActivity() {
                 for (categoryID in categoryList) {
                     var total = 0.0
                     for (expense in snapshot.children) {
-                        if (expense.child("category").value.toString() == categoryID) {
+                        if (expense.child("categoryID").value.toString() == categoryID) {
                             total += expense.child("amount").value.toString().toDouble()
                         }
                     }
@@ -157,7 +157,7 @@ class Dashboard : AppCompatActivity() {
                 }
 
                 // Notify the adapter that data has changed
-                adapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
 
                 // Optionally calculate the total expense
 
