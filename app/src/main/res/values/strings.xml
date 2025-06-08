@@ -70,6 +70,10 @@
     <string name="category_create">Enter Category name below</string>
     <string name="uploaded_image_preview">Uploaded image preview</string>
     <string name="edit_category">Edit Category</string>
+    <string name="add_budget_title">Add Budget</string>
+    <string name="budget_name_hint">Enter Budget Name</string>
+
+
 
     <!-- Transactions -->
     <string name="transactions">Transactions</string>
