@@ -79,7 +79,18 @@ class Dashboard : AppCompatActivity() {
         lifecycleScope.launch {
             getTotalBudget().collect { budget ->
                 val netMoney = budget - TotalExpense
-                _displayBudget.text = String.format("R%.2f", netMoney)
+                if (netMoney < 0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.red))
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                } else if (netMoney >   0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.green))
+
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                }
+                else if (netMoney < 1000f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.yellow))
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                }
             }
         }
 
