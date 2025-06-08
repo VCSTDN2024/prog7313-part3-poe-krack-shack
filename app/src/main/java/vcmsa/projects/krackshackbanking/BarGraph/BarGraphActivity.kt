@@ -28,18 +28,25 @@ private var dataModel: ArrayList<DataModel>? = null
 
 private lateinit var adapter: CustomAdapter
 
-var Income: Float = 20.0f
-var Expense: Float = 10.0f
+var Budget: Float = 0f
+var Expense: Float = 0f
 
 // ArrayList for the first set of bar entries
 private val barEntriesList: ArrayList<BarEntry>
     get() {
-        // Creating a new ArrayList
+
+        Expense = 0f
         barEntries = ArrayList()
+
+        for (i in dataModel!!.indices) {
+            if (dataModel!![i].checked) {
+                Expense += dataModel!![i].amount
+            }
+        }
 
         // Adding entries to the ArrayList for the first set
         barEntries.add(BarEntry(1f, Expense))
-        barEntries.add(BarEntry(2f, Income))
+        barEntries.add(BarEntry(2f, Budget))
 
         return barEntries
     }
@@ -58,68 +65,15 @@ class BarGraphActivity : AppCompatActivity() {
         dataModel = ArrayList<DataModel>()
 
         // Todo: Replace with data from database
+        Budget = 8000f
         dataModel!!.add(DataModel("Water", true, 500f))
         dataModel!!.add(DataModel("Electricity", true, 200f))
         dataModel!!.add(DataModel("Food", true, 1000f))
         dataModel!!.add(DataModel("Rent", true, 2000f))
         dataModel!!.add(DataModel("Fuel", true, 4000f))
 
-        // Working on DataSet
-        barDataSet = BarDataSet(barEntriesList, "Data")
-
-        // Set colour for the bars
-        val colors = intArrayOf(Color.RED, Color.GREEN)
-
-        // Set the colors for the bars
-        barDataSet.colors = colors.toList()
-
-        barDataSet.valueTextSize = 10f
-
-        // Working on BarChart
-        barChart = findViewById(R.id.BCBudgetSummary)
-        val data = BarData(barDataSet)
-        barChart.data = data
-        barChart.animateY(1000)
-        barChart.description.isEnabled = false
-        barChart.isDragEnabled = true
-        barChart.setVisibleXRangeMaximum(5f)
-
-        // Set bar width
-        data.barWidth = 1f
-
-        // X-Axis Data
-        val xAxis: XAxis = barChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.granularity = 1f
-        xAxis.isGranularityEnabled = true
-
-        // Enable grid lines for X-axis
-        xAxis.setDrawGridLines(false)
-
-        // Set grid line color
-        xAxis.gridColor = Color.BLACK
-
-        // Set grid line width
-        xAxis.gridLineWidth = 1f
-
-        // Y-Axis Data
-        val leftAxis: YAxis = barChart.axisLeft
-        leftAxis.setDrawGridLines(true)
-        leftAxis.gridColor = Color.LTGRAY
-        leftAxis.gridLineWidth = 1f
-        leftAxis.textColor = Color.WHITE
-
-        val rightAxis: YAxis = barChart.axisRight
-
-        // Disable right Y-axis
-        rightAxis.isEnabled = false
-
-        barChart.xAxis.axisMinimum = 0f
-        barChart.animate()
-
-        // Invalidate the chart to refresh
-        barChart.invalidate()
-
+        // Update the graph
+        updateGraph()
 
         // Setting the adapter
         adapter = CustomAdapter(dataModel!!, applicationContext)
@@ -129,6 +83,8 @@ class BarGraphActivity : AppCompatActivity() {
         lvCategories.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val dataModel: DataModel = dataModel!![position]
             dataModel.checked = !dataModel.checked
+            // Update the graph
+            updateGraph()
             adapter.notifyDataSetChanged()
         }
 
@@ -171,6 +127,74 @@ class BarGraphActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
 
+    private fun updateGraph() {
+
+        // Working on DataSet
+        barDataSet = BarDataSet(barEntriesList, "Data")
+
+        // Set colour for the bars
+        val colors = intArrayOf(Color.RED, Color.GREEN)
+
+        // Set the colors for the bars
+        barDataSet.colors = colors.toList()
+
+        barDataSet.valueTextSize = 10f
+
+        // Working on BarChart
+        barChart = findViewById(R.id.BCBudgetSummary)
+        val data = BarData(barDataSet)
+        barChart.data = data
+        barChart.animateY(0)
+        barChart.description.isEnabled = false
+        barChart.isDragEnabled = true
+        barChart.setVisibleXRangeMaximum(5f)
+
+        // Set bar width
+        data.barWidth = 1f
+
+        // X-Axis Data
+        val xAxis: XAxis = barChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+
+        // Enable grid lines for X-axis
+        xAxis.setDrawGridLines(false)
+
+        // Set grid line color
+        xAxis.gridColor = Color.BLACK
+
+        // Set grid line width
+        xAxis.gridLineWidth = 1f
+
+        // Y-Axis Data
+        val leftAxis: YAxis = barChart.axisLeft
+        leftAxis.setDrawGridLines(true)
+        leftAxis.gridColor = Color.LTGRAY
+        leftAxis.gridLineWidth = 1f
+        leftAxis.textColor = Color.BLACK
+        leftAxis.axisMinimum = 0f
+        leftAxis.labelCount = 10
+
+        // Set Y-axis maximum to the higher value between 120% of budget and expenses
+        val maxExpense = Expense * 1.2f
+        val maxBudget = Budget * 1.2f
+        leftAxis.axisMaximum = maxOf(maxExpense, maxBudget)
+
+        // Calculate granularity based on the maximum value
+        leftAxis.granularity = leftAxis.axisMaximum / 10
+
+        val rightAxis: YAxis = barChart.axisRight
+
+        // Disable right Y-axis
+        rightAxis.isEnabled = false
+
+        barChart.xAxis.axisMinimum = 0f
+        barChart.animate()
+
+        // Invalidate the chart to refresh
+        barChart.invalidate()
     }
 }
