@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -21,9 +22,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.channels.awaitClose
 import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.R
 import kotlin.properties.Delegates
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
@@ -36,11 +43,10 @@ private var dataModel: ArrayList<DataModel>? = null
 
 
 // database components
-private lateinit var _data : DatabaseReference
-private lateinit var _auth : FirebaseAuth
-private lateinit var _uid : String
+private lateinit var _data: DatabaseReference
+private lateinit var _auth: FirebaseAuth
+private lateinit var _uid: String
 private val expenseList = mutableListOf<CategoryExpense>()
-
 
 
 //global total for bar graph
@@ -74,7 +80,6 @@ private val barEntriesList: ArrayList<BarEntry>
 class BarGraphActivity : AppCompatActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bar_graph)
@@ -86,7 +91,9 @@ class BarGraphActivity : AppCompatActivity() {
         //intilize firebase
         _auth = FirebaseAuth.getInstance()
         _uid = _auth.currentUser?.uid.toString()
-        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_uid)
+        _data =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(_uid).child(_uid).child("Expenses")
 
 
         // Initializing the model and adding data
@@ -95,15 +102,20 @@ class BarGraphActivity : AppCompatActivity() {
         // Todo: Replace with data from database
         Budget = 8000f
 
-        dataModel!!.add(DataModel("Water", true, getCategoryTotal("Water")))
+        dataModel!!.add(DataModel("Water", true, 0f))
+        dataModel!!.add(DataModel("Electricity", true, 0f))
+        dataModel!!.add(DataModel("Food", true, 0f))
+        dataModel!!.add(DataModel("Rent", true, 0f))
+        dataModel!!.add(DataModel("Fuel", true, 0f))
 
-        dataModel!!.add(DataModel("Electricity", true, getCategoryTotal("Electricity")))
-
-        dataModel!!.add(DataModel("Food", true, getCategoryTotal("Food")))
-
-        dataModel!!.add(DataModel("Rent", true, getCategoryTotal("Rent")))
-
-        dataModel!!.add(DataModel("Fuel", true, getCategoryTotal("Fuel")))
+        lifecycleScope.launch {
+            for (category in dataModel) {
+                val total = getCategoryTotal(category.name).first()
+                dataModel?.find { it.name.equals(category.name) }?.amount = total
+            }
+            adapter.notifyDataSetChanged()
+            updateGraph()
+        }
 
         // Update the graph
         updateGraph()
@@ -230,34 +242,25 @@ class BarGraphActivity : AppCompatActivity() {
         // Invalidate the chart to refresh
         barChart.invalidate()
     }
-    fun getCategoryTotal(categoryID: String) :Float{
-        var _total = 0.0F
-        _data.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
+
+    fun getCategoryTotal(categoryID: String): Flow<Float> = callbackFlow {
+        var total = 0f
+        val listener = object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
-                // Clear old data before updating
-                expenseList.clear()
-
-                // Get the total expense per category
-
-                    var total = 0.0
-                    for (expense in snapshot.children) {
-                        if (expense.child("categoryID").value.toString() == categoryID) {
-                            total += expense.child("amount").value.toString().toDouble()
-                        }
+                total = 0f
+                for (expense in snapshot.children) {
+                    if (expense.child("categoryID").value.toString() == categoryID) {
+                        total += expense.child("amount").value.toString().toDouble().toFloat()
                     }
-                    // Only add categories that have expenses
-                    if (total > 0) {
-                        _total = total.toFloat()
-                    }
-
+                }
+                trySend(total)
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                close(error.toException())
             }
-        })
-
-        return _total
-
+        }
+        _data.addValueEventListener(listener)
+        awaitClose { _data.removeEventListener(listener) }
     }
 }
