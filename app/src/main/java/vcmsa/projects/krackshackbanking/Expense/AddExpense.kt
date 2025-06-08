@@ -141,7 +141,7 @@ class AddExpense : AppCompatActivity() {
                     val entryID = _data.push().key!!
                 val expense = ExpenseModel(id,category, date, amount, description, _image, _UID)
 
-                _data.child(entryID).setValue(expense).addOnCompleteListener {
+                _data.child("Expense").setValue(expense).addOnCompleteListener {
                     Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, Dashboard::class.java)
                     startActivity(intent)
