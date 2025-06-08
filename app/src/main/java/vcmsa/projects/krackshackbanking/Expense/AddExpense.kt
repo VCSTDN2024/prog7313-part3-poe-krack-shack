@@ -56,9 +56,11 @@ class AddExpense : AppCompatActivity() {
 
     //image store
 
-    private  var IMAGE_DIRECTORY: String = ""
+    private var IMAGE_DIRECTORY: String = ""
+
     //firebase auth
     private val _auth = FirebaseAuth.getInstance()
+
     // read data array from database
     private lateinit var _catArray: Array<String>
 
@@ -66,9 +68,9 @@ class AddExpense : AppCompatActivity() {
     private lateinit var _UID: String
 
 
-
     // databsase list
-    private val _expense = mutableListOf<Pair<String,ExpenseModel>>()
+    private val _expense = mutableListOf<Pair<String, ExpenseModel>>()
+
     // database reference
     private lateinit var _data: DatabaseReference
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -86,7 +88,9 @@ class AddExpense : AppCompatActivity() {
         _cancelButton = findViewById(R.id.btnCancel)
         imageView = findViewById(R.id.image_view)
         _UID = _auth.currentUser?.uid.toString()
-        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_UID)
+        _data =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(_UID)
         //here we make the array for the spinner
         _catArray = RetrieveData()
         // Temporary date
@@ -101,15 +105,13 @@ class AddExpense : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(
                     this, Manifest.permission.CAMERA
                 ) != PackageManager.PERMISSION_GRANTED
-            )
-            {
+            ) {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.CAMERA),
                     CAMERA_PERMISSION_REQUEST_CODE
                 )
-            } else
-            {
+            } else {
                 openCamera()
             }
         }
@@ -138,21 +140,20 @@ class AddExpense : AppCompatActivity() {
             val testdata = _data
             val _image = IMAGE_DIRECTORY
             if (true) {
-                    val entryID = _data.push().key!!
-                val expense = ExpenseModel(id,category, date, amount, description, _image, _UID)
+                val entryID = _data.push().key!!
+                val expense = ExpenseModel(id, category, date, amount, description, _image, _UID)
 
-                _data.child("Expense").setValue(expense).addOnCompleteListener {
-                    Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Dashboard::class.java)
-                    startActivity(intent)
-                }.addOnFailureListener {
+                _data.child(_UID).child("Expenses").child(id).setValue(expense)
+                    .addOnCompleteListener {
+                        Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        val intent = Intent(this, Dashboard::class.java)
+                        startActivity(intent)
+                    }.addOnFailureListener {
                     Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
                 }
 
-            _data.child(_UID).child("Expenses").child(id).setValue(expense)
-
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
@@ -195,22 +196,18 @@ class AddExpense : AppCompatActivity() {
         }
     }
 
-    private fun openCamera()
-    {
+    private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (cameraIntent.resolveActivity(packageManager) != null)
-        {
+        if (cameraIntent.resolveActivity(packageManager) != null) {
             startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode ==
             RESULT_OK
-        )
-        {
+        ) {
             val extras = data?.extras
             val imageBitmap = extras?.get("data") as Bitmap
             IMAGE_DIRECTORY = imageBitmap.toString()
@@ -222,18 +219,15 @@ class AddExpense : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>, grantResults: IntArray
-    )
-    {
+    ) {
         super.onRequestPermissionsResult(
             requestCode, permissions,
             grantResults
         )
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE)
-        {
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] ==
                 PackageManager.PERMISSION_GRANTED
-            )
-            {
+            ) {
                 openCamera()
             }
         }
