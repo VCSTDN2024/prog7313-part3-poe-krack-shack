@@ -1,5 +1,7 @@
 package vcmsa.projects.krackshackbanking
 
+import CategoryExpense
+import CategoryExpenseAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -13,21 +15,24 @@ import com.google.firebase.database.FirebaseDatabase
 import vcmsa.projects.krackshackbanking.BarGraph.BarGraphActivity
 import vcmsa.projects.krackshackbanking.Expense.AddExpense
 import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
-import vcmsa.projects.krackshackbanking.Expense.ExpenseModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class Dashboard : AppCompatActivity() {
 
     // database auth
     private lateinit var _data: DatabaseReference
     private lateinit var _auth: FirebaseAuth
-
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: CategoryExpenseAdapter
+    private val expenseList = mutableListOf<CategoryExpense>() // updated
 
     //
 
     //budget model array
-    private val expenseList = mutableListOf<Pair<String,String>>()
 
-    //UID for serch functions
+    //UID for search functions
     private lateinit var _UID: String
 
 
@@ -41,20 +46,31 @@ class Dashboard : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set the layout first!
         setContentView(R.layout.dashboard)
 
-        // initialising components
+        // Now safely initialize views
+        recyclerView = findViewById(R.id.parent_recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = CategoryExpenseAdapter(expenseList)
+        recyclerView.adapter = adapter
+
+        // Firebase init
         _auth = FirebaseAuth.getInstance()
         _UID = _auth.currentUser?.uid.toString()
-        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_UID)
+        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference(_UID)
 
-        //xml components
+        // XML components
         _income = findViewById(R.id.btn_log_income)
         _expense = findViewById(R.id.btn_log_expense)
         _totalExpense = findViewById(R.id.balanceCard)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
+
         bottomNavigationView.selectedItemId = R.id.navigation_home
-        // Setup bottom navigation
+
+        // Set up bottom nav logic
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -69,53 +85,35 @@ class Dashboard : AppCompatActivity() {
                     true
                 }
 
-                R.id.navigation_money -> {
-                    // TODO: Replace with Money activity when available
-                    // startActivity(Intent(this, MoneyActivity::class.java))
-                    // finish()
-                    true
-                }
-
-                R.id.navigation_profile -> {
-                    // TODO: Replace with Profile activity when available
-                    // startActivity(Intent(this, ProfileActivity::class.java))
-                    // finish()
-                    true
-                }
-
-                R.id.navigation_menu -> {
-                    // TODO: Replace with Menu activity when available
-                    // startActivity(Intent(this, MenuActivity::class.java))
-                    // finish()
-                    true
-                }
+                R.id.navigation_money,
+                R.id.navigation_profile,
+                R.id.navigation_menu -> true
 
                 else -> false
             }
         }
 
-        // button logic
         _income.setOnClickListener {
-            // here we send the user to the add expense page
-            val intent = Intent(this, ExpenseHandler::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ExpenseHandler::class.java))
         }
 
-        // button logic
         _expense.setOnClickListener {
-            // method to open the set monthly budget area
-            val intent = Intent(this, AddExpense::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AddExpense::class.java))
         }
+
+        // Now fetch the data
+        getTotalExpense()
     }
 
     // method to fetch total expense per category and display it on dashboard
-    fun GetTotalExpense() {
+    private fun getTotalExpense() {
         // this will be the event listener for each category expense
-
         _data.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
-                // here we get the total expense per category
+                // Clear old data before updating
+                expenseList.clear()
+
+                // Get the total expense per category
                 for (category in categoryList) {
                     var total = 0.0
                     for (expense in snapshot.children) {
@@ -123,23 +121,28 @@ class Dashboard : AppCompatActivity() {
                             total += expense.child("amount").value.toString().toDouble()
                         }
                     }
-                    // lost of expense per category
-                    expenseList.add(Pair(category, total.toString()))
+                    // Only add categories that have expenses
+                    if (total > 0) {
+                        expenseList.add(CategoryExpense(category, total.toString()))
+                    }
                 }
-                // here we get the total expense
+
+                // Notify the adapter that data has changed
+                adapter.notifyDataSetChanged()
+
+                // Optionally calculate the total expense
                 var totalExpense = 0.0
                 for (expense in snapshot.children) {
                     totalExpense += expense.child("amount").value.toString().toDouble()
                 }
-                // here you can put what returns you want
+
+                // You can display the totalExpense in a TextView or use it as needed
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
-
         })
-
     }
 
 
