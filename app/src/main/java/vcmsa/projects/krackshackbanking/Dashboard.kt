@@ -72,7 +72,7 @@ class Dashboard : AppCompatActivity() {
 
         searchBar = findViewById(R.id.searchBar)
         searchView = findViewById(R.id.searchView)
-        _income = findViewById(R.id.btn_log_income)
+        _income = findViewById(R.id.btn_Add_Budget)
         _expense = findViewById(R.id.btn_log_expense)
         _totalExpense = findViewById(R.id.balanceCard)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
