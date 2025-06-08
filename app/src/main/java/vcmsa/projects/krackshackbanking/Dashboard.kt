@@ -17,6 +17,10 @@ import vcmsa.projects.krackshackbanking.Expense.AddExpense
 import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
+import android.view.View
+import android.util.Log
 
 
 class Dashboard : AppCompatActivity() {
@@ -27,7 +31,8 @@ class Dashboard : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CategoryExpenseAdapter
     private val expenseList = mutableListOf<CategoryExpense>() // updated
-
+    private lateinit var searchBar: SearchBar
+    private lateinit var searchView: SearchView
     //
 
     //budget model array
@@ -63,12 +68,34 @@ class Dashboard : AppCompatActivity() {
             .getReference(_UID)
 
         // XML components
+        bottomNavigationView.selectedItemId = R.id.navigation_home
+        searchBar = findViewById(R.id.searchBar)
+        searchView = findViewById(R.id.searchView)
         _income = findViewById(R.id.btn_log_income)
         _expense = findViewById(R.id.btn_log_expense)
         _totalExpense = findViewById(R.id.balanceCard)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
-
         bottomNavigationView.selectedItemId = R.id.navigation_home
+        searchBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                // Handle menu items here if you added them
+                else -> false
+            }
+        }
+        searchBar.setOnClickListener {
+            searchBar.visibility = View.GONE
+            searchView.visibility = View.VISIBLE
+            searchView.show() // expand the view with animation
+        }
+        searchView.editText.setOnEditorActionListener { v, actionId, event ->
+            val query = searchView.text.toString()
+            // TODO: Perform search logic here
+            Log.d("Search", "User searched for: $query")
+            searchView.hide()
+            searchView.visibility = View.GONE
+            searchBar.visibility = View.VISIBLE
+            true
+        }
 
         // Set up bottom nav logic
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -106,7 +133,7 @@ class Dashboard : AppCompatActivity() {
     }
 
     // method to fetch total expense per category and display it on dashboard
-    private fun getTotalExpense() {
+     fun getTotalExpense() {
         // this will be the event listener for each category expense
         _data.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
@@ -144,10 +171,6 @@ class Dashboard : AppCompatActivity() {
             }
         })
     }
-
-
-
-
-
 }
+
 
