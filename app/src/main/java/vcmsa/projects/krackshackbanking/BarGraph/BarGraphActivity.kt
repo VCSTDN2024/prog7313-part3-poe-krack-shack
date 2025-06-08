@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -48,10 +49,6 @@ private lateinit var _auth: FirebaseAuth
 private lateinit var _uid: String
 private val expenseList = mutableListOf<CategoryExpense>()
 
-
-//global total for bar graph
-
-
 private lateinit var adapter: CustomAdapter
 
 var Budget: Float = 0f
@@ -84,11 +81,13 @@ class BarGraphActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bar_graph)
 
+        // Working on BarChart
+        barChart = findViewById(R.id.BCBudgetSummary)
         lvCategories = findViewById<View>(R.id.lvCategories) as ListView
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_graph
 
-        //intilize firebase
+        // Initialize firebase
         _auth = FirebaseAuth.getInstance()
         _uid = _auth.currentUser?.uid.toString()
         _data =
@@ -99,30 +98,29 @@ class BarGraphActivity : AppCompatActivity() {
         // Initializing the model and adding data
         dataModel = ArrayList<DataModel>()
 
-        // Todo: Replace with data from database
-        Budget = 8000f
-
         dataModel!!.add(DataModel("Water", true, 0f))
         dataModel!!.add(DataModel("Electricity", true, 0f))
         dataModel!!.add(DataModel("Food", true, 0f))
         dataModel!!.add(DataModel("Rent", true, 0f))
         dataModel!!.add(DataModel("Fuel", true, 0f))
 
+        // Setting the adapter
+        adapter = CustomAdapter(dataModel!!, applicationContext)
+        lvCategories.adapter = adapter
+
         lifecycleScope.launch {
             for (category in dataModel) {
                 val total = getCategoryTotal(category.name).first()
                 dataModel?.find { it.name.equals(category.name) }?.amount = total
             }
+            Budget = getTotalBudget().first()
             adapter.notifyDataSetChanged()
             updateGraph()
         }
 
         // Update the graph
+        adapter.notifyDataSetChanged()
         updateGraph()
-
-        // Setting the adapter
-        adapter = CustomAdapter(dataModel!!, applicationContext)
-        lvCategories.adapter = adapter
 
         // Upon item click, checkbox will be opposite
         lvCategories.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
@@ -187,8 +185,6 @@ class BarGraphActivity : AppCompatActivity() {
 
         barDataSet.valueTextSize = 10f
 
-        // Working on BarChart
-        barChart = findViewById(R.id.BCBudgetSummary)
         val data = BarData(barDataSet)
         barChart.data = data
         barChart.animateY(0)
@@ -262,5 +258,34 @@ class BarGraphActivity : AppCompatActivity() {
         }
         _data.addValueEventListener(listener)
         awaitClose { _data.removeEventListener(listener) }
+    }
+
+    fun getTotalBudget(): Flow<Float> = callbackFlow {
+        var total = 0f
+
+        val dataPath = ("$_uid/Budget/amount")
+        val database =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val _expensedata = database.getReference(dataPath)
+        val listener = object : com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                total = 0f
+
+                try {
+                    total = snapshot.value.toString().toFloat()
+                } catch (e: Exception) {
+                    Log.e("Dashboard", "Error parsing amount: ${e.message}")
+                }
+
+                trySend(total).isSuccess
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Dashboard", "Database error: ${error.message}")
+                close(error.toException())
+            }
+        }
+        _expensedata.addValueEventListener(listener)
+        awaitClose { _expensedata.removeEventListener(listener) }
     }
 }
