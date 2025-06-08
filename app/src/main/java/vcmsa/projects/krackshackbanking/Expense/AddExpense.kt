@@ -54,12 +54,18 @@ class AddExpense : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var captureButton: Button
 
+    //image store
+
+    private  var IMAGE_DIRECTORY: String = ""
+    //firebase auth
     private val _auth = FirebaseAuth.getInstance()
     // read data array from database
     private lateinit var _catArray: Array<String>
 
-    //
+    // user ID for storage
     private lateinit var _UID: String
+
+
 
     // databsase list
     private val _expense = mutableListOf<Pair<String,ExpenseModel>>()
@@ -80,7 +86,7 @@ class AddExpense : AppCompatActivity() {
         _cancelButton = findViewById(R.id.btnCancel)
         imageView = findViewById(R.id.image_view)
         _UID = _auth.currentUser?.uid.toString()
-        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
+        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_UID)
         //here we make the array for the spinner
         _catArray = RetrieveData()
         // Temporary date
@@ -130,9 +136,10 @@ class AddExpense : AppCompatActivity() {
             val description = _descriptionEditText.text.toString()
             val id = UUID.randomUUID().toString()
             val testdata = _data
+            val _image = IMAGE_DIRECTORY
             if (true) {
                     val entryID = _data.push().key!!
-                val expense = ExpenseModel("testID","test", "testDate", 25f, "testDesc", "test", _UID)
+                val expense = ExpenseModel(id,category, date, amount, description, _image, _UID)
 
                 _data.child(entryID).setValue(expense).addOnCompleteListener {
                     Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT).show()
@@ -205,6 +212,7 @@ class AddExpense : AppCompatActivity() {
         {
             val extras = data?.extras
             val imageBitmap = extras?.get("data") as Bitmap
+            IMAGE_DIRECTORY = imageBitmap.toString()
             imageView.setImageBitmap(imageBitmap)
             imageView.visibility = View.VISIBLE
         }
