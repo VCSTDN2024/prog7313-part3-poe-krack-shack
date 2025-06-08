@@ -169,11 +169,12 @@ class AddExpense : AppCompatActivity() {
     // whenever data at this location is updated.
     private fun RetrieveData(): Array<String> {
         var _getData: Array<String> = emptyArray()
-        _getData += "Food"
+
         _getData += "Water"
-        _getData += "Entertainment"
-        _getData += "Transportation"
-        _getData += "Add Category"
+        _getData += "Electricity"
+        _getData += "Food"
+        _getData += "Rent"
+        _getData += "Fuel"
         try {
             //_data.addListenerForSingleValueEvent(object : ValueEventListener {
             //    override fun onDataChange(dataSnapshot: DataSnapshot) {

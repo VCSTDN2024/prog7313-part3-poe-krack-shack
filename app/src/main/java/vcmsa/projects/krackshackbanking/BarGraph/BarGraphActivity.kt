@@ -1,5 +1,6 @@
 package vcmsa.projects.krackshackbanking.BarGraph
 
+import CategoryExpense
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +15,15 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import vcmsa.projects.krackshackbanking.Dashboard
 import vcmsa.projects.krackshackbanking.R
+import kotlin.properties.Delegates
 
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
@@ -25,6 +33,18 @@ private lateinit var barEntries: ArrayList<BarEntry>
 
 // Declaring the DataModel Array
 private var dataModel: ArrayList<DataModel>? = null
+
+
+// database components
+private lateinit var _data : DatabaseReference
+private lateinit var _auth : FirebaseAuth
+private lateinit var _uid : String
+private val expenseList = mutableListOf<CategoryExpense>()
+
+
+
+//global total for bar graph
+
 
 private lateinit var adapter: CustomAdapter
 
@@ -52,6 +72,9 @@ private val barEntriesList: ArrayList<BarEntry>
     }
 
 class BarGraphActivity : AppCompatActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bar_graph)
@@ -60,17 +83,27 @@ class BarGraphActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_graph
 
+        //intilize firebase
+        _auth = FirebaseAuth.getInstance()
+        _uid = _auth.currentUser?.uid.toString()
+        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_uid)
+
 
         // Initializing the model and adding data
         dataModel = ArrayList<DataModel>()
 
         // Todo: Replace with data from database
         Budget = 8000f
-        dataModel!!.add(DataModel("Water", true, 500f))
-        dataModel!!.add(DataModel("Electricity", true, 200f))
-        dataModel!!.add(DataModel("Food", true, 1000f))
-        dataModel!!.add(DataModel("Rent", true, 2000f))
-        dataModel!!.add(DataModel("Fuel", true, 4000f))
+
+        dataModel!!.add(DataModel("Water", true, getCategoryTotal("Water")))
+
+        dataModel!!.add(DataModel("Electricity", true, getCategoryTotal("Electricity")))
+
+        dataModel!!.add(DataModel("Food", true, getCategoryTotal("Food")))
+
+        dataModel!!.add(DataModel("Rent", true, getCategoryTotal("Rent")))
+
+        dataModel!!.add(DataModel("Fuel", true, getCategoryTotal("Fuel")))
 
         // Update the graph
         updateGraph()
@@ -196,5 +229,35 @@ class BarGraphActivity : AppCompatActivity() {
 
         // Invalidate the chart to refresh
         barChart.invalidate()
+    }
+    fun getCategoryTotal(categoryID: String) :Float{
+        var _total = 0.0F
+        _data.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                // Clear old data before updating
+                expenseList.clear()
+
+                // Get the total expense per category
+
+                    var total = 0.0
+                    for (expense in snapshot.children) {
+                        if (expense.child("categoryID").value.toString() == categoryID) {
+                            total += expense.child("amount").value.toString().toDouble()
+                        }
+                    }
+                    // Only add categories that have expenses
+                    if (total > 0) {
+                        _total = total.toFloat()
+                    }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+        return _total
+
     }
 }
