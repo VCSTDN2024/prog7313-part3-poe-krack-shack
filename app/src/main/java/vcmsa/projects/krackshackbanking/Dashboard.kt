@@ -2,6 +2,7 @@ package vcmsa.projects.krackshackbanking
 
 import CategoryExpense
 import CategoryExpenseAdapter
+import vcmsa.projects.krackshackbanking.Budget.BudgetHandler
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -33,7 +34,7 @@ class Dashboard : AppCompatActivity() {
     private val expenseList = mutableListOf<CategoryExpense>() // updated
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
-    //
+
 
     //budget model array
 
@@ -68,7 +69,7 @@ class Dashboard : AppCompatActivity() {
             .getReference(_UID)
 
         // XML components
-        bottomNavigationView.selectedItemId = R.id.navigation_home
+
         searchBar = findViewById(R.id.searchBar)
         searchView = findViewById(R.id.searchView)
         _income = findViewById(R.id.btn_log_income)
@@ -76,6 +77,7 @@ class Dashboard : AppCompatActivity() {
         _totalExpense = findViewById(R.id.balanceCard)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_home
+
         searchBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 // Handle menu items here if you added them
@@ -121,7 +123,7 @@ class Dashboard : AppCompatActivity() {
         }
 
         _income.setOnClickListener {
-            startActivity(Intent(this, ExpenseHandler::class.java))
+            startActivity(Intent(this, BudgetHandler::class.java))
         }
 
         _expense.setOnClickListener {
@@ -141,16 +143,16 @@ class Dashboard : AppCompatActivity() {
                 expenseList.clear()
 
                 // Get the total expense per category
-                for (category in categoryList) {
+                for (categoryID in categoryList) {
                     var total = 0.0
                     for (expense in snapshot.children) {
-                        if (expense.child("category").value.toString() == category) {
+                        if (expense.child("category").value.toString() == categoryID) {
                             total += expense.child("amount").value.toString().toDouble()
                         }
                     }
                     // Only add categories that have expenses
                     if (total > 0) {
-                        expenseList.add(CategoryExpense(category, total.toString()))
+                        expenseList.add(CategoryExpense(categoryID, total.toString()))
                     }
                 }
 
@@ -158,10 +160,7 @@ class Dashboard : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
 
                 // Optionally calculate the total expense
-                var totalExpense = 0.0
-                for (expense in snapshot.children) {
-                    totalExpense += expense.child("amount").value.toString().toDouble()
-                }
+
 
                 // You can display the totalExpense in a TextView or use it as needed
             }
