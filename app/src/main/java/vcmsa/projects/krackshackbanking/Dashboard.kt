@@ -231,8 +231,4 @@ class Dashboard : AppCompatActivity() {
         _expensedata.addValueEventListener(listener)
         awaitClose { _expensedata.removeEventListener(listener) }
     }
-
-
 }
-
-
