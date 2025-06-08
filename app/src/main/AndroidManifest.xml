@@ -39,6 +39,10 @@
         <activity
             android:name=".BarGraph.BarGraphActivity"
             android:exported="true" />
+        <activity
+            android:name=".Budget.BudgetHandler"
+            android:exported="true" />
+
 
 
         <meta-data

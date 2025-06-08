@@ -132,7 +132,7 @@ class AddExpense : AppCompatActivity() {
             val category = _categorySpinner.selectedItem.toString()
             val date =
                 _datePicker.year.toString() + "-" + (_datePicker.month + 1).toString() + "-" + _datePicker.dayOfMonth.toString()
-            val amount = _amountEditText.text.toString().toFloat()
+            val amount = _amountEditText.text.toString().toDouble()
             val description = _descriptionEditText.text.toString()
             val id = UUID.randomUUID().toString()
             val testdata = _data
