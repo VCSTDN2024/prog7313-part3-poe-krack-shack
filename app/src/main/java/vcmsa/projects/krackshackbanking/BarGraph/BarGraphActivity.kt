@@ -1,4 +1,4 @@
-package vcmsa.projects.krackshackbanking
+package vcmsa.projects.krackshackbanking.BarGraph
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,8 +14,8 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import vcmsa.projects.krackshackbanking.BarGraph.CustomAdapter
-import vcmsa.projects.krackshackbanking.BarGraph.DataModel
+import vcmsa.projects.krackshackbanking.Dashboard
+import vcmsa.projects.krackshackbanking.R
 
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
@@ -25,8 +25,6 @@ private lateinit var barEntries: ArrayList<BarEntry>
 // Declaring the DataModel Array
 private var dataModel: ArrayList<DataModel>? = null
 
-// Declaring the elements from the main layout file
-private lateinit var listView: ListView
 private lateinit var adapter: CustomAdapter
 
 var Income: Float = 20.0f
@@ -109,7 +107,7 @@ class BarGraphActivity : AppCompatActivity() {
         barChart.invalidate()
 
         // Initializing the elements from the main layout file
-        listView = findViewById<View>(R.id.lvCategories) as ListView
+        val listView = findViewById<View>(R.id.lvCategories) as ListView
 
         // Initializing the model and adding data
         // False = not checked; True = checked
