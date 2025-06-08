@@ -78,8 +78,19 @@ class Dashboard : AppCompatActivity() {
         //getting our total budget
         lifecycleScope.launch {
             getTotalBudget().collect { budget ->
-                val netMoney = budget// added minus for total expense
-                _displayBudget.text = String.format("R%.2f", netMoney)
+                val netMoney = budget - TotalExpense
+                if (netMoney < 0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.red))
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                } else if (netMoney >   0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.green))
+
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                }
+                else if (netMoney < 1000f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.yellow))
+                    _displayBudget.text = String.format("R%.2f", netMoney)
+                }
             }
         }
 
@@ -165,7 +176,7 @@ class Dashboard : AppCompatActivity() {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
                 // Clear old data before updating
                 expenseList.clear()
-
+                TotalExpense = 0f
                 // Get the total expense per category
                 for (categoryID in categoryList) {
                     var total = 0.0
@@ -177,6 +188,7 @@ class Dashboard : AppCompatActivity() {
                     // Only add categories that have expenses
                     if (total > 0) {
                         expenseList.add(CategoryExpense(categoryID, total.toString()))
+                        TotalExpense += total.toFloat()
                     }
                 }
 
@@ -202,13 +214,11 @@ class Dashboard : AppCompatActivity() {
         val _expensedata = database.getReference(dataPath)
         val listener = object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
-                total = 0f
-
-                    try {
-                        total = snapshot.value.toString().toFloat()
-                    } catch (e: Exception) {
-                        Log.e("Dashboard", "Error parsing amount: ${e.message}")
-                    }
+                try {
+                    total = snapshot.value.toString().toFloat()
+                } catch (e: Exception) {
+                    Log.e("Dashboard", "Error parsing amount: ${e.message}")
+                }
 
                 trySend(total).isSuccess
             }
