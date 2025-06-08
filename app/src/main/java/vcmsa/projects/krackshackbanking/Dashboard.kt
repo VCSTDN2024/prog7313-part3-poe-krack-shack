@@ -134,8 +134,11 @@ class Dashboard : AppCompatActivity() {
 
     // method to fetch total expense per category and display it on dashboard
      fun getTotalExpense() {
-        // this will be the event listener for each category expense
-        _data.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
+         val dataPath = ("$_UID/$_UID/Expenses")
+        val database = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+         val _expensedata = database.getReference(dataPath)
+        // this will be the event listener for each category expensex
+        _expensedata.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
                 // Clear old data before updating
                 expenseList.clear()
