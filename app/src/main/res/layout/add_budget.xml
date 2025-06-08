@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addBudgetLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_colour">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- Title Label -->
+            <TextView
+                android:id="@+id/txtBudgetTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="@string/add_budget_title"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/outfit_extrabold"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:elevation="5dp" />
+
+            <!-- Budget Name Input -->
+            <EditText
+                android:id="@+id/edtBudgetName"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/format_button"
+                android:fontFamily="@font/outfit_extrabold"
+                android:hint="@string/budget_name_hint"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:elevation="5dp" />
+
+            <!-- Buttons Layout -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnCancelBudget"
+                    android:layout_width="125dp"
+                    android:layout_height="75dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/red"
+                    android:fontFamily="@font/outfit_extrabold"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:elevation="5dp" />
+
+                <Button
+                    android:id="@+id/btnSaveBudget"
+                    android:layout_width="125dp"
+                    android:layout_height="75dp"
+                    android:backgroundTint="@color/green"
+                    android:fontFamily="@font/outfit_extrabold"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:elevation="5dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
