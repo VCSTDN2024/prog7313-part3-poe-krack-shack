@@ -37,7 +37,7 @@
             android:name=".Expense.ExpenseHandler"
             android:exported="true" />
         <activity
-            android:name=".BarGraphActivity"
+            android:name=".BarGraph.BarGraphActivity"
             android:exported="true" />
 
         <meta-data
