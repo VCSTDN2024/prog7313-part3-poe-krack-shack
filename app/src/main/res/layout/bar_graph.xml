@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_colour"
-    tools:context=".BarGraphActivity">
+    tools:context=".BarGraph.BarGraphActivity">
 
     <TextView
         android:id="@+id/txtBudgetSummary"

@@ -1,21 +1,32 @@
-package vcmsa.projects.krackshackbanking
+package vcmsa.projects.krackshackbanking.BarGraph
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.graphics.Color
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ListView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import vcmsa.projects.krackshackbanking.Dashboard
+import vcmsa.projects.krackshackbanking.R
 
 private lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
 private lateinit var barDataSet: BarDataSet
+private lateinit var lvCategories: ListView
 private lateinit var barEntries: ArrayList<BarEntry>
+
+// Declaring the DataModel Array
+private var dataModel: ArrayList<DataModel>? = null
+
+private lateinit var adapter: CustomAdapter
 
 var Income: Float = 20.0f
 var Expense: Float = 10.0f
@@ -37,8 +48,21 @@ class BarGraphActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bar_graph)
+
+        lvCategories = findViewById<View>(R.id.lvCategories) as ListView
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.selectedItemId = R.id.navigation_graph
+
+
+        // Initializing the model and adding data
+        dataModel = ArrayList<DataModel>()
+
+        // Todo: Replace with data from database
+        dataModel!!.add(DataModel("Water", true, 500f))
+        dataModel!!.add(DataModel("Electricity", true, 200f))
+        dataModel!!.add(DataModel("Food", true, 1000f))
+        dataModel!!.add(DataModel("Rent", true, 2000f))
+        dataModel!!.add(DataModel("Fuel", true, 4000f))
 
         // Working on DataSet
         barDataSet = BarDataSet(barEntriesList, "Data")
@@ -95,6 +119,18 @@ class BarGraphActivity : AppCompatActivity() {
 
         // Invalidate the chart to refresh
         barChart.invalidate()
+
+
+        // Setting the adapter
+        adapter = CustomAdapter(dataModel!!, applicationContext)
+        lvCategories.adapter = adapter
+
+        // Upon item click, checkbox will be opposite
+        lvCategories.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val dataModel: DataModel = dataModel!![position]
+            dataModel.checked = !dataModel.checked
+            adapter.notifyDataSetChanged()
+        }
 
         // Setup bottom navigation
         bottomNavigationView.setOnItemSelectedListener { item ->

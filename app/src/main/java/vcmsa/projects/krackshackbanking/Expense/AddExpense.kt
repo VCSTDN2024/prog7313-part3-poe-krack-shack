@@ -54,9 +54,17 @@ class AddExpense : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var captureButton: Button
 
+    //image store
 
+    private  var IMAGE_DIRECTORY: String = ""
+    //firebase auth
+    private val _auth = FirebaseAuth.getInstance()
     // read data array from database
     private lateinit var _catArray: Array<String>
+
+    // user ID for storage
+    private lateinit var _UID: String
+
 
 
     // databsase list
@@ -77,7 +85,8 @@ class AddExpense : AppCompatActivity() {
         _submitButton = findViewById(R.id.btnEnter)
         _cancelButton = findViewById(R.id.btnCancel)
         imageView = findViewById(R.id.image_view)
-        _data = FirebaseDatabase.getInstance().reference
+        _UID = _auth.currentUser?.uid.toString()
+        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/").getReference(_UID)
         //here we make the array for the spinner
         _catArray = RetrieveData()
         // Temporary date
@@ -113,21 +122,39 @@ class AddExpense : AppCompatActivity() {
 
         // once the user is happy the submit an expense entry to the database
         _submitButton.setOnClickListener {
+
+
+            //val test = "does read"
+
+            //_data.setValue(test)
+
+
             val category = _categorySpinner.selectedItem.toString()
             val date =
-                _datePicker.dayOfMonth.toString() + "/" + _datePicker.month.toString() + "/" + _datePicker.year.toString()
+                _datePicker.year.toString() + "-" + (_datePicker.month + 1).toString() + "-" + _datePicker.dayOfMonth.toString()
             val amount = _amountEditText.text.toString().toFloat()
             val description = _descriptionEditText.text.toString()
             val id = UUID.randomUUID().toString()
-            var expense = ExpenseModel(id,category, date, amount, description.toString(), _imageUri.toString())
+            val testdata = _data
+            val _image = IMAGE_DIRECTORY
+            if (true) {
+                    val entryID = _data.push().key!!
+                val expense = ExpenseModel(id,category, date, amount, description, _image, _UID)
 
-            var UID = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                _data.child(entryID).setValue(expense).addOnCompleteListener {
+                    Toast.makeText(this, "Expense added successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, Dashboard::class.java)
+                    startActivity(intent)
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
+                }
 
-            _data.child(UID).child("Expenses").child(id).setValue(expense)
+            _data.child(_UID).child("Expenses").child(id).setValue(expense)
 
-
-            val Intent = Intent(this, Dashboard::class.java)
-            startActivity(Intent)
+            }
+            else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // cancel button to return to dashboard
@@ -148,17 +175,17 @@ class AddExpense : AppCompatActivity() {
         _getData += "Transportation"
         _getData += "Add Category"
         try {
-            _data.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    dataSnapshot.children.forEach { snapshot ->
-                        val category = snapshot.getValue(String::class.java)
-                        _getData += (category.toString())
-                    }
-                }
+            //_data.addListenerForSingleValueEvent(object : ValueEventListener {
+            //    override fun onDataChange(dataSnapshot: DataSnapshot) {
+            //        dataSnapshot.children.forEach { snapshot ->
+            //            val category = snapshot.getValue(String::class.java)
+            //            _getData += (category.toString())
+            //        }
+            //    }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
+            //    override fun onCancelled(error: DatabaseError) {
+            //    }
+            //})
             return _getData
         } catch (e: Exception) {
             // failed exception handling here
@@ -185,6 +212,7 @@ class AddExpense : AppCompatActivity() {
         {
             val extras = data?.extras
             val imageBitmap = extras?.get("data") as Bitmap
+            IMAGE_DIRECTORY = imageBitmap.toString()
             imageView.setImageBitmap(imageBitmap)
             imageView.visibility = View.VISIBLE
         }
