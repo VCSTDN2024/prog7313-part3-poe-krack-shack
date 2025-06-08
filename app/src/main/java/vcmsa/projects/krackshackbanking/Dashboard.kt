@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import vcmsa.projects.krackshackbanking.BarGraph.BarGraphActivity
 import vcmsa.projects.krackshackbanking.Expense.AddExpense
 import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
 
