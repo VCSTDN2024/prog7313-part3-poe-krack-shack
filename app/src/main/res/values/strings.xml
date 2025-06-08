@@ -52,6 +52,7 @@
     <string name="search_expenses">Search expenses…</string>
     <string name="log_income">Log Income</string>
     <string name="log_expense">Log Expense</string>
+    <string name="add_budget">Add Budget</string>
 
     <!-- Budgets -->
     <string name="create_budget">Create Budget</string>

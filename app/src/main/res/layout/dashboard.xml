@@ -99,7 +99,7 @@
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
                         android:backgroundTint="@color/green"
-                        android:text="@string/log_income"
+                        android:text="@string/add_budget"
                         android:textColor="@color/white" />
 
                     <com.google.android.material.button.MaterialButton
