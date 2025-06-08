@@ -78,7 +78,7 @@ class Dashboard : AppCompatActivity() {
         //getting our total budget
         lifecycleScope.launch {
             getTotalBudget().collect { budget ->
-                val netMoney = budget// added minus for total expense
+                val netMoney = budget - TotalExpense
                 _displayBudget.text = String.format("R%.2f", netMoney)
             }
         }
@@ -165,7 +165,7 @@ class Dashboard : AppCompatActivity() {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
                 // Clear old data before updating
                 expenseList.clear()
-
+                TotalExpense = 0f
                 // Get the total expense per category
                 for (categoryID in categoryList) {
                     var total = 0.0
@@ -177,6 +177,7 @@ class Dashboard : AppCompatActivity() {
                     // Only add categories that have expenses
                     if (total > 0) {
                         expenseList.add(CategoryExpense(categoryID, total.toString()))
+                        TotalExpense += total.toFloat()
                     }
                 }
 
