@@ -35,9 +35,7 @@ class Dashboard : AppCompatActivity() {
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
 
-
     //budget model array
-
     //UID for search functions
     private lateinit var _UID: String
 
