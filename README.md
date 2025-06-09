@@ -1,5 +1,5 @@
 # KracKShacKBanking
-Youtube video: https://youtu.be/L35yc0cjLrE
+
 
 # Features
 1. User Registration
