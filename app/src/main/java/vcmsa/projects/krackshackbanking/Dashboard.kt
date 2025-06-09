@@ -82,6 +82,7 @@ class Dashboard : AppCompatActivity() {
 
         //getting our total budget
         lifecycleScope.launch {
+            getTotalExpense()
             getTotalBudget().collect { budget ->
                 val netMoney = budget - TotalExpense
                 if (netMoney < 0f) {
