@@ -127,7 +127,7 @@ class Dashboard : AppCompatActivity() {
             true
         }
 
-        // Set up bottom nav logic
+        // Setup bottom navigation
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -142,9 +142,25 @@ class Dashboard : AppCompatActivity() {
                     true
                 }
 
-                R.id.navigation_money,
-                R.id.navigation_profile,
-                R.id.navigation_menu -> true
+                R.id.navigation_money -> {
+                    startActivity(Intent(this, ExpenseHandler::class.java))
+                    finish()
+                    true
+                }
+
+                R.id.navigation_profile -> {
+                    // TODO: Replace with Profile activity when available
+                    // startActivity(Intent(this, ProfileActivity::class.java))
+                    // finish()
+                    true
+                }
+
+                R.id.navigation_menu -> {
+                    // TODO: Replace with Menu activity when available
+                    // startActivity(Intent(this, MenuActivity::class.java))
+                    // finish()
+                    true
+                }
 
                 else -> false
             }
