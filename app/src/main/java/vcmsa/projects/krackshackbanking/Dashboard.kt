@@ -41,6 +41,7 @@ class Dashboard : AppCompatActivity() {
     private lateinit var searchBar: SearchBar
     private lateinit var searchView: SearchView
     private lateinit var _displayBudget: TextView
+
     //budget model array
     //UID for search functions
     private lateinit var _UID: String
@@ -49,8 +50,11 @@ class Dashboard : AppCompatActivity() {
 
     //total expense value
     private var TotalExpense: Float = 0f
+
     //list of categories
-    private val categoryList = mutableListOf<String>("Food", "Water", "Entertainment", "Transportation", "Other")
+    private val categoryList =
+        mutableListOf<String>("Water", "Electricity", "Food", "Rent", "Fuel")
+
     // xml components
     private lateinit var _income: Button
     private lateinit var _expense: Button
@@ -72,8 +76,9 @@ class Dashboard : AppCompatActivity() {
         // Firebase init
         _auth = FirebaseAuth.getInstance()
         _UID = _auth.currentUser?.uid.toString()
-        _data = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
-            .getReference(_UID)
+        _data =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(_UID)
 
         //getting our total budget
         lifecycleScope.launch {
@@ -81,16 +86,12 @@ class Dashboard : AppCompatActivity() {
                 val netMoney = budget - TotalExpense
                 if (netMoney < 0f) {
                     _displayBudget.setTextColor(resources.getColor(R.color.red))
-                    _displayBudget.text = String.format("R%.2f", netMoney)
-                } else if (netMoney >   0f) {
+                } else if (netMoney > 0f) {
                     _displayBudget.setTextColor(resources.getColor(R.color.green))
-
-                    _displayBudget.text = String.format("R%.2f", netMoney)
-                }
-                else if (netMoney < 1000f) {
+                } else if (netMoney < 1000f) {
                     _displayBudget.setTextColor(resources.getColor(R.color.yellow))
-                    _displayBudget.text = String.format("R%.2f", netMoney)
                 }
+                _displayBudget.text = String.format("R%.2f", netMoney)
             }
         }
 
@@ -167,12 +168,14 @@ class Dashboard : AppCompatActivity() {
     }
 
     // method to fetch total expense per category and display it on dashboard
-     fun getTotalExpense() {
-         val dataPath = ("$_UID/$_UID/Expenses")
-        val database = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
-         val _expensedata = database.getReference(dataPath)
+    fun getTotalExpense() {
+        val dataPath = ("$_UID/$_UID/Expenses")
+        val database =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val _expensedata = database.getReference(dataPath)
         // this will be the event listener for each category expenses
-        _expensedata.addValueEventListener(object : com.google.firebase.database.ValueEventListener {
+        _expensedata.addValueEventListener(object :
+            com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
                 // Clear old data before updating
                 expenseList.clear()
@@ -187,13 +190,13 @@ class Dashboard : AppCompatActivity() {
                     }
                     // Only add categories that have expenses
                     if (total > 0) {
-                        expenseList.add(CategoryExpense(categoryID, total.toString()))
+                        expenseList.add(CategoryExpense("$categoryID: ", "%.2f".format(total)))
                         TotalExpense += total.toFloat()
                     }
                 }
 
                 // Notify the adapter that data has changed
-                    adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
 
                 // Optionally calculate the total expense
 
@@ -206,11 +209,13 @@ class Dashboard : AppCompatActivity() {
             }
         })
     }
+
     fun getTotalBudget(): Flow<Float> = callbackFlow {
         var total = 0f
 
         val dataPath = ("$_UID/Budget/amount")
-        val database = FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val database =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
         val _expensedata = database.getReference(dataPath)
         val listener = object : com.google.firebase.database.ValueEventListener {
             override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
