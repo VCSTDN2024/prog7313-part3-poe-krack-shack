@@ -32,8 +32,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
 
-private lateinit var bottomNavigationView: BottomNavigationView
+internal lateinit var bottomNavigationView: BottomNavigationView
 private lateinit var barChart: BarChart
 private lateinit var barDataSet: BarDataSet
 private lateinit var lvCategories: ListView
@@ -147,9 +148,8 @@ class BarGraphActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_money -> {
-                    // TODO: Replace with Money activity when available
-                    // startActivity(Intent(this, MoneyActivity::class.java))
-                    // finish()
+                    startActivity(Intent(this, ExpenseHandler::class.java))
+                    finish()
                     true
                 }
 
