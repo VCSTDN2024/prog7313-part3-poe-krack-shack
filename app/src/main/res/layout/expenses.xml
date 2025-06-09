@@ -52,25 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnStartDate" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="300dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtCategory"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_dark"
-            android:fontFamily="@font/outfit_extrabold"
-            android:scrollbars="vertical"
-            android:text="@string/budget_summary"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/txtExpenses"
@@ -90,6 +72,31 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/budgetsCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/btnEndDate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/parent_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/outfit_extrabold"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

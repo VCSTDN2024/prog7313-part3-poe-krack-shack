@@ -17,7 +17,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,14 +41,10 @@
         <activity
             android:name=".Budget.BudgetHandler"
             android:exported="true" />
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
     <uses-permission android:name="android.hardware.camera.any" />
     <uses-permission
         android:name="android.permission.CAMERA"
@@ -59,5 +54,4 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
-
 </manifest>
