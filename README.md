@@ -35,4 +35,6 @@ If account is not registered, click register to create a new account.
 If account is registered, click login to log into your account.
 User will be directed to the dashboard.
 User can add expenses, view expenses, add budget, and view budgets.
-User can view the graphs for expenses and budget on the graph tab.
+User can view the graphs for expenses and budget on the graph tab. 
+YouTube Link:
+https://youtu.be/923Qd6vzYqI
