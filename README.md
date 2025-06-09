@@ -25,7 +25,7 @@
 
 # Non-Functional Requirements
 1. Users can access data from any device 
-2. Useres can set payments for furture dates
+2. Users can set payments for future dates
 
 # Gamification
 1. budget summary changes colour according to how close the user is to their budget.
