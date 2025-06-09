@@ -1,0 +1,256 @@
+package vcmsa.projects.krackshackbanking
+
+import CategoryExpense
+import CategoryExpenseAdapter
+import vcmsa.projects.krackshackbanking.Budget.BudgetHandler
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import vcmsa.projects.krackshackbanking.BarGraph.BarGraphActivity
+import vcmsa.projects.krackshackbanking.Expense.AddExpense
+import vcmsa.projects.krackshackbanking.Expense.ExpenseHandler
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
+import android.view.View
+import android.util.Log
+import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.launch
+
+
+class Dashboard : AppCompatActivity() {
+
+    // database auth
+    private lateinit var _data: DatabaseReference
+    private lateinit var _auth: FirebaseAuth
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: CategoryExpenseAdapter
+    private val expenseList = mutableListOf<CategoryExpense>() // updated
+    private lateinit var searchBar: SearchBar
+    private lateinit var searchView: SearchView
+    private lateinit var _displayBudget: TextView
+
+    //budget model array
+    //UID for search functions
+    private lateinit var _UID: String
+
+    //budget value
+
+    //total expense value
+    private var TotalExpense: Float = 0f
+
+    //list of categories
+    private val categoryList =
+        mutableListOf<String>("Water", "Electricity", "Food", "Rent", "Fuel")
+
+    // xml components
+    private lateinit var _income: Button
+    private lateinit var _expense: Button
+    private lateinit var _totalExpense: CardView
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Set the layout first!
+        setContentView(R.layout.dashboard)
+
+        // Now safely initialize views
+        recyclerView = findViewById(R.id.parent_recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = CategoryExpenseAdapter(expenseList)
+        recyclerView.adapter = adapter
+
+        // Firebase init
+        _auth = FirebaseAuth.getInstance()
+        _UID = _auth.currentUser?.uid.toString()
+        _data =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference(_UID)
+
+        //getting our total budget
+        lifecycleScope.launch {
+            getTotalExpense()
+            getTotalBudget().collect { budget ->
+                val netMoney = budget - TotalExpense
+                if (netMoney < 0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.red))
+                } else if (netMoney > 0f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.green))
+                } else if (netMoney < 1000f) {
+                    _displayBudget.setTextColor(resources.getColor(R.color.yellow))
+                }
+                _displayBudget.text = String.format("R%.2f", netMoney)
+            }
+        }
+
+        // XML components
+
+        searchBar = findViewById(R.id.searchBar)
+        searchView = findViewById(R.id.searchView)
+        _income = findViewById(R.id.btn_Add_Budget)
+        _expense = findViewById(R.id.btn_log_expense)
+        _totalExpense = findViewById(R.id.balanceCard)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.selectedItemId = R.id.navigation_home
+        _displayBudget = findViewById(R.id.totalBalanceText)
+
+        searchBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                // Handle menu items here if you added them
+                else -> false
+            }
+        }
+        searchBar.setOnClickListener {
+            searchBar.visibility = View.GONE
+            searchView.visibility = View.VISIBLE
+            searchView.show() // expand the view with animation
+        }
+        searchView.editText.setOnEditorActionListener { v, actionId, event ->
+            val query = searchView.text.toString()
+            // TODO: Perform search logic here
+            Log.d("Search", "User searched for: $query")
+            searchView.hide()
+            searchView.visibility = View.GONE
+            searchBar.visibility = View.VISIBLE
+            true
+        }
+
+        // Setup bottom navigation
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(this, Dashboard::class.java))
+                    finish()
+                    true
+                }
+
+                R.id.navigation_graph -> {
+                    startActivity(Intent(this, BarGraphActivity::class.java))
+                    finish()
+                    true
+                }
+
+                R.id.navigation_money -> {
+                    startActivity(Intent(this, ExpenseHandler::class.java))
+                    finish()
+                    true
+                }
+
+                R.id.navigation_profile -> {
+                    // TODO: Replace with Profile activity when available
+                    // startActivity(Intent(this, ProfileActivity::class.java))
+                    // finish()
+                    true
+                }
+
+                R.id.navigation_menu -> {
+                    // TODO: Replace with Menu activity when available
+                    // startActivity(Intent(this, MenuActivity::class.java))
+                    // finish()
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        _income.setOnClickListener {
+            startActivity(Intent(this, BudgetHandler::class.java))
+        }
+
+        _expense.setOnClickListener {
+            startActivity(Intent(this, AddExpense::class.java))
+        }
+
+        // Now fetch the data
+        getTotalExpense()
+
+
+        //val netMoney = Budget - TotalExpense
+        //_displayBudget.text = netMoney.toString()
+
+    }
+
+    // method to fetch total expense per category and display it on dashboard
+    fun getTotalExpense() {
+        val dataPath = ("$_UID/$_UID/Expenses")
+        val database =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val _expensedata = database.getReference(dataPath)
+        // this will be the event listener for each category expenses
+        _expensedata.addValueEventListener(object :
+            com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                // Clear old data before updating
+                expenseList.clear()
+                TotalExpense = 0f
+                // Get the total expense per category
+                for (categoryID in categoryList) {
+                    var total = 0.0
+                    for (expense in snapshot.children) {
+                        if (expense.child("categoryID").value.toString() == categoryID) {
+                            total += expense.child("amount").value.toString().toDouble()
+                        }
+                    }
+                    // Only add categories that have expenses
+                    if (total > 0) {
+                        expenseList.add(CategoryExpense("$categoryID: ", "%.2f".format(total)))
+                        TotalExpense += total.toFloat()
+                    }
+                }
+
+                // Notify the adapter that data has changed
+                adapter.notifyDataSetChanged()
+
+                // Optionally calculate the total expense
+
+
+                // You can display the totalExpense in a TextView or use it as needed
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    fun getTotalBudget(): Flow<Float> = callbackFlow {
+        var total = 0f
+
+        val dataPath = ("$_UID/Budget/amount")
+        val database =
+            FirebaseDatabase.getInstance("https://prog7313poe-default-rtdb.europe-west1.firebasedatabase.app/")
+        val _expensedata = database.getReference(dataPath)
+        val listener = object : com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                try {
+                    total = snapshot.value.toString().toFloat()
+                } catch (e: Exception) {
+                    Log.e("Dashboard", "Error parsing amount: ${e.message}")
+                }
+
+                trySend(total).isSuccess
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Dashboard", "Database error: ${error.message}")
+                close(error.toException())
+            }
+        }
+        _expensedata.addValueEventListener(listener)
+        awaitClose { _expensedata.removeEventListener(listener) }
+    }
+}
