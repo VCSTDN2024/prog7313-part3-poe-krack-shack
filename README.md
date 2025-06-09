@@ -24,8 +24,8 @@
 2. Google
 
 # Non-Functional Requirements
-1. All data is stored in a Firebase database
-2. All data is stored in an online database
+1. Users can access data from any device 
+2. Useres can set payments for furture dates
 
 # Gamification
 1. budget summary changes colour according to how close the user is to their budget.
