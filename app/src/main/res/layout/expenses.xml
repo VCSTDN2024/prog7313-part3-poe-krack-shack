@@ -25,7 +25,7 @@
         android:id="@+id/btnStartDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/gray"
         android:paddingTop="6dp"
         android:rotationX="0"
@@ -54,9 +54,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="300dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -89,4 +90,17 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:foregroundTint="@color/black"
+        app:itemIconTint="@color/gray"
+        app:itemTextColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
