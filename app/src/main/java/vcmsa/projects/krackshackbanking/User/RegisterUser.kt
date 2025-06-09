@@ -90,5 +90,4 @@ class RegisterUser : AppCompatActivity() {
                 }
             }
     }
-
 }
