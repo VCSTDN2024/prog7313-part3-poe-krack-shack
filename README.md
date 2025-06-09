@@ -23,5 +23,16 @@ Youtube video: https://youtu.be/L35yc0cjLrE
 1. Android Studio
 2. Google
 
-# Design
-1. 
+# Non-Functional Requirements
+1. All data is stored in a Firebase database
+2. All data is stored in an online database
+
+# Gamification
+1. budget summary changes colour according to how close the user is to their budget
+
+# User Guide
+If account is not registered, click register to create a new account
+If account is registered, click login to log into your account
+User will be directed to the dashboard
+User can add expenses, view expenses, add budget, and view budgets
+User can view the graphs for expenses and budget on the graph tab
