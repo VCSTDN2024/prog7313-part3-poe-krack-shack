@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_colour">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/outfit_extrabold"
+                android:text="@string/Email"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtEmailInput"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/format_button"
+                android:fontFamily="@font/outfit_extrabold"
+                android:gravity="center"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtPassword"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/outfit_extrabold"
+                android:text="@string/Password"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtPasswordInput"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/format_text_input"
+                android:fontFamily="@font/outfit_extrabold"
+                android:gravity="center"
+                android:hint="@string/password_input_hint"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtConfirmPassword"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/outfit_extrabold"
+                android:text="@string/confirm_password"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtConfirmPasswordInput"
+                android:layout_width="300dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/format_text_input"
+                android:fontFamily="@font/outfit_extrabold"
+                android:gravity="center"
+                android:hint="@string/confirm_password_input_hint"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="125dp"
+                android:layout_height="75dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:autoSizeTextType="uniform"
+                android:backgroundTint="@color/red"
+                android:fontFamily="@font/outfit_extrabold"
+                android:padding="10dp"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/btnEnter"
+                android:layout_width="125dp"
+                android:layout_height="75dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-75dp"
+                android:layout_marginEnd="25dp"
+                android:autoSizeTextType="uniform"
+                android:backgroundTint="@color/green"
+                android:fontFamily="@font/outfit_extrabold"
+                android:padding="10dp"
+                android:text="@string/save" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
